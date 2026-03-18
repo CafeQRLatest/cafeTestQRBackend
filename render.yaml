@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: cafe-qr-backend
+    runtime: docker
+    dockerContext: .
+    dockerfile: Dockerfile
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      # Database (To be provided by Neon.tech)
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      # Redis (To be provided by Upstash or Render Managed)
+      - key: SPRING_DATA_REDIS_HOST
+        sync: false
+      - key: SPRING_DATA_REDIS_PORT
+        sync: false
+      - key: SPRING_DATA_REDIS_PASSWORD
+        sync: false
+      # RabbitMQ (To be provided by CloudAMQP)
+      - key: SPRING_RABBITMQ_HOST
+        sync: false
+      - key: SPRING_RABBITMQ_PORT
+        sync: false
+      - key: SPRING_RABBITMQ_USERNAME
+        sync: false
+      - key: SPRING_RABBITMQ_PASSWORD
+        sync: false
+      # Security & Mail
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
