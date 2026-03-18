@@ -3,7 +3,7 @@ services:
     name: cafe-qr-backend
     runtime: docker
     dockerContext: .
-    dockerfile: Dockerfile
+    dockerfilePath: ./Dockerfile
     plan: free
     envVars:
       - key: SPRING_PROFILES_ACTIVE
