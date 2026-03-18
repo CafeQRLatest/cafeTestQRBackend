@@ -2,14 +2,22 @@
 
 This project is configured to run on 100% free services. Follow these steps to deploy.
 
-## 1. Database (Postgres) - [Neon.tech](https://neon.tech)
+## 1. Database (Postgres) - [Neon.tech](https://neon.tech) or [Supabase.com](https://supabase.com)
+### Option A: Neon.tech
 1. Sign up/Login to **Neon.tech**.
 2. Create a new project named `cafe-qr`.
 3. Copy the **Connection String** (choose "Connection string" from the dashboard).
-4. You will need these details for Render:
-   - `SPRING_DATASOURCE_URL`: `jdbc:postgresql://<host>/neondb?sslmode=require`
-   - `SPRING_DATASOURCE_USERNAME`: Provided by Neon
-   - `SPRING_DATASOURCE_PASSWORD`: Provided by Neon
+
+### Option B: Supabase.com
+1. Sign up/Login to **Supabase**.
+2. Create a new project named `cafe-qr`.
+3. Go to **Project Settings** -> **Database**.
+4. Copy the **Connection URI** (use "Transaction mode" on port 6543 for better connection pooling).
+
+### Final Details for Render:
+- `SPRING_DATASOURCE_URL`: The Connection String/URI
+- `SPRING_DATASOURCE_USERNAME`: Provided by provider
+- `SPRING_DATASOURCE_PASSWORD`: Provided by provider
 
 ## 2. Cache (Redis) - [Upstash.com](https://upstash.com)
 1. Sign up/Login to **Upstash**.
