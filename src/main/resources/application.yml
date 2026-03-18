@@ -6,7 +6,7 @@ spring:
     name: cafe-qr-backend
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/cafeqr_db
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/cafeqr_db}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
@@ -69,11 +69,9 @@ springdoc:
 
 app:
   cors:
-    allowed-origins: http://localhost:3000,http://localhost:3001
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001}
 
 logging:
   level:
-    org.hibernate.orm.jdbc.bind: TRACE
-  file:
-    name: "c:/Users/sayoo/OneDrive/Desktop/java rest pos/cafe-qr-backend/spring_backend_debug.log"
+    org.hibernate.orm.jdbc.bind: ERROR # Reduced for production
 
