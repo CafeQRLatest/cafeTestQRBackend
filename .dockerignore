@@ -1,0 +1,9 @@
+target/
+.idea/
+.git/
+.mvn/
+*.log
+.DS_Store
+src/test/
+# Ignore locally compiled classes
+*.class

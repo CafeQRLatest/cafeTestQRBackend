@@ -1,0 +1,706 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.restaurant.pos:cafe-qr-backend >-----------------
+[INFO] Building cafe-qr-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.3:run (default-cli) > test-compile @ cafe-qr-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cafe-qr-backend ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ cafe-qr-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cafe-qr-backend ---
+[INFO] skip non existing resourceDirectory C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ cafe-qr-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.3:run (default-cli) < test-compile @ cafe-qr-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.3:run (default-cli) @ cafe-qr-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2026-03-17T02:50:49.135+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : Starting CafeQrBackendApplication using Java 21.0.8 with PID 26556 (C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\target\classes started by sayooj in C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend)
+2026-03-17T02:50:49.138+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-03-17T02:50:50.517+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-17T02:50:50.517+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-17T02:50:50.806+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 277 ms. Found 19 JPA repository interfaces.
+2026-03-17T02:50:50.852+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-17T02:50:50.856+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-17T02:50:50.905+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.MenuRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.906+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.PermissionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.906+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.RefreshTokenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.907+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.907+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.909+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.ClientRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.909+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.DeviceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.909+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.OrganizationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.909+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.TerminalRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.909+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.invoice.repository.InvoiceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.912+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.order.repository.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.912+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.CategoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.912+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.913+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductUpsellRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.914+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductVariantMappingRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.914+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.UomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.915+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantGroupRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.915+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantOptionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.916+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantPricingRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T02:50:50.916+05:30  INFO 26556 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
+2026-03-17T02:50:51.832+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-17T02:50:51.853+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-17T02:50:51.853+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-17T02:50:51.962+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-17T02:50:51.962+05:30  INFO 26556 --- [cafe-qr-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2768 ms
+2026-03-17T02:50:52.090+05:30  INFO 26556 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-17T02:50:52.354+05:30  INFO 26556 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5da57a64
+2026-03-17T02:50:52.356+05:30  INFO 26556 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-17T02:50:52.472+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.22.3 by Redgate
+2026-03-17T02:50:52.472+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2026-03-17T02:50:52.472+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : 
+2026-03-17T02:50:52.496+05:30  INFO 26556 --- [cafe-qr-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/cafeqr_db (PostgreSQL 17.6)
+2026-03-17T02:50:52.507+05:30  WARN 26556 --- [cafe-qr-backend] [           main] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: PostgreSQL 17.6 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 15.
+2026-03-17T02:50:52.603+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 20 migrations (execution time 00:00.077s)
+2026-03-17T02:50:52.619+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1.19
+2026-03-17T02:50:52.622+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-03-17T02:50:52.756+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-17T02:50:52.847+05:30  INFO 26556 --- [cafe-qr-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-03-17T02:50:52.890+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-17T02:50:53.182+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-17T02:50:55.362+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-17T02:50:55.457+05:30  INFO 26556 --- [cafe-qr-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T02:50:57.266+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-17T02:50:58.106+05:30  WARN 26556 --- [cafe-qr-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-17T02:50:58.447+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@507eda0c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5b218570, org.springframework.security.web.context.SecurityContextHolderFilter@72dfac2e, org.springframework.security.web.header.HeaderWriterFilter@3391a67f, org.springframework.web.filter.CorsFilter@4412ac1a, org.springframework.security.web.authentication.logout.LogoutFilter@59f1a96c, com.restaurant.pos.auth.config.JwtAuthenticationFilter@2c62f56f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@222e8b99, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@191a8997, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@777a67a0, org.springframework.security.web.session.SessionManagementFilter@60d4269a, org.springframework.security.web.access.ExceptionTranslationFilter@780d5822, org.springframework.security.web.access.intercept.AuthorizationFilter@57db81e2]
+2026-03-17T02:50:59.357+05:30  INFO 26556 --- [cafe-qr-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-17T02:50:59.376+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : Started CafeQrBackendApplication in 10.913 seconds (process running for 11.464)
+2026-03-17T02:50:59.392+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Starting Data Initialization...
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.559+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_ORDER]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.596+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VOID_BILL]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.599+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VIEW_REPORT]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.602+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_USERS]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.605+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_ORG]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T02:50:59.608+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_TERMINAL]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0
+Hibernate: select m1_0.id,m1_0.created_at,m1_0.description,m1_0.isactive,m1_0.name,m1_0.parent_id,m1_0.updated_at,m1_0.url from menus m1_0
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T02:50:59.638+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [SUPER_ADMIN]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T02:50:59.660+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T02:50:59.668+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.685+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: SUPER_ADMIN with 6 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T02:50:59.721+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Full System Access]
+2026-03-17T02:50:59.721+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T02:50:59.721+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [SUPER_ADMIN]
+2026-03-17T02:50:59.721+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T02:50:59.691330700]
+2026-03-17T02:50:59.722+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T02:50:59.733+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T02:50:59.736+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.740+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.741+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e01efe43-76f7-4fd3-946d-7c5ab8b6b851]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.748+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.748+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [d0e52739-20bc-4b8f-992b-859094003f48]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.749+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.749+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.750+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.750+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [d40b9722-1944-440f-933b-bd48b5fcddf5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.751+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.752+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.752+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.753+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.754+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.754+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.758+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.758+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.759+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.759+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.760+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.760+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.762+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.762+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.763+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T02:50:59.764+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T02:50:59.764+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [ADMIN]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T02:50:59.766+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T02:50:59.767+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.770+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: ADMIN with 3 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T02:50:59.775+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Business Administrator]
+2026-03-17T02:50:59.776+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T02:50:59.776+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [ADMIN]
+2026-03-17T02:50:59.776+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T02:50:59.775394600]
+2026-03-17T02:50:59.776+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T02:50:59.777+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T02:50:59.778+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.780+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.782+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.782+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.784+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.784+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.785+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.785+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.785+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.786+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.786+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.787+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.788+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T02:50:59.788+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T02:50:59.789+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGER]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T02:50:59.791+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T02:50:59.792+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.794+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: MANAGER with 3 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T02:50:59.798+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Branch Manager]
+2026-03-17T02:50:59.798+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T02:50:59.798+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [MANAGER]
+2026-03-17T02:50:59.798+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T02:50:59.797383800]
+2026-03-17T02:50:59.798+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T02:50:59.799+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T02:50:59.799+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.800+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.800+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.801+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.801+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.802+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.802+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.802+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.803+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.803+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.803+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.803+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.803+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.804+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.804+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.804+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.804+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T02:50:59.806+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T02:50:59.806+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T02:50:59.807+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [STAFF]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T02:50:59.808+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T02:50:59.810+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+2026-03-17T02:50:59.812+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: STAFF with 1 menus
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:50:59.830+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [25f77a9f-72b6-402c-82e1-b5400bb418d8]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:50:59.835+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [b8f746bf-29e5-48cf-ac34-cb6cafbb90a6]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:50:59.845+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:50:59.853+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [d38efd70-6f3b-4687-a3a8-20e47a10c175]
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T02:50:59.863+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Standard Staff Account]
+2026-03-17T02:50:59.863+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T02:50:59.863+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [STAFF]
+2026-03-17T02:50:59.863+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T02:50:59.860266400]
+2026-03-17T02:50:59.865+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T02:50:59.865+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T02:50:59.866+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+2026-03-17T02:50:59.866+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T02:50:59.866+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [ADMIN]
+Hibernate: select c1_0.id,c1_0.account_number,c1_0.address,c1_0.bank_name,c1_0.brand_color,c1_0.country,c1_0.created_at,c1_0.created_by,c1_0.currency,c1_0.email,c1_0.facebook_url,c1_0.fssai_number,c1_0.google_maps_url,c1_0.gst_number,c1_0.ifsc_code,c1_0.instagram_url,c1_0.isactive,c1_0.legal_name,c1_0.logo_url,c1_0.name,c1_0.owner_name,c1_0.pan_number,c1_0.phone,c1_0.pin_code,c1_0.pos_type,c1_0.primary_language,c1_0.stripe_customer_id,c1_0.subscription_expiry_date,c1_0.subscription_status,c1_0.timezone,c1_0.updated_at,c1_0.website,c1_0.whatsapp_number from clients c1_0
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.882+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9f0f6c1d-dfc8-47b6-a351-aec8300b025e]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.890+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [742292d9-bfa8-4861-89a6-cafe45e7370b]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.894+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [891f341a-0fb9-4c05-8d8e-ab6d6a61ce69]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.901+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6d637a80-2c18-467c-9d3a-fb3fad78e4bc]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.906+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [48278854-f080-4681-b6e7-54cebd11b7f7]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T02:50:59.910+05:30 TRACE 26556 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [07b9476b-ec59-437b-93f5-cea9134d14c3]
+2026-03-17T02:50:59.912+05:30  INFO 26556 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Data Initialization complete.
+2026-03-17T02:51:31.432+05:30  INFO 26556 --- [cafe-qr-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-17T02:51:31.432+05:30  INFO 26556 --- [cafe-qr-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-17T02:51:31.435+05:30  INFO 26556 --- [cafe-qr-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/uoms, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/variants/groups, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/categories, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+2026-03-17T02:51:31.759+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+2026-03-17T02:51:31.759+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+2026-03-17T02:51:31.759+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+2026-03-17T02:51:31.759+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:51:31.759+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:51:31.767+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+2026-03-17T02:51:31.767+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+2026-03-17T02:51:31.767+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/variants/groups, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/uoms, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products/categories, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+2026-03-17T02:51:32.482+05:30 ERROR 26556 --- [cafe-qr-backend] [nio-8080-exec-8] c.r.p.c.e.GlobalExceptionHandler         : Unexpected error occurred
+
+org.springframework.data.redis.serializer.SerializationException: Could not read JSON:Cannot construct instance of `com.restaurant.pos.product.dto.ProductListDto` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: (byte[])"["java.util.ArrayList",[{"@class":"com.restaurant.pos.product.dto.ProductListDto","id":"b93947e9-10e3-46d2-bcf1-dc126bb21044","name":"chickn burger","description":"","price":["java.math.BigDecimal",1000.00],"imageUrl":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAAB"[truncated 46199 bytes]; line: 1, column: 83] (through reference chain: java.util.ArrayList[0]) 
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:292) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:261) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.DefaultRedisElementReader.read(DefaultRedisElementReader.java:46) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.RedisSerializationContext$SerializationPair.read(RedisSerializationContext.java:277) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.cache.RedisCache.deserializeCacheValue(RedisCache.java:390) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:209) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:518) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedValue(CacheAspectSupport.java:481) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:431) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:395) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:74) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at com.restaurant.pos.product.service.ProductService$$SpringCGLIB$$0.getProducts(<generated>) ~[classes/:na]
+	at com.restaurant.pos.product.controller.ProductController.getProducts(ProductController.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at com.restaurant.pos.product.controller.ProductController$$SpringCGLIB$$0.getProducts(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at com.restaurant.pos.auth.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:141) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.restaurant.pos.product.dto.ProductListDto` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: (byte[])"["java.util.ArrayList",[{"@class":"com.restaurant.pos.product.dto.ProductListDto","id":"b93947e9-10e3-46d2-bcf1-dc126bb21044","name":"chickn burger","description":"","price":["java.math.BigDecimal",1000.00],"imageUrl":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAAB"[truncated 46199 bytes]; line: 1, column: 83] (through reference chain: java.util.ArrayList[0])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1915) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:414) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.handleMissingInstantiator(DeserializationContext.java:1360) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.deserializeFromObjectUsingNonDefault(BeanDeserializerBase.java:1434) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:352) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer._deserializeOther(BeanDeserializer.java:220) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:187) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer._deserializeTypedForId(AsPropertyTypeDeserializer.java:170) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromObject(AsPropertyTypeDeserializer.java:136) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromAny(AsPropertyTypeDeserializer.java:240) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializerNR.deserializeWithType(UntypedObjectDeserializerNR.java:115) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer._deserializeFromArray(CollectionDeserializer.java:361) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:244) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:28) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer._deserialize(AsArrayTypeDeserializer.java:120) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer.deserializeTypedFromArray(AsArrayTypeDeserializer.java:53) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromAny(AsPropertyTypeDeserializer.java:238) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializerNR.deserializeWithType(UntypedObjectDeserializerNR.java:115) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.impl.TypeWrappedDeserializer.deserialize(TypeWrappedDeserializer.java:74) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4825) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3874) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at org.springframework.data.redis.serializer.JacksonObjectReader.lambda$create$0(JacksonObjectReader.java:54) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:289) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	... 129 common frames omitted
+
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG LOG-V3] JWT Filter: Method=GET, Path=/api/v1/products, Auth=null, Cookies=[sb-vhrecpabjhpicmgzgrgm-auth-token=base64-eyJ...; firstName=sayooj...; lastName=jayarajan...; userId=a53163b5-6...; country=IN...; access_token=eyJhbGciOi...; token=eyJhbGciOi...; refresh_token=e2b2e03b-8...; userRole=SUPER_ADMI...; userEmail=sayoojtssj...; subscriptionStatus=TRIAL...; subscriptionExpiryDate=2026-03-28...; ]
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG] JWT Filter: Extracted from cookie: access_token
+===> [DEBUG] JWT Filter: Found JWT (first 15 chars): eyJhbGciOiJSUzI...
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+===> [DEBUG] JWT Filter: Extracted user: sayoojtssjayarajan@gmail.com
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+2026-03-17T02:51:32.512+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+===> [DEBUG] JWT Filter: Set Tenant via clientId: 48278854-f080-4681-b6e7-54cebd11b7f7
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+2026-03-17T02:51:32.515+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+2026-03-17T02:51:32.515+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+2026-03-17T02:51:32.517+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:51:32.517+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:51:32.517+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0 where u1_0.email=?
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+2026-03-17T02:51:32.526+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [sayoojtssjayarajan@gmail.com]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T02:51:32.527+05:30 TRACE 26556 --- [cafe-qr-backend] [nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: Loaded user: sayoojtssjayarajan@gmail.com with roles: [VIEW_REPORT, MANAGE_ORG, VOID_BILL, MANAGE_TERMINAL, CREATE_ORDER, ROLE_SUPER_ADMIN, MANAGE_USERS]
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+===> [DEBUG] JWT Filter: SUCCESS - Authentication set
+2026-03-17T02:51:32.560+05:30 ERROR 26556 --- [cafe-qr-backend] [nio-8080-exec-6] c.r.p.c.e.GlobalExceptionHandler         : Unexpected error occurred
+
+org.springframework.data.redis.serializer.SerializationException: Could not read JSON:Cannot construct instance of `com.restaurant.pos.product.dto.ProductListDto` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: (byte[])"["java.util.ArrayList",[{"@class":"com.restaurant.pos.product.dto.ProductListDto","id":"b93947e9-10e3-46d2-bcf1-dc126bb21044","name":"chickn burger","description":"","price":["java.math.BigDecimal",1000.00],"imageUrl":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAAB"[truncated 46199 bytes]; line: 1, column: 83] (through reference chain: java.util.ArrayList[0]) 
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:292) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:261) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.DefaultRedisElementReader.read(DefaultRedisElementReader.java:46) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.RedisSerializationContext$SerializationPair.read(RedisSerializationContext.java:277) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.cache.RedisCache.deserializeCacheValue(RedisCache.java:390) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.cache.RedisCache.lookup(RedisCache.java:209) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.cache.support.AbstractValueAdaptingCache.get(AbstractValueAdaptingCache.java:58) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.AbstractCacheInvoker.doGet(AbstractCacheInvoker.java:73) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.findInCaches(CacheAspectSupport.java:518) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.findCachedValue(CacheAspectSupport.java:481) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:431) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:395) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:74) ~[spring-context-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at com.restaurant.pos.product.service.ProductService$$SpringCGLIB$$0.getProducts(<generated>) ~[classes/:na]
+	at com.restaurant.pos.product.controller.ProductController.getProducts(ProductController.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.2.2.jar:6.2.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765) ~[spring-aop-6.1.4.jar:6.1.4]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717) ~[spring-aop-6.1.4.jar:6.1.4]
+	at com.restaurant.pos.product.controller.ProductController$$SpringCGLIB$$0.getProducts(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at com.restaurant.pos.auth.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:141) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `com.restaurant.pos.product.dto.ProductListDto` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: (byte[])"["java.util.ArrayList",[{"@class":"com.restaurant.pos.product.dto.ProductListDto","id":"b93947e9-10e3-46d2-bcf1-dc126bb21044","name":"chickn burger","description":"","price":["java.math.BigDecimal",1000.00],"imageUrl":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAAB"[truncated 46199 bytes]; line: 1, column: 83] (through reference chain: java.util.ArrayList[0])
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1915) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition(DatabindContext.java:414) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.DeserializationContext.handleMissingInstantiator(DeserializationContext.java:1360) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.deserializeFromObjectUsingNonDefault(BeanDeserializerBase.java:1434) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:352) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer._deserializeOther(BeanDeserializer.java:220) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:187) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer._deserializeTypedForId(AsPropertyTypeDeserializer.java:170) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromObject(AsPropertyTypeDeserializer.java:136) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromAny(AsPropertyTypeDeserializer.java:240) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializerNR.deserializeWithType(UntypedObjectDeserializerNR.java:115) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer._deserializeFromArray(CollectionDeserializer.java:361) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:244) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:28) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer._deserialize(AsArrayTypeDeserializer.java:120) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer.deserializeTypedFromArray(AsArrayTypeDeserializer.java:53) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer.deserializeTypedFromAny(AsPropertyTypeDeserializer.java:238) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializerNR.deserializeWithType(UntypedObjectDeserializerNR.java:115) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.impl.TypeWrappedDeserializer.deserialize(TypeWrappedDeserializer.java:74) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4825) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3874) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at org.springframework.data.redis.serializer.JacksonObjectReader.lambda$create$0(JacksonObjectReader.java:54) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:289) ~[spring-data-redis-3.2.3.jar:3.2.3]
+	... 129 common frames omitted
+

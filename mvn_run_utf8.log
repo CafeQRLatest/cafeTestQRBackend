@@ -1,0 +1,310 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.restaurant.pos:cafe-qr-backend >-----------------
+[INFO] Building cafe-qr-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ cafe-qr-backend ---
+[INFO] Deleting C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\target
+[INFO] 
+[INFO] >>> spring-boot:3.2.3:run (default-cli) > test-compile @ cafe-qr-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cafe-qr-backend ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 19 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ cafe-qr-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 94 source files with javac [debug release 17] to target\classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[WARNING] unknown enum constant javax.annotation.meta.When.MAYBE
+  reason: class file for javax.annotation.meta.When not found
+[WARNING] unknown enum constant javax.annotation.meta.When.MAYBE
+  reason: class file for javax.annotation.meta.When not found
+[WARNING] unknown enum constant javax.annotation.meta.When.MAYBE
+  reason: class file for javax.annotation.meta.When not found
+[WARNING] unknown enum constant javax.annotation.meta.When.MAYBE
+  reason: class file for javax.annotation.meta.When not found
+[WARNING] unknown enum constant javax.annotation.meta.When.MAYBE
+  reason: class file for javax.annotation.meta.When not found
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cafe-qr-backend ---
+[INFO] skip non existing resourceDirectory C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ cafe-qr-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.3:run (default-cli) < test-compile @ cafe-qr-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.3:run (default-cli) @ cafe-qr-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2026-03-17T04:19:21.542+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : Starting CafeQrBackendApplication using Java 21.0.8 with PID 16968 (C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\target\classes started by sayooj in C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend)
+2026-03-17T04:19:21.546+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-03-17T04:19:28.479+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-17T04:19:28.488+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-17T04:19:29.560+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1041 ms. Found 19 JPA repository interfaces.
+2026-03-17T04:19:29.616+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-17T04:19:29.620+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-17T04:19:29.671+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.MenuRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.672+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.PermissionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.672+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.RefreshTokenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.675+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.676+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.auth.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.682+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.ClientRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.682+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.DeviceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.684+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.OrganizationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.685+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.client.repository.TerminalRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.685+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.invoice.repository.InvoiceRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.687+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.order.repository.OrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.687+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.CategoryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.689+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.689+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductUpsellRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.691+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.ProductVariantMappingRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.693+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.UomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.694+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantGroupRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.694+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantOptionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.696+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.restaurant.pos.product.repository.VariantPricingRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-03-17T04:19:29.697+05:30  INFO 16968 --- [cafe-qr-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 0 Redis repository interfaces.
+2026-03-17T04:19:31.209+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-17T04:19:31.231+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-17T04:19:31.231+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-03-17T04:19:31.333+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-17T04:19:31.333+05:30  INFO 16968 --- [cafe-qr-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9633 ms
+2026-03-17T04:19:31.534+05:30  INFO 16968 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-17T04:19:32.242+05:30  INFO 16968 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1736c1e4
+2026-03-17T04:19:32.245+05:30  INFO 16968 --- [cafe-qr-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-17T04:19:32.479+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.22.3 by Redgate
+2026-03-17T04:19:32.480+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2026-03-17T04:19:32.480+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.c.internal.license.VersionPrinter    : 
+2026-03-17T04:19:32.522+05:30  INFO 16968 --- [cafe-qr-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/cafeqr_db (PostgreSQL 17.6)
+2026-03-17T04:19:32.535+05:30  WARN 16968 --- [cafe-qr-backend] [           main] o.f.c.internal.database.base.Database    : Flyway upgrade recommended: PostgreSQL 17.6 is newer than this version of Flyway and support has not been tested. The latest supported version of PostgreSQL is 15.
+2026-03-17T04:19:32.707+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 20 migrations (execution time 00:00.124s)
+2026-03-17T04:19:32.733+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1.19
+2026-03-17T04:19:32.739+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-03-17T04:19:33.019+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-17T04:19:33.128+05:30  INFO 16968 --- [cafe-qr-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-03-17T04:19:33.202+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-17T04:19:33.661+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-17T04:19:35.628+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-17T04:19:35.750+05:30  INFO 16968 --- [cafe-qr-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T04:19:37.874+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-17T04:19:38.755+05:30  WARN 16968 --- [cafe-qr-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-17T04:19:39.116+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@736f4c27, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@31b07a16, org.springframework.security.web.context.SecurityContextHolderFilter@4b0c144e, org.springframework.security.web.header.HeaderWriterFilter@6bc67b0b, org.springframework.web.filter.CorsFilter@4c27fe7a, org.springframework.security.web.authentication.logout.LogoutFilter@c421318, com.restaurant.pos.auth.config.JwtAuthenticationFilter@eaa901a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4892206a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@752114f1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@782fb591, org.springframework.security.web.session.SessionManagementFilter@162be846, org.springframework.security.web.access.ExceptionTranslationFilter@67fe131c, org.springframework.security.web.access.intercept.AuthorizationFilter@51f26df9]
+2026-03-17T04:19:39.776+05:30  INFO 16968 --- [cafe-qr-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-03-17T04:19:39.784+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.CafeQrBackendApplication         : Started CafeQrBackendApplication in 20.661 seconds (process running for 23.32)
+2026-03-17T04:19:39.794+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Starting Data Initialization...
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.881+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [CREATE_ORDER]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.907+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VOID_BILL]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.909+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [VIEW_REPORT]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.909+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_USERS]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.909+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_ORG]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0 where p1_0.name=?
+2026-03-17T04:19:39.917+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGE_TERMINAL]
+Hibernate: select p1_0.id,p1_0.created_at,p1_0.description,p1_0.name,p1_0.updated_at from permissions p1_0
+Hibernate: select m1_0.id,m1_0.created_at,m1_0.description,m1_0.isactive,m1_0.name,m1_0.parent_id,m1_0.updated_at,m1_0.url from menus m1_0
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T04:19:39.938+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [SUPER_ADMIN]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T04:19:39.952+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T04:19:39.957+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:39.968+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: SUPER_ADMIN with 6 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T04:19:39.992+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Full System Access]
+2026-03-17T04:19:39.992+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T04:19:39.992+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [SUPER_ADMIN]
+2026-03-17T04:19:39.992+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T04:19:39.973689700]
+2026-03-17T04:19:39.994+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T04:19:40.001+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T04:19:40.018+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.023+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.023+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e01efe43-76f7-4fd3-946d-7c5ab8b6b851]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.037+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.037+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [d0e52739-20bc-4b8f-992b-859094003f48]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.039+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.039+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [d40b9722-1944-440f-933b-bd48b5fcddf5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.040+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.045+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.045+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.046+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.046+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.047+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.047+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.048+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.048+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.049+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6acfc6c2-fc2e-4868-a046-1bac6191a969]
+2026-03-17T04:19:40.049+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T04:19:40.051+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [ADMIN]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T04:19:40.052+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T04:19:40.053+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.056+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: ADMIN with 3 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T04:19:40.057+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Business Administrator]
+2026-03-17T04:19:40.059+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T04:19:40.059+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [ADMIN]
+2026-03-17T04:19:40.059+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T04:19:40.057664]
+2026-03-17T04:19:40.059+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T04:19:40.059+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T04:19:40.061+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.061+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.061+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.061+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.062+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.062+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.062+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.063+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.063+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.063+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.063+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.064+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.064+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.064+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.066+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.066+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.066+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.067+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [e409ced5-65f5-419d-a2c1-df5f4cb031f2]
+2026-03-17T04:19:40.067+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T04:19:40.067+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [MANAGER]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T04:19:40.069+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T04:19:40.070+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.072+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: MANAGER with 3 menus
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T04:19:40.074+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Branch Manager]
+2026-03-17T04:19:40.074+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T04:19:40.074+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [MANAGER]
+2026-03-17T04:19:40.074+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T04:19:40.074080700]
+2026-03-17T04:19:40.075+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T04:19:40.075+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: delete from role_permissions where role_id=?
+2026-03-17T04:19:40.076+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.076+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.076+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [bc6c1c8f-9c2c-4029-bfa5-275aa662f6a5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [ee3d7b1e-b5a3-4a84-b821-314fe474c4ba]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.077+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [1ebaaae4-9c3b-49ac-8cf5-b2ad545d8a99]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.078+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.078+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [f92b1f8e-abcf-4ade-852f-3258c6760802]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.078+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.078+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [22513b2a-bd04-40dc-9051-2b12a4104add]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [e8a0e36b-197e-4a05-a4c8-89bc061d9e73]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [710c5b70-3074-49d3-8498-89a7088dbdc8]
+Hibernate: insert into role_permissions (role_id,permission_id) values (?,?)
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9c46a574-6d85-4bbf-bf2a-a87aac669961]
+2026-03-17T04:19:40.080+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [367711bb-03e9-4629-93a2-b11d398d8cb5]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T04:19:40.082+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [STAFF]
+Hibernate: select p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at from role_permissions p1_0 join permissions p1_1 on p1_1.id=p1_0.permission_id where p1_0.role_id=?
+2026-03-17T04:19:40.083+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: select m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url from role_menus m1_0 join menus m1_1 on m1_1.id=m1_0.menu_id where m1_0.role_id=?
+2026-03-17T04:19:40.084+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+2026-03-17T04:19:40.086+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Seeded global role: STAFF with 1 menus
+Hibernate: select u1_0.id,u1_0.client_id,u1_0.created_at,u1_0.created_by,u1_0.email,u1_0.first_name,u1_0.is_enabled,u1_0.isactive,u1_0.last_name,u1_0.org_id,u1_0.password,u1_0.phone,u1_0.role_id,u1_0.terminal_id,u1_0.updated_at from users u1_0
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T04:19:40.100+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [25f77a9f-72b6-402c-82e1-b5400bb418d8]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T04:19:40.102+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [b8f746bf-29e5-48cf-ac34-cb6cafbb90a6]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T04:19:40.109+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [5a7924e3-680f-4f00-a342-9c481234662d]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,m1_0.role_id,m1_1.id,m1_1.created_at,m1_1.description,m1_1.isactive,m1_1.name,m1_1.parent_id,m1_1.updated_at,m1_1.url,re1_0.name,re1_0.org_id,p1_0.role_id,p1_1.id,p1_1.created_at,p1_1.description,p1_1.name,p1_1.updated_at,re1_0.updated_at from roles re1_0 left join role_menus m1_0 on re1_0.id=m1_0.role_id left join menus m1_1 on m1_1.id=m1_0.menu_id left join role_permissions p1_0 on re1_0.id=p1_0.role_id left join permissions p1_1 on p1_1.id=p1_0.permission_id where re1_0.id=?
+2026-03-17T04:19:40.116+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [d38efd70-6f3b-4687-a3a8-20e47a10c175]
+Hibernate: update roles set description=?,isactive=?,name=?,updated_at=? where id=?
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Standard Staff Account]
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:VARCHAR) <- [Y]
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [STAFF]
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [2026-03-17T04:19:40.123842500]
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (5:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: delete from role_menus where role_id=?
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+Hibernate: insert into role_menus (role_id,menu_id) values (?,?)
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [45ab9aaa-c06d-47ca-92a6-9af312d982f5]
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (2:UUID) <- [4d00ba93-5539-46e8-94ba-cc05e364d701]
+Hibernate: select re1_0.id,re1_0.client_id,re1_0.created_at,re1_0.created_by,re1_0.description,re1_0.isactive,re1_0.name,re1_0.org_id,re1_0.updated_at from roles re1_0 where re1_0.name=? and re1_0.client_id is null
+2026-03-17T04:19:40.123+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [ADMIN]
+Hibernate: select c1_0.id,c1_0.account_number,c1_0.address,c1_0.bank_name,c1_0.brand_color,c1_0.country,c1_0.created_at,c1_0.created_by,c1_0.currency,c1_0.email,c1_0.facebook_url,c1_0.fssai_number,c1_0.google_maps_url,c1_0.gst_number,c1_0.ifsc_code,c1_0.instagram_url,c1_0.isactive,c1_0.legal_name,c1_0.logo_url,c1_0.name,c1_0.owner_name,c1_0.pan_number,c1_0.phone,c1_0.pin_code,c1_0.pos_type,c1_0.primary_language,c1_0.stripe_customer_id,c1_0.subscription_expiry_date,c1_0.subscription_status,c1_0.timezone,c1_0.updated_at,c1_0.website,c1_0.whatsapp_number from clients c1_0
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.140+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [9f0f6c1d-dfc8-47b6-a351-aec8300b025e]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.145+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [742292d9-bfa8-4861-89a6-cafe45e7370b]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.150+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [891f341a-0fb9-4c05-8d8e-ab6d6a61ce69]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.154+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [6d637a80-2c18-467c-9d3a-fb3fad78e4bc]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.157+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [48278854-f080-4681-b6e7-54cebd11b7f7]
+Hibernate: select o1_0.id,o1_0.address,o1_0.client_id,o1_0.created_at,o1_0.created_by,o1_0.delivery_radius_km,o1_0.email,o1_0.google_maps_url,o1_0.gstin,o1_0.isactive,o1_0.latitude,o1_0.logo_url,o1_0.longitude,o1_0.name,o1_0.org_code,o1_0.phone,o1_0.pin_code,o1_0.updated_at from organizations o1_0 where o1_0.client_id=?
+2026-03-17T04:19:40.161+05:30 TRACE 16968 --- [cafe-qr-backend] [           main] org.hibernate.orm.jdbc.bind              : binding parameter (1:UUID) <- [07b9476b-ec59-437b-93f5-cea9134d14c3]
+2026-03-17T04:19:40.161+05:30  INFO 16968 --- [cafe-qr-backend] [           main] c.r.pos.common.config.DataInitializer    : Data Initialization complete.

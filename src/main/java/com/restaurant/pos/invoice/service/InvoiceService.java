@@ -1,0 +1,67 @@
+package com.restaurant.pos.invoice.service;
+
+import com.restaurant.pos.common.exception.ResourceNotFoundException;
+import com.restaurant.pos.common.tenant.TenantContext;
+import com.restaurant.pos.invoice.domain.Invoice;
+import com.restaurant.pos.invoice.repository.InvoiceRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.restaurant.pos.common.util.SecurityUtils;
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class InvoiceService {
+
+    private final InvoiceRepository invoiceRepository;
+
+    public Invoice getInvoice(UUID id) {
+        UUID tenantId = TenantContext.getCurrentTenant();
+        if (SecurityUtils.isSuperAdmin()) {
+            return invoiceRepository.findByIdAndClientId(id, tenantId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Invoice not found or access denied"));
+        }
+        return invoiceRepository.findByIdAndClientIdAndOrgId(id, tenantId, TenantContext.getCurrentOrg())
+                .orElseThrow(() -> new ResourceNotFoundException("Invoice not found or access denied"));
+    }
+
+    public Invoice getInvoiceByOrder(UUID orderId) {
+        UUID tenantId = TenantContext.getCurrentTenant();
+        if (SecurityUtils.isSuperAdmin()) {
+            return invoiceRepository.findByOrderIdAndClientId(orderId, tenantId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Invoice not found for order or access denied"));
+        }
+        return invoiceRepository.findByOrderIdAndClientIdAndOrgId(orderId, tenantId, TenantContext.getCurrentOrg())
+                .orElseThrow(() -> new ResourceNotFoundException("Invoice not found for order or access denied"));
+    }
+
+    @Transactional
+    public Invoice createInvoice(Invoice invoice) {
+        invoice.setClientId(TenantContext.getCurrentTenant());
+        if (!SecurityUtils.isSuperAdmin() || invoice.getOrgId() == null) {
+            invoice.setOrgId(TenantContext.getCurrentOrg());
+        }
+
+        // Prevent duplicate creation from offline sync
+        if (invoice.getIdempotencyKey() != null) {
+             Optional<Invoice> existing;
+             if (SecurityUtils.isSuperAdmin()) {
+                 existing = invoiceRepository.findByInvoiceNumberAndClientId(
+                     invoice.getInvoiceNumber(), invoice.getClientId()
+                 );
+             } else {
+                 existing = invoiceRepository.findByInvoiceNumberAndClientIdAndOrgId(
+                     invoice.getInvoiceNumber(), invoice.getClientId(), invoice.getOrgId()
+                 );
+             }
+             
+             if (existing.isPresent()) {
+                 return existing.get();
+             }
+        }
+        return invoiceRepository.save(invoice);
+    }
+}

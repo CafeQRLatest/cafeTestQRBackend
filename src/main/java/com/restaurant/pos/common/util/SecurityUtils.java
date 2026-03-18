@@ -1,0 +1,33 @@
+package com.restaurant.pos.common.util;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+public class SecurityUtils {
+
+    public static boolean isSuperAdmin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return false;
+        }
+        
+        boolean isSuper = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_SUPER_ADMIN"));
+        
+        if (!isSuper) {
+             // Let's log if it's not detected but maybe should be
+             // Note: Using System.out for quick simple debug in a static util if SLF4J is not easy to add
+             System.out.println("DEBUG: isSuperAdmin=false. Authorities: " + auth.getAuthorities());
+        }
+        return isSuper;
+    }
+
+    public static boolean hasRole(String role) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) return false;
+        
+        String roleWithPrefix = role.startsWith("ROLE_") ? role : "ROLE_" + role;
+        return auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals(roleWithPrefix));
+    }
+}
