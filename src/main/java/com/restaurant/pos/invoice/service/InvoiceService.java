@@ -46,15 +46,15 @@ public class InvoiceService {
         }
 
         // Prevent duplicate creation from offline sync
-        if (invoice.getIdempotencyKey() != null) {
+        if (invoice.getInvoiceNo() != null) {
              Optional<Invoice> existing;
              if (SecurityUtils.isSuperAdmin()) {
-                 existing = invoiceRepository.findByInvoiceNumberAndClientId(
-                     invoice.getInvoiceNumber(), invoice.getClientId()
+                 existing = invoiceRepository.findByInvoiceNoAndClientId(
+                     invoice.getInvoiceNo(), invoice.getClientId()
                  );
              } else {
-                 existing = invoiceRepository.findByInvoiceNumberAndClientIdAndOrgId(
-                     invoice.getInvoiceNumber(), invoice.getClientId(), invoice.getOrgId()
+                 existing = invoiceRepository.findByInvoiceNoAndClientIdAndOrgId(
+                     invoice.getInvoiceNo(), invoice.getClientId(), invoice.getOrgId()
                  );
              }
              

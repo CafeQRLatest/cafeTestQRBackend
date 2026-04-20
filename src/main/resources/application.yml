@@ -18,10 +18,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
   flyway:
     baseline-on-migrate: true
+    validate-on-migrate: false
+    out-of-order: true
+    clean-on-validation-error: false
+    repair-on-migrate: true
     properties:
       hibernate:
         format_sql: true
@@ -70,6 +74,7 @@ springdoc:
 app:
   cors:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001}
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
 
 logging:
   level:

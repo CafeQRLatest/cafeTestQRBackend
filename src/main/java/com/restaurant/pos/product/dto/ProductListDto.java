@@ -31,4 +31,6 @@ public class ProductListDto {
     private boolean isActive;
     @JsonProperty("isPackagedGood")
     private boolean isPackagedGood;
+    @JsonProperty("isIngredient")
+    private boolean isIngredient;
 }

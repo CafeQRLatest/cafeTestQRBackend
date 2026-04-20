@@ -1,7 +1,8 @@
 package com.restaurant.pos.order.domain;
 
 public enum OrderStatus {
-    NEW,
+    DRAFT,
+    CONFIRMED,
     IN_PROGRESS,
     READY,
     COMPLETED,

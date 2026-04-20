@@ -28,14 +28,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final UomRepository uomRepository;
     private final VariantGroupRepository variantGroupRepository;
     private final VariantOptionRepository variantOptionRepository;
-
-    // --- Category Methods ---
 
     @Transactional(readOnly = true)
     @Cacheable(value = "products_categories_v2", key = "T(com.restaurant.pos.common.tenant.TenantContext).getCurrentTenant() + ':' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
@@ -277,6 +274,7 @@ public class ProductService {
                 .taxCode(product.getTaxCode())
                 .isActive(product.isActive())
                 .isPackagedGood(product.isPackagedGood())
+                .isIngredient(product.isIngredient())
                 .productType(product.getProductType())
                 .build();
     }
@@ -414,6 +412,7 @@ public class ProductService {
         existing.setProductType(product.getProductType());
         existing.setVariant(product.isVariant());
         existing.setPackagedGood(product.isPackagedGood());
+        existing.setIngredient(product.isIngredient());
         existing.setProductCode(product.getProductCode());
         existing.setTaxRate(product.getTaxRate());
         existing.setTaxCode(product.getTaxCode());

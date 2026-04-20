@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.restaurant.pos")
 public class CafeQrBackendApplication {
 
     public static void main(String[] args) {

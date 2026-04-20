@@ -12,10 +12,11 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<Order, UUID> {
     List<Order> findByClientIdOrderByCreatedAtDesc(UUID clientId);
     List<Order> findByClientIdAndOrgIdOrderByCreatedAtDesc(UUID clientId, UUID orgId);
+    List<Order> findByClientIdAndOrderTypeOrderByCreatedAtDesc(UUID clientId, String orderType);
+    List<Order> findByClientIdAndOrgIdAndOrderTypeOrderByCreatedAtDesc(UUID clientId, UUID orgId, String orderType);
     
     Optional<Order> findByIdAndClientId(UUID id, UUID clientId);
     Optional<Order> findByIdAndClientIdAndOrgId(UUID id, UUID clientId, UUID orgId);
     
-    Optional<Order> findByIdempotencyKeyAndClientId(String idempotencyKey, UUID clientId);
-    Optional<Order> findByIdempotencyKeyAndClientIdAndOrgId(String idempotencyKey, UUID clientId, UUID orgId);
+    Optional<Order> findByOrderNoAndClientId(String orderNo, UUID clientId);
 }

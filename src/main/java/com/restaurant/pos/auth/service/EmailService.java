@@ -42,4 +42,28 @@ public class EmailService {
             // We do NOT throw an exception here so the user can still register by looking at the backend logs
         }
     }
+
+    @Async
+    public void sendTableQREmail(String toEmail, String tableNumber, String qrLink) {
+        // Log the link prominently in the terminal as per "login/signup" strategy
+        System.out.println("\n[MAIL SIMULATOR] ------------------------------------------------");
+        System.out.println("[MAIL SIMULATOR] TABLE: " + tableNumber);
+        System.out.println("[MAIL SIMULATOR] TO: " + toEmail);
+        System.out.println("[MAIL SIMULATOR] LINK: " + qrLink);
+        System.out.println("[MAIL SIMULATOR] ------------------------------------------------\n");
+        
+        log.info("Requested QR email for Table {} to {}. LINK: {}", tableNumber, toEmail, qrLink);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(toEmail);
+            message.setSubject("Table " + tableNumber + " Digital Access - Cafe-QR");
+            message.setText("Hello,\n\nYour digital menu access link for Table " + tableNumber + " is: " + qrLink + "\n\nUse this link to browse the menu and place orders.");
+
+            emailSender.send(message);
+            log.info("QR email successfully sent to {}", toEmail);
+        } catch (Exception e) {
+            log.warn("FAILED to send QR email to {}: {}. !!! LINK IS LOGGED ABOVE !!!", toEmail, e.getMessage());
+        }
+    }
 }

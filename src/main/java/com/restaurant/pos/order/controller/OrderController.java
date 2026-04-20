@@ -2,7 +2,6 @@ package com.restaurant.pos.order.controller;
 
 import com.restaurant.pos.common.dto.ApiResponse;
 import com.restaurant.pos.order.domain.Order;
-import com.restaurant.pos.order.domain.OrderStatus;
 import com.restaurant.pos.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +24,12 @@ public class OrderController {
         return ResponseEntity.ok(ApiResponse.success(orderService.getOrders()));
     }
 
+    @GetMapping("/type/{type}")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
+    public ResponseEntity<ApiResponse<List<Order>>> getOrdersByType(@PathVariable String type) {
+        return ResponseEntity.ok(ApiResponse.success(orderService.getOrdersByType(type.toUpperCase())));
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
     public ResponseEntity<ApiResponse<Order>> getOrder(@PathVariable UUID id) {
@@ -37,11 +42,17 @@ public class OrderController {
         return ResponseEntity.ok(ApiResponse.success(orderService.createOrder(order)));
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
+    public ResponseEntity<ApiResponse<Order>> updateOrder(@PathVariable UUID id, @RequestBody Order order) {
+        return ResponseEntity.ok(ApiResponse.success(orderService.updateOrder(id, order)));
+    }
+
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
     public ResponseEntity<ApiResponse<Order>> updateOrderStatus(
             @PathVariable UUID id,
-            @RequestParam OrderStatus status
+            @RequestParam String status
     ) {
         return ResponseEntity.ok(ApiResponse.success(orderService.updateOrderStatus(id, status)));
     }

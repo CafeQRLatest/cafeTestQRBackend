@@ -1,17 +1,12 @@
 package com.restaurant.pos.invoice.domain;
 
 import com.restaurant.pos.common.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -27,21 +22,50 @@ public class Invoice extends BaseEntity {
     @Builder.Default
     private UUID id = UUID.randomUUID();
 
-    @Column(unique = true, nullable = false)
-    private String invoiceNumber;
+    @Column(name = "terminal_id")
+    private UUID terminalId;
 
-    @Column(nullable = false)
+    @Column(name = "order_id")
     private UUID orderId;
 
-    private BigDecimal subtotal;
-    private BigDecimal taxAmount;
-    private BigDecimal discountAmount;
+    @Column(name = "customer_id")
+    private UUID customerId;
+
+    @Column(name = "vendor_id")
+    private UUID vendorId;
+
+    @Column(name = "invoice_no", unique = true, nullable = false)
+    private String invoiceNo;
+
+    @Column(name = "invoice_date")
+    @Builder.Default
+    private LocalDateTime invoiceDate = LocalDateTime.now();
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
+
+    @Builder.Default
+    @Column(length = 20)
+    private String status = "UNPAID"; // UNPAID, PARTIAL, PAID, VOID
+
+    @Builder.Default
+    @Column(name = "is_paid")
+    private Boolean isPaid = false;
+
+    @Column(name = "total_amount", precision = 15, scale = 2, nullable = false)
     private BigDecimal totalAmount;
 
-    private String paymentStatus; // PAID, UNPAID, PARTIAL
-    private String paymentMethod; // CASH, CARD, UPI
+    @Column(name = "amount_due", precision = 15, scale = 2, nullable = false)
+    private BigDecimal amountDue;
 
-    // Useful for offline sync exactly like Order idempotency
-    @Column(unique = true)
-    private String idempotencyKey;
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(length = 100)
+    private String reference;
+
+    @Builder.Default
+    @JsonProperty("isActive")
+    @Column(name = "isactive", length = 1)
+    private String isactive = "Y";
 }

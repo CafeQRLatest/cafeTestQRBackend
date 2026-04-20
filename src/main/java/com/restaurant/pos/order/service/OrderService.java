@@ -3,16 +3,14 @@ package com.restaurant.pos.order.service;
 import com.restaurant.pos.common.exception.ResourceNotFoundException;
 import com.restaurant.pos.common.tenant.TenantContext;
 import com.restaurant.pos.order.domain.Order;
-import com.restaurant.pos.order.domain.OrderStatus;
 import com.restaurant.pos.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.restaurant.pos.common.util.SecurityUtils;
+import com.restaurant.pos.inventory.service.InventoryService;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,7 +18,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final RabbitTemplate rabbitTemplate;
+    private final InventoryService inventoryService;
 
     public List<Order> getOrders() {
         UUID tenantId = TenantContext.getCurrentTenant();
@@ -28,6 +26,15 @@ public class OrderService {
             return orderRepository.findByClientIdOrderByCreatedAtDesc(tenantId);
         }
         return orderRepository.findByClientIdAndOrgIdOrderByCreatedAtDesc(tenantId, TenantContext.getCurrentOrg());
+    }
+
+    public List<Order> getOrdersByType(String orderType) {
+        UUID tenantId = TenantContext.getCurrentTenant();
+        if (SecurityUtils.isSuperAdmin()) {
+            return orderRepository.findByClientIdAndOrderTypeOrderByCreatedAtDesc(tenantId, orderType);
+        }
+        return orderRepository.findByClientIdAndOrgIdAndOrderTypeOrderByCreatedAtDesc(
+                tenantId, TenantContext.getCurrentOrg(), orderType);
     }
 
     public Order getOrder(UUID id) {
@@ -47,45 +54,83 @@ public class OrderService {
             order.setOrgId(TenantContext.getCurrentOrg());
         }
 
-        // If an idempotency key is provided, check if the order already exists to support offline sync safely
-        if (order.getIdempotencyKey() != null) {
-            Optional<Order> existingOrder;
-            if (SecurityUtils.isSuperAdmin()) {
-                existingOrder = orderRepository.findByIdempotencyKeyAndClientId(
-                        order.getIdempotencyKey(), order.getClientId()
-                );
-            } else {
-                existingOrder = orderRepository.findByIdempotencyKeyAndClientIdAndOrgId(
-                        order.getIdempotencyKey(), order.getClientId(), order.getOrgId()
-                );
-            }
-            
-            if (existingOrder.isPresent()) {
-                return existingOrder.get();
-            }
+        if (order.getOrderStatus() == null) {
+            order.setOrderStatus("DRAFT");
         }
 
-        order.setStatus(OrderStatus.NEW);
-        
-        // Ensure bidirectional mapping is set up correctly
-        if (order.getItems() != null) {
-            order.getItems().forEach(item -> item.setOrder(order));
+        // Ensure bidirectional mapping
+        if (order.getLines() != null) {
+            order.getLines().forEach(line -> line.setOrder(order));
         }
 
-        Order savedOrder = orderRepository.save(order);
-
-        // Publish event to RabbitMQ
-        rabbitTemplate.convertAndSend("pos.exchange", "order.created", 
-            "Order created: " + savedOrder.getId() + " for Client: " + savedOrder.getClientId()
-        );
-
-        return savedOrder;
+        return orderRepository.save(order);
     }
 
     @Transactional
-    public Order updateOrderStatus(UUID id, OrderStatus status) {
+    public Order updateOrder(UUID id, Order updates) {
+        Order existing = getOrder(id);
+        existing.setOrderStatus(updates.getOrderStatus());
+        existing.setPaymentStatus(updates.getPaymentStatus());
+        existing.setCustomerId(updates.getCustomerId());
+        existing.setVendorId(updates.getVendorId());
+        existing.setDescription(updates.getDescription());
+        existing.setReference(updates.getReference());
+        existing.setTotalTaxAmount(updates.getTotalTaxAmount());
+        existing.setTotalDiscountAmount(updates.getTotalDiscountAmount());
+        existing.setTotalAmount(updates.getTotalAmount());
+        existing.setGrandTotal(updates.getGrandTotal());
+
+        // Update lines
+        if (updates.getLines() != null) {
+            existing.getLines().clear();
+            updates.getLines().forEach(line -> {
+                line.setOrder(existing);
+                existing.getLines().add(line);
+            });
+        }
+
+        Order result = orderRepository.save(existing);
+        
+        // Inventory Hook: If PURCHASE order is COMPLETED, update stock
+        if ("PURCHASE".equalsIgnoreCase(result.getOrderType()) && "COMPLETED".equalsIgnoreCase(result.getOrderStatus())) {
+            processInventoryForOrder(result);
+        }
+        
+        return result;
+    }
+
+    @Transactional
+    public Order updateOrderStatus(UUID id, String status) {
         Order order = getOrder(id);
-        order.setStatus(status);
-        return orderRepository.save(order);
+        order.setOrderStatus(status);
+        Order result = orderRepository.save(order);
+        
+        // Inventory Hook
+        if ("PURCHASE".equalsIgnoreCase(result.getOrderType()) && "COMPLETED".equalsIgnoreCase(result.getOrderStatus())) {
+            processInventoryForOrder(result);
+        }
+        
+        return result;
+    }
+
+    private void processInventoryForOrder(Order order) {
+        if (order.getWarehouseId() == null) {
+            // Log warning or throw exception? For now, we need a warehouse to receive stock.
+            return;
+        }
+
+        if (order.getLines() != null) {
+            for (com.restaurant.pos.order.domain.OrderLine line : order.getLines()) {
+                inventoryService.updateStock(
+                    order.getWarehouseId(),
+                    line.getProductId(),
+                    line.getVariantId(),
+                    line.getQuantity(),
+                    "PURCHASE",
+                    order.getId(),
+                    line.getUnitPrice()
+                );
+            }
+        }
     }
 }

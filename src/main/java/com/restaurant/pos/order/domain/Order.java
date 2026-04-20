@@ -1,14 +1,12 @@
 package com.restaurant.pos.order.domain;
 
 import com.restaurant.pos.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,37 +24,87 @@ public class Order extends BaseEntity {
     @Builder.Default
     private UUID id = UUID.randomUUID();
 
-    // The tablet/client can send this idempotency key during offline sync
-    @Column(unique = true)
-    private String idempotencyKey;
+    @Column(name = "order_no", unique = true, nullable = false)
+    private String orderNo;
 
-    private String customerName;
-    private String customerPhone;
-    
-    // UUID from the Client module (could map to customer entity later)
+    @Column(name = "order_type", length = 20, nullable = false)
+    @Builder.Default
+    private String orderType = "SALE"; // SALE, PURCHASE
+
+    @Column(name = "order_status", length = 20)
+    @Builder.Default
+    private String orderStatus = "DRAFT"; // DRAFT, CONFIRMED, COMPLETED, CANCELLED
+
+    @Column(name = "payment_status", length = 20)
+    @Builder.Default
+    private String paymentStatus = "PENDING"; // PENDING, PARTIAL, PAID
+
+    @Column(name = "order_source", length = 50)
+    @Builder.Default
+    private String orderSource = "OFFLINE"; // OFFLINE, ONLINE, APP
+
+    @Column(name = "terminal_id")
+    private UUID terminalId;
+
+    @Column(name = "customer_id")
     private UUID customerId;
 
-    private String orderType; // DINE_IN, TAKEAWAY, DELIVERY
+    @Column(name = "vendor_id")
+    private UUID vendorId;
+
+    @Column(name = "pricelist_id")
+    private UUID pricelistId;
+
+    @Column(name = "currency_id")
+    private UUID currencyId;
+
+    @Column(name = "warehouse_id")
+    private UUID warehouseId;
+
+    @Column(name = "order_date")
+    @Builder.Default
+    private LocalDateTime orderDate = LocalDateTime.now();
+
+    @Builder.Default
+    @Column(name = "total_tax_amount", precision = 15, scale = 2)
+    private BigDecimal totalTaxAmount = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "total_discount_amount", precision = 15, scale = 2)
+    private BigDecimal totalDiscountAmount = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "total_amount", precision = 15, scale = 2)
+    private BigDecimal totalAmount = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "grand_total", precision = 15, scale = 2)
+    private BigDecimal grandTotal = BigDecimal.ZERO;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(length = 100)
+    private String reference;
+
+    @Column(name = "fulfillment_type", length = 20)
+    @Builder.Default
+    private String fulfillmentType = "DINE_IN"; // DINE_IN, TAKEAWAY, DELIVERY
+
+    @Column(name = "table_number", length = 20)
     private String tableNumber;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
-
     @Builder.Default
-    private BigDecimal subtotal = BigDecimal.ZERO;
-    @Builder.Default
-    private BigDecimal taxTotal = BigDecimal.ZERO;
-    @Builder.Default
-    private BigDecimal discount = BigDecimal.ZERO;
-    @Builder.Default
-    private BigDecimal totalAmount = BigDecimal.ZERO;
+    @JsonProperty("isActive")
+    @Column(name = "isactive", length = 1)
+    private String isactive = "Y";
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderLine> lines = new ArrayList<>();
 
-    public void addItem(OrderItem item) {
-        items.add(item);
-        item.setOrder(this);
+    public void addLine(OrderLine line) {
+        lines.add(line);
+        line.setOrder(this);
     }
 }

@@ -54,6 +54,8 @@ public class Product extends AuditableEntity {
     private boolean isVariant;
     @JsonProperty("isPackagedGood")
     private boolean isPackagedGood;
+    @JsonProperty("isIngredient")
+    private boolean isIngredient;
     private String productCode;
     
     // Global ERP Financials & Inventory
