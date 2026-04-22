@@ -38,6 +38,7 @@ public class SystemConfiguration {
     private boolean onlineDeliveryEnabled;
     private boolean allowMultipleCustomersPerOrder;
     private boolean posProductListingEnabled;
+    private boolean discountEnabled;
 
     // Round-off Engine
     private boolean roundOffEnabled;

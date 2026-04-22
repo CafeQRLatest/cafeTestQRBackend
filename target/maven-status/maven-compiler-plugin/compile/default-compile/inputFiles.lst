@@ -18,7 +18,9 @@ C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\MenuRepository.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\exception\BusinessException.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\domain\OrderStatus.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\repository\ExpenseCategoryRepository.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\Product.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\service\ExpenseService.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\AuthResponse.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Vendor.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\table\domain\RestaurantTable.java
@@ -29,11 +31,13 @@ C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\controller\ClientController.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\repository\OrganizationRepository.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\config\CacheConfig.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\domain\Expense.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Terminal.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\StockSnapshotRepository.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\tenant\UserContext.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\ClientService.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\OrganizationService.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\controller\ExpenseController.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\Warehouse.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\service\ProductService.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Pricelist.java
@@ -117,8 +121,10 @@ C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\AuthRequest.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\controller\ProductController.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\tenant\TenantInterceptor.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\repository\ExpenseRepository.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\controller\AuthController.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\RoleService.java
+C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\domain\ExpenseCategory.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\CafeQrBackendApplication.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Client.java
 C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\WarehouseRepository.java

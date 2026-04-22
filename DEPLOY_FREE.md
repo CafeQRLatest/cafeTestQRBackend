@@ -35,19 +35,33 @@ This project is configured to run on 100% free services. Follow these steps to d
    - `SPRING_RABBITMQ_USERNAME`: The user
    - `SPRING_RABBITMQ_PASSWORD`: The password
 
-## 4. Backend - [Render.com](https://render.com)
+## 4. Email (SMTP) - [Gmail](https://gmail.com) or [SendGrid](https://sendgrid.com)
+1. Use a Gmail account or a free SendGrid account.
+2. For Gmail:
+   - Go to **Google Account Settings** -> **Security**.
+   - Enable **2-Step Verification**.
+   - Search for **App Passwords**.
+   - Create a new App Password for "Mail" on "Other (Custom name: Cafe-QR)".
+3. You will need:
+   - `SMTP_HOST`: `smtp.gmail.com`
+   - `SMTP_PORT`: `587`
+   - `SMTP_USERNAME`: Your Gmail address
+   - `SMTP_PASSWORD`: The 16-character App Password
+## 5. Backend - [Render.com](https://render.com)
 1. Push your code to your **Private** GitHub repository.
 2. Go to **Render Dashboard** -> **New** -> **Blueprint**.
 3. Connect your GitHub repo.
 4. Render will automatically detect `render.yaml`.
 5. Fill in the environment variables when prompted:
-   - `SPRING_DATASOURCE_URL`: From Neon (jdbc:...neondb?sslmode=require)
-   - `SPRING_RABBITMQ_HOST`: From CloudAMQP
-   - `SPRING_DATA_REDIS_HOST`: From Upstash
-   - `ALLOWED_ORIGINS`: Your Vercel URL (e.g., `https://cafe-qr.vercel.app`)
+    - `SPRING_DATASOURCE_URL`: From Neon (jdbc:...neondb?sslmode=require)
+    - `SPRING_RABBITMQ_HOST`: From CloudAMQP
+    - `SPRING_DATA_REDIS_HOST`: From Upstash
+    - `SMTP_USERNAME`: Your Gmail address
+    - `SMTP_PASSWORD`: Your Gmail App Password
+    - `ALLOWED_ORIGINS`: Your Vercel URL (e.g., `https://cafe-qr.vercel.app`)
 6. Once deployed, copy your backend URL (e.g., `https://cafe-qr-backend.onrender.com`).
 
-## 5. Frontend - [Vercel.com](https://vercel.com)
+## 6. Frontend - [Vercel.com](https://vercel.com)
 1. Go to **Vercel Dashboard** -> **Add New** -> **Project**.
 2. Select your GitHub repo (and the `cafe-qr-frontend` folder).
 3. Add an environment variable:

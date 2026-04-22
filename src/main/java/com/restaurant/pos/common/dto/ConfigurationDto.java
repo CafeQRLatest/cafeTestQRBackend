@@ -28,6 +28,7 @@ public class ConfigurationDto {
     private boolean onlineDeliveryEnabled;
     private boolean allowMultipleCustomersPerOrder;
     private boolean posProductListingEnabled;
+    private boolean discountEnabled;
 
     // Tax Settings (Stubbed for now as requested - handled in client wise)
     @Builder.Default

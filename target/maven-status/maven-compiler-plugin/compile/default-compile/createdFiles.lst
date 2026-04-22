@@ -7,6 +7,7 @@ com\restaurant\pos\invoice\domain\Invoice.class
 com\restaurant\pos\product\domain\ProductUpsell.class
 com\restaurant\pos\inventory\domain\StockAdjustmentLine.class
 com\restaurant\pos\auth\domain\User$UserBuilder.class
+com\restaurant\pos\expense\domain\ExpenseCategory$ExpenseCategoryBuilder.class
 com\restaurant\pos\product\repository\UomRepository.class
 com\restaurant\pos\product\dto\ProductListDto.class
 com\restaurant\pos\common\config\WebMvcConfig.class
@@ -21,6 +22,7 @@ com\restaurant\pos\CafeQrBackendApplication.class
 com\restaurant\pos\inventory\domain\StockSnapshot.class
 com\restaurant\pos\inventory\repository\StockAdjustmentRepository.class
 com\restaurant\pos\product\domain\Uom$UomBuilder.class
+com\restaurant\pos\expense\domain\Expense$ExpenseBuilder.class
 com\restaurant\pos\common\entity\AuditableEntity.class
 com\restaurant\pos\common\dto\ConfigurationDto.class
 com\restaurant\pos\table\controller\RestaurantTableController.class
@@ -39,7 +41,9 @@ com\restaurant\pos\order\domain\OrderLine.class
 com\restaurant\pos\product\domain\Category.class
 com\restaurant\pos\table\domain\RestaurantTable.class
 com\restaurant\pos\purchasing\domain\Currency$CurrencyBuilder.class
+com\restaurant\pos\expense\controller\ExpenseController.class
 com\restaurant\pos\auth\repository\RefreshTokenRepository.class
+com\restaurant\pos\expense\domain\Expense.class
 com\restaurant\pos\auth\dto\UserProfileDTO$UserProfileDTOBuilder.class
 com\restaurant\pos\auth\repository\UserRepository.class
 com\restaurant\pos\inventory\domain\StockLedger.class
@@ -64,6 +68,8 @@ com\restaurant\pos\inventory\domain\StockAdjustment.class
 com\restaurant\pos\auth\controller\DebugController.class
 com\restaurant\pos\purchasing\repository\CustomerRepository.class
 com\restaurant\pos\order\domain\Order$OrderBuilder.class
+com\restaurant\pos\expense\domain\ExpenseCategory.class
+com\restaurant\pos\expense\repository\ExpenseRepository.class
 com\restaurant\pos\invoice\service\InvoiceService.class
 com\restaurant\pos\order\service\OrderService.class
 com\restaurant\pos\common\controller\ConfigurationController.class
@@ -72,6 +78,7 @@ com\restaurant\pos\common\config\CacheConfig.class
 com\restaurant\pos\purchasing\domain\PricelistVersion.class
 com\restaurant\pos\inventory\domain\StockAdjustment$StockAdjustmentBuilder.class
 com\restaurant\pos\product\domain\ProductVariantMapping$ProductVariantMappingBuilder.class
+com\restaurant\pos\expense\repository\ExpenseCategoryRepository.class
 com\restaurant\pos\purchasing\repository\PricelistRepository.class
 com\restaurant\pos\inventory\domain\StockTransferLine$StockTransferLineBuilder.class
 com\restaurant\pos\product\domain\VariantGroup$VariantGroupBuilder.class
@@ -150,6 +157,7 @@ com\restaurant\pos\product\domain\VariantGroup.class
 com\restaurant\pos\common\repository\SystemConfigurationRepository.class
 com\restaurant\pos\auth\controller\RoleController.class
 com\restaurant\pos\auth\dto\ResetPasswordRequest$ResetPasswordRequestBuilder.class
+com\restaurant\pos\expense\service\ExpenseService.class
 com\restaurant\pos\auth\domain\Menu$MenuBuilder.class
 com\restaurant\pos\auth\service\EmailService.class
 com\restaurant\pos\client\domain\Device.class

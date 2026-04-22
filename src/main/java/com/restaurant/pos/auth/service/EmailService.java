@@ -26,8 +26,6 @@ public class EmailService {
     public void sendOtpEmail(String toEmail, String otp) {
         log.info("Requested OTP email to {}", toEmail);
 
-        // Email sending logic below
-
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
@@ -38,7 +36,7 @@ public class EmailService {
             emailSender.send(message);
             log.info("OTP email successfully sent to {}", toEmail);
         } catch (Exception e) {
-            log.warn("FAILED to send OTP email to {}: {}. !!! CHECK TERMINAL LOGS FOR THE OTP !!!", toEmail, e.getMessage());
+            log.warn("FAILED to send OTP email to {}: {}", toEmail, e.getMessage());
             // We do NOT throw an exception here so the user can still register by looking at the backend logs
         }
     }

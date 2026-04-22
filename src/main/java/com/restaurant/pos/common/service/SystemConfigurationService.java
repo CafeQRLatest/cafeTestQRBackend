@@ -40,6 +40,7 @@ public class SystemConfigurationService {
                 .qrOrderingEnabled(true)
                 .sendToKitchenEnabled(true)
                 .posProductListingEnabled(true)
+                .discountEnabled(true)
                 .taxLabelGlobal("GST")
                 .currencySymbol("₹")
                 .currencyPosition("before")
@@ -65,6 +66,7 @@ public class SystemConfigurationService {
                 .onlineDeliveryEnabled(entity.isOnlineDeliveryEnabled())
                 .allowMultipleCustomersPerOrder(entity.isAllowMultipleCustomersPerOrder())
                 .posProductListingEnabled(entity.isPosProductListingEnabled())
+                .discountEnabled(entity.isDiscountEnabled())
                 .roundOffEnabled(entity.isRoundOffEnabled())
                 .roundOffMode(entity.getRoundOffMode())
                 .roundOffAutoFactor(entity.getRoundOffAutoFactor())
@@ -100,6 +102,7 @@ public class SystemConfigurationService {
         entity.setOnlineDeliveryEnabled(dto.isOnlineDeliveryEnabled());
         entity.setAllowMultipleCustomersPerOrder(dto.isAllowMultipleCustomersPerOrder());
         entity.setPosProductListingEnabled(dto.isPosProductListingEnabled());
+        entity.setDiscountEnabled(dto.isDiscountEnabled());
         entity.setRoundOffEnabled(dto.isRoundOffEnabled());
         entity.setRoundOffMode(dto.getRoundOffMode());
         entity.setRoundOffAutoFactor(dto.getRoundOffAutoFactor());
