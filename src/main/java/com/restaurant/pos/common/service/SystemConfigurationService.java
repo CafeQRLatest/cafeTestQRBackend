@@ -3,7 +3,15 @@ package com.restaurant.pos.common.service;
 import com.restaurant.pos.common.dto.ConfigurationDto;
 import com.restaurant.pos.common.entity.SystemConfiguration;
 import com.restaurant.pos.common.repository.SystemConfigurationRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SystemConfigurationService {
 
     private final SystemConfigurationRepository repository;
+    private final ObjectMapper objectMapper;
 
     @Transactional(readOnly = true)
     public ConfigurationDto getConfiguration() {
@@ -41,7 +50,11 @@ public class SystemConfigurationService {
                 .sendToKitchenEnabled(true)
                 .posProductListingEnabled(true)
                 .discountEnabled(true)
+                .taxEnabled(false)
                 .taxLabelGlobal("GST")
+                .taxRatesJson("[]")
+                .pricesIncludeTax(false)
+                .taxSplitEnabled(true)
                 .currencySymbol("₹")
                 .currencyPosition("before")
                 .roundOffMode("automatic")
@@ -71,7 +84,12 @@ public class SystemConfigurationService {
                 .roundOffMode(entity.getRoundOffMode())
                 .roundOffAutoFactor(entity.getRoundOffAutoFactor())
                 .roundOffManualLimit(entity.getRoundOffManualLimit())
+                .taxEnabled(entity.isTaxEnabled())
                 .taxLabelGlobal(entity.getTaxLabelGlobal())
+                .taxRates(parseTaxRates(entity.getTaxRatesJson()))
+                .taxDefaultId(entity.getTaxDefaultId())
+                .pricesIncludeTax(entity.isPricesIncludeTax())
+                .taxSplitEnabled(entity.isTaxSplitEnabled())
                 .currencySymbol(entity.getCurrencySymbol())
                 .currencyPosition(entity.getCurrencyPosition())
                 .billFooter(entity.getBillFooter())
@@ -107,7 +125,12 @@ public class SystemConfigurationService {
         entity.setRoundOffMode(dto.getRoundOffMode());
         entity.setRoundOffAutoFactor(dto.getRoundOffAutoFactor());
         entity.setRoundOffManualLimit(dto.getRoundOffManualLimit());
+        entity.setTaxEnabled(dto.isTaxEnabled());
         if (dto.getTaxLabelGlobal() != null) entity.setTaxLabelGlobal(dto.getTaxLabelGlobal());
+        entity.setTaxRatesJson(serializeTaxRates(dto.getTaxRates()));
+        entity.setTaxDefaultId(dto.getTaxDefaultId());
+        entity.setPricesIncludeTax(dto.isPricesIncludeTax());
+        entity.setTaxSplitEnabled(dto.isTaxSplitEnabled());
         if (dto.getCurrencySymbol() != null) entity.setCurrencySymbol(dto.getCurrencySymbol());
         if (dto.getCurrencyPosition() != null) entity.setCurrencyPosition(dto.getCurrencyPosition());
         
@@ -125,5 +148,25 @@ public class SystemConfigurationService {
         entity.setPrintAutoCut(dto.isPrintAutoCut());
         if (dto.getPrintWinListUrl() != null) entity.setPrintWinListUrl(dto.getPrintWinListUrl());
         if (dto.getPrintWinPostUrl() != null) entity.setPrintWinPostUrl(dto.getPrintWinPostUrl());
+    }
+
+    private List<Object> parseTaxRates(String json) {
+        if (json == null || json.trim().isEmpty()) return Collections.emptyList();
+        try {
+            return objectMapper.readValue(json, new TypeReference<List<Object>>(){});
+        } catch (Exception e) {
+            log.error("Failed to parse tax rates JSON", e);
+            return Collections.emptyList();
+        }
+    }
+
+    private String serializeTaxRates(List<Object> rates) {
+        if (rates == null) return "[]";
+        try {
+            return objectMapper.writeValueAsString(rates);
+        } catch (Exception e) {
+            log.error("Failed to serialize tax rates", e);
+            return "[]";
+        }
     }
 }

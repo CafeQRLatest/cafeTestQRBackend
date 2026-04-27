@@ -39,6 +39,7 @@ public class Organization extends AuditableEntity {
     @com.fasterxml.jackson.annotation.JsonProperty("isactive")
     private String isactive = "Y"; // Standardized Y/N
 
+    @Column(columnDefinition = "TEXT")
     private String logoUrl;
     private String googleMapsUrl;
     private String pinCode;

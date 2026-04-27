@@ -52,6 +52,13 @@ public class Invoice extends BaseEntity {
     @Column(name = "is_paid")
     private Boolean isPaid = false;
 
+    @Column(name = "is_credit")
+    @Builder.Default
+    private Boolean isCredit = false;
+
+    @Column(name = "original_invoice_id")
+    private UUID originalInvoiceId;
+
     @Column(name = "total_amount", precision = 15, scale = 2, nullable = false)
     private BigDecimal totalAmount;
 

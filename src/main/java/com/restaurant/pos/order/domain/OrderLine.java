@@ -34,6 +34,12 @@ public class OrderLine {
     @Column(name = "variant_id")
     private UUID variantId;
 
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "is_packaged_good")
+    private Boolean isPackagedGood;
+
     @Builder.Default
     @Column(precision = 15, scale = 3, nullable = false)
     private BigDecimal quantity = BigDecimal.ONE;

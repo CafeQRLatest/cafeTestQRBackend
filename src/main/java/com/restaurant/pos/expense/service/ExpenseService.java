@@ -26,11 +26,14 @@ public class ExpenseService {
 
     public List<ExpenseCategory> getCategories() {
         UUID clientId = TenantContext.getCurrentTenant();
-        return categoryRepository.findByClientIdAndIsactiveOrderBySortOrderAsc(clientId, "Y");
+        return categoryRepository.findByClientIdOrderBySortOrderAsc(clientId);
     }
 
     @Transactional
     public ExpenseCategory createCategory(ExpenseCategory category) {
+        if (category.getOrgId() == null) {
+            category.setOrgId(TenantContext.getCurrentOrg());
+        }
         return categoryRepository.save(category);
     }
 
@@ -38,18 +41,34 @@ public class ExpenseService {
     public ExpenseCategory updateCategory(UUID id, ExpenseCategory updated) {
         ExpenseCategory cat = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+        
         cat.setName(updated.getName());
         if (updated.getSortOrder() != null) cat.setSortOrder(updated.getSortOrder());
-        return categoryRepository.save(cat);
+        
+        // Also fix orgId if it was missing
+        if (cat.getOrgId() == null) {
+            cat.setOrgId(TenantContext.getCurrentOrg());
+        }
+
+        // Save basic info first
+        cat = categoryRepository.save(cat);
+
+        // Fail-safe check for both naming variants (Lombok vs Jackson)
+        String newStatus = updated.getIsactive();
+        if (newStatus == null) newStatus = updated.getIsActive();
+
+        if (newStatus != null) {
+            categoryRepository.updateStatus(id, newStatus);
+            cat.setIsactive(newStatus);
+        }
+        
+        return cat;
     }
 
     @Transactional
     public void deleteCategory(UUID id) {
-        long count = expenseRepository.countByCategoryId(id);
-        if (count > 0) {
-            throw new RuntimeException("Cannot delete: category is used by " + count + " expense(s)");
-        }
-        categoryRepository.deleteById(id);
+        // Instead of deleting, we now mark as Inactive ('N')
+        categoryRepository.updateStatus(id, "N");
     }
 
     // ── Expenses ────────────────────────────────────────────────────────────────

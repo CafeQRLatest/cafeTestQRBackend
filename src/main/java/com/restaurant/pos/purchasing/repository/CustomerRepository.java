@@ -14,4 +14,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     List<Customer> findByClientIdAndOrgIdOrderByNameAsc(UUID clientId, UUID orgId);
     Optional<Customer> findByIdAndClientId(UUID id, UUID clientId);
     Optional<Customer> findByIdAndClientIdAndOrgId(UUID id, UUID clientId, UUID orgId);
+    Optional<Customer> findByPhoneAndClientIdAndOrgId(String phone, UUID clientId, UUID orgId);
+    Optional<Customer> findByPhoneAndClientId(String phone, UUID clientId);
+    Optional<Customer> findByEmailAndClientId(String email, UUID clientId);
 }

@@ -20,8 +20,8 @@ public class OrderController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
-    public ResponseEntity<ApiResponse<List<Order>>> getOrders() {
-        return ResponseEntity.ok(ApiResponse.success(orderService.getOrders()));
+    public ResponseEntity<ApiResponse<List<Order>>> getOrders(@RequestParam(required = false) String status) {
+        return ResponseEntity.ok(ApiResponse.success(orderService.getOrders(status)));
     }
 
     @GetMapping("/type/{type}")
@@ -52,8 +52,10 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
     public ResponseEntity<ApiResponse<Order>> updateOrderStatus(
             @PathVariable UUID id,
-            @RequestParam String status
+            @RequestParam String status,
+            @RequestParam(required = false) String paymentStatus,
+            @RequestParam(required = false) String description
     ) {
-        return ResponseEntity.ok(ApiResponse.success(orderService.updateOrderStatus(id, status)));
+        return ResponseEntity.ok(ApiResponse.success(orderService.updateOrderStatus(id, status, paymentStatus, description)));
     }
 }

@@ -13,10 +13,10 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class BaseEntity extends AuditableEntity {
 
-    @Column(name = "client_id", updatable = false)
+    @Column(name = "client_id")
     private UUID clientId;
 
-    @Column(name = "org_id", updatable = false)
+    @Column(name = "org_id")
     private UUID orgId;
 
     @PrePersist

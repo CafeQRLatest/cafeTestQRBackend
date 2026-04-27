@@ -47,7 +47,13 @@ public class SystemConfiguration {
     private BigDecimal roundOffManualLimit;
 
     // Locale & Global Logic
+    private boolean taxEnabled;
     private String taxLabelGlobal;
+    @Column(columnDefinition = "TEXT")
+    private String taxRatesJson;
+    private String taxDefaultId;
+    private boolean pricesIncludeTax;
+    private boolean taxSplitEnabled;
     private String currencySymbol;
     private String currencyPosition;
 

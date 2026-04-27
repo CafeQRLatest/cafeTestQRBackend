@@ -4,6 +4,7 @@ import com.restaurant.pos.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -93,6 +94,22 @@ public class Order extends BaseEntity {
 
     @Column(name = "table_number", length = 20)
     private String tableNumber;
+
+    @Column(name = "table_id")
+    private UUID tableId;
+
+    @Column(name = "original_order_id")
+    private UUID originalOrderId;
+
+    @Column(name = "revision_number")
+    @Builder.Default
+    private Integer revisionNumber = 0;
+
+    @Formula("(SELECT i.invoice_no FROM invoices i WHERE i.order_id = id LIMIT 1)")
+    private String invoiceNo;
+
+    @Formula("(SELECT p.reference_no FROM payments p WHERE p.order_id = id ORDER BY p.created_at DESC LIMIT 1)")
+    private String paymentNo;
 
     @Builder.Default
     @JsonProperty("isActive")
