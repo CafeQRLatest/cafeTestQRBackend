@@ -1,0 +1,30 @@
+# Build output
+target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Maven
+apache-maven-3.9.6/
+maven.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.txt
+!DEPLOY_FREE.md
+!all_tables.txt
+
+# Environment
+.env
+.env.local

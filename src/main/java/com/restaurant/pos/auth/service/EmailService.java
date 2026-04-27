@@ -33,6 +33,12 @@ public class EmailService {
             message.setSubject("Your Cafe-QR Registration OTP");
             message.setText("Welcome to Cafe-QR!\n\nYour one-time password (OTP) for registration is: " + otp + "\n\nThis OTP is valid for 5 minutes.");
 
+            // Log the OTP to console for local development convenience
+            System.out.println("\n[OTP DEBUG] ------------------------------------------------");
+            System.out.println("[OTP DEBUG] TO: " + toEmail);
+            System.out.println("[OTP DEBUG] CODE: " + otp);
+            System.out.println("[OTP DEBUG] ------------------------------------------------\n");
+
             emailSender.send(message);
             log.info("OTP email successfully sent to {}", toEmail);
         } catch (Exception e) {

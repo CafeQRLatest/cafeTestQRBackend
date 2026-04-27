@@ -1,140 +1,3 @@
-<<<<<<< Updated upstream
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockTransferLine.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\service\InventoryService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\entity\SystemConfiguration.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\TerminalService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockAdjustment.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\Menu.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Organization.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\dto\ConfigurationDto.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\ProductVariantMappingRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\service\SystemConfigurationService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\ProductUpsellRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\ResetPasswordRequest.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\config\ApplicationConfig.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\AuthService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\exception\ResourceNotFoundException.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\StockTransferRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\controller\InventoryController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\MenuRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\exception\BusinessException.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\domain\OrderStatus.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\repository\ExpenseCategoryRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\Product.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\service\ExpenseService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\AuthResponse.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Vendor.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\table\domain\RestaurantTable.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\controller\OrderController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\util\AuthCookieUtil.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\repository\VendorRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\CategoryRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\controller\ClientController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\repository\OrganizationRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\config\CacheConfig.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\domain\Expense.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Terminal.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\StockSnapshotRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\tenant\UserContext.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\ClientService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\OrganizationService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\controller\ExpenseController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\Warehouse.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\service\ProductService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Pricelist.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\RoleEntity.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\repository\PricelistRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\table\controller\RestaurantTableController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\invoice\service\InvoiceService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\Role.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Currency.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\invoice\domain\Invoice.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\config\WebMvcConfig.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\VariantGroupRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\RefreshToken.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\EmailService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\tenant\TenantContext.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockSnapshot.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\repository\CustomerRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Device.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\dto\ApiResponse.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\controller\TerminalController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\ProductUpsell.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\repository\TerminalRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\config\DataInitializer.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\entity\AuditLog.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\Category.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\VariantOptionRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\dto\ProductListDto.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\table\repository\RestaurantTableRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\controller\DeviceController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\service\OrderService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockAdjustmentLine.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\controller\PurchasingController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\repository\CurrencyRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\VariantPricing.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\domain\Order.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\User.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\entity\BaseEntity.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\invoice\repository\InvoiceRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\entity\AuditableEntity.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\config\SecurityConfig.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\RoleRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\service\PurchasingService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\UomRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockTransfer.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\UserRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\repository\SystemConfigurationRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\repository\DeviceRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\domain\StockLedger.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\service\DeviceService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\invoice\controller\InvoiceController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\controller\OrganizationController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\Customer.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\controller\WarehouseController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\StockLedgerRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\domain\OrderLine.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\controller\UserController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\VariantPricingRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\ChangePasswordRequest.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\config\CustomAuthenticationEntryPoint.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\config\JwtAuthenticationFilter.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\controller\RoleController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\RefreshTokenRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\UserProfileDTO.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\repository\ProductRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\SendOtpRequest.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\table\service\RestaurantTableService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\repository\ClientRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\config\JacksonConfig.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\order\repository\OrderRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\controller\DebugController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\Uom.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\VariantOption.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\StockAdjustmentRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\purchasing\domain\PricelistVersion.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\JwtService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\exception\GlobalExceptionHandler.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\VariantGroup.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\domain\ProductVariantMapping.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\RegisterRequest.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\util\SecurityUtils.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\dto\AuthRequest.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\product\controller\ProductController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\tenant\TenantInterceptor.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\repository\ExpenseRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\controller\AuthController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\RoleService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\expense\domain\ExpenseCategory.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\CafeQrBackendApplication.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\client\domain\Client.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\inventory\repository\WarehouseRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\common\controller\ConfigurationController.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\repository\PermissionRepository.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\OtpService.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\domain\Permission.java
-C:\Users\sayoo\OneDrive\Desktop\java rest pos\cafe-qr-backend\src\main\java\com\restaurant\pos\auth\service\RefreshTokenService.java
-=======
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\controller\DebugController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\repository\MenuRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\domain\VariantOption.java
@@ -148,6 +11,7 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\inventory\controller\WarehouseController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\order\domain\OrderLine.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\controller\ProductController.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\repository\ExpenseCategoryRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\order\domain\OrderStatus.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\client\controller\ClientController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\CafeQrBackendApplication.java
@@ -158,10 +22,12 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\dto\ApiResponse.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\service\EmailService.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\inventory\repository\StockSnapshotRepository.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\repository\ExpenseRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\service\JwtService.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\dto\ProductListDto.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\controller\ConfigurationController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\controller\AuthController.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\domain\Expense.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\config\ApplicationConfig.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\service\SystemConfigurationService.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\repository\VariantGroupRepository.java
@@ -170,6 +36,7 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\domain\Role.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\exception\ResourceNotFoundException.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\dto\AuthResponse.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\service\ExpenseService.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\purchasing\controller\PurchasingController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\purchasing\repository\CustomerRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\inventory\domain\StockSnapshot.java
@@ -184,6 +51,7 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\purchasing\service\PurchasingService.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\dto\ConfigurationDto.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\entity\AuditLog.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\controller\ExpenseController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\dto\RegisterRequest.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\dto\SendOtpRequest.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\domain\RoleEntity.java
@@ -239,6 +107,7 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\repository\ProductUpsellRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\repository\ProductRepository.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\domain\RefreshToken.java
+C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\expense\domain\ExpenseCategory.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\inventory\controller\InventoryController.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\inventory\domain\StockTransferLine.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\purchasing\repository\PricelistRepository.java
@@ -264,4 +133,3 @@ C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\m
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\auth\dto\AuthRequest.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\product\domain\VariantGroup.java
 C:\RIYAS\Sharp INtell\Test Cafe QR\Test CafeQR Hostinger\cafeTestQRBackend\src\main\java\com\restaurant\pos\common\exception\BusinessException.java
->>>>>>> Stashed changes
