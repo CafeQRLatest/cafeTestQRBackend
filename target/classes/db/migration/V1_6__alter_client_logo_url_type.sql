@@ -1,1 +1,0 @@
-ALTER TABLE clients ALTER COLUMN logo_url TYPE TEXT;
