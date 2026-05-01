@@ -29,6 +29,10 @@ public class Organization extends AuditableEntity {
 
     private String name;
     private String orgCode;
+    
+    @Column(name = "branch_code", length = 20, nullable = false)
+    private String branchCode = "HQ";
+    
     private String address;
     private String phone;
     private String email;

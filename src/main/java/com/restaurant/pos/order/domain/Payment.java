@@ -21,6 +21,10 @@ public class Payment extends BaseEntity {
     @Builder.Default
     private UUID id = UUID.randomUUID();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type", length = 20)
+    private PaymentType paymentType; // INBOUND (Sales) or OUTBOUND (Purchase/Expense)
+
     @Column(name = "client_id")
     private UUID clientId;
 
@@ -35,6 +39,9 @@ public class Payment extends BaseEntity {
 
     @Column(name = "invoice_id")
     private UUID invoiceId;
+
+    @Column(name = "expense_category_id")
+    private UUID expenseCategoryId;
 
     @Column(name = "payment_date")
     @Builder.Default

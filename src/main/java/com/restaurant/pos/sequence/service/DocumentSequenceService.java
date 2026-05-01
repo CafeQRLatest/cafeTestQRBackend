@@ -1,0 +1,172 @@
+package com.restaurant.pos.sequence.service;
+
+import com.restaurant.pos.common.exception.BusinessException;
+import com.restaurant.pos.common.tenant.TenantContext;
+import com.restaurant.pos.sequence.domain.DocumentSequence;
+import com.restaurant.pos.sequence.domain.DocumentType;
+import com.restaurant.pos.sequence.repository.DocumentSequenceRepository;
+import com.restaurant.pos.client.repository.OrganizationRepository;
+import com.restaurant.pos.client.domain.Organization;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class DocumentSequenceService {
+
+    private final DocumentSequenceRepository sequenceRepository;
+    private final OrganizationRepository organizationRepository;
+
+    /**
+     * CRITICAL: Uses REQUIRES_NEW to ensure the sequence increment is immediately committed
+     * regardless of whether the parent transaction succeeds or rolls back. This prevents
+     * gaps in numbering but guarantees no duplicate numbers are ever issued.
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public String generateNextSequence(DocumentType type) {
+        UUID clientId = TenantContext.getCurrentTenant();
+        UUID orgId = getEffectiveOrgId();
+
+        // 1. Pessimistic lock fetches the row, blocking other threads
+        DocumentSequence sequence = sequenceRepository.findAndLockByDocumentType(clientId, orgId, type)
+                .orElseGet(() -> createDefaultSequence(clientId, orgId, type));
+
+        if (!sequence.getIsActive()) {
+            throw new BusinessException("Document sequence for " + type + " is disabled.");
+        }
+
+        // 2. Format the number
+        long currentNum = sequence.getNextNumber();
+        String formattedNum = String.format("%0" + sequence.getPaddingLength() + "d", currentNum);
+
+        // Parse year placeholders if used in prefix/suffix
+        String year = String.valueOf(LocalDateTime.now().getYear());
+        
+        // Fetch branch code for parsing {BRANCH_CODE}
+        String branchCode = organizationRepository.findByIdAndClientId(orgId, clientId)
+                .map(Organization::getBranchCode)
+                .orElse("HQ");
+        
+        String prefix = sequence.getPrefix();
+        if (prefix != null) {
+            prefix = prefix.replace("{YYYY}", year).replace("{BRANCH_CODE}", branchCode);
+        } else {
+            prefix = "";
+        }
+        
+        String suffix = sequence.getSuffix();
+        if (suffix != null) {
+            suffix = suffix.replace("{YYYY}", year).replace("{BRANCH_CODE}", branchCode);
+        } else {
+            suffix = "";
+        }
+
+        String fullSequence = prefix + formattedNum + suffix;
+
+        // 3. Increment and save
+        sequence.setNextNumber(currentNum + 1);
+        sequenceRepository.saveAndFlush(sequence);
+
+        return fullSequence;
+    }
+
+    @Transactional
+    public List<DocumentSequence> getAllSequences() {
+        UUID clientId = TenantContext.getCurrentTenant();
+        UUID orgId = getEffectiveOrgId();
+        
+        List<DocumentSequence> existing = sequenceRepository.findByClientIdAndOrgId(clientId, orgId);
+        
+        // Auto-seed missing sequences if none exist
+        if (existing.isEmpty()) {
+            log.info("Auto-seeding default sequences for Org: {}", orgId);
+            for (DocumentType type : DocumentType.values()) {
+                createDefaultSequence(clientId, orgId, type);
+            }
+            return sequenceRepository.findByClientIdAndOrgId(clientId, orgId);
+        }
+        
+        return existing;
+    }
+
+    @Transactional
+    public DocumentSequence createSequence(DocumentSequence data) {
+        UUID clientId = TenantContext.getCurrentTenant();
+        UUID orgId = getEffectiveOrgId();
+        
+        // UPSERT Logic: If it exists, update it. If not, create it.
+        return sequenceRepository.findByClientIdAndOrgIdAndDocumentType(clientId, orgId, data.getDocumentType())
+                .map(existing -> updateSequence(existing.getId(), data))
+                .orElseGet(() -> {
+                    data.setClientId(clientId);
+                    data.setOrgId(orgId);
+                    if (data.getNextNumber() == null) data.setNextNumber(1L);
+                    if (data.getPaddingLength() == null) data.setPaddingLength(7);
+                    if (data.getIsActive() == null) data.setIsActive(true);
+                    return sequenceRepository.save(data);
+                });
+    }
+
+    @Transactional
+    public DocumentSequence updateSequence(UUID id, DocumentSequence updateData) {
+        DocumentSequence seq = sequenceRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Sequence rule not found"));
+
+        // Copy fields carefully
+        if (updateData.getPrefix() != null) seq.setPrefix(updateData.getPrefix());
+        if (updateData.getSuffix() != null) seq.setSuffix(updateData.getSuffix());
+        if (updateData.getPaddingLength() != null) seq.setPaddingLength(updateData.getPaddingLength());
+        if (updateData.getIsActive() != null) seq.setIsActive(updateData.getIsActive());
+        if (updateData.getNextNumber() != null) seq.setNextNumber(updateData.getNextNumber());
+
+        return sequenceRepository.saveAndFlush(seq);
+    }
+
+    private DocumentSequence createDefaultSequence(UUID clientId, UUID orgId, DocumentType type) {
+        String defaultPrefix = switch (type) {
+            case SALE_ORDER -> "SO-";
+            case PURCHASE_ORDER -> "PO-";
+            case EXPENSE -> "EX-";
+            case CUSTOMER_INVOICE -> "INV-";
+            case VENDOR_BILL -> "BILL-";
+            case EXPENSE_RECEIPT -> "ER-";
+            case INBOUND_PAYMENT -> "REC-";
+            case OUTBOUND_PAYMENT -> "PAY-";
+        };
+
+        DocumentSequence seq = DocumentSequence.builder()
+                .documentType(type)
+                .prefix(defaultPrefix + "{YYYY}-")
+                .suffix("-{BRANCH_CODE}")
+                .paddingLength(7)
+                .nextNumber(1L)
+                .isActive(true)
+                .build();
+                
+        seq.setClientId(clientId);
+        seq.setOrgId(orgId);
+                
+        return sequenceRepository.saveAndFlush(seq);
+    }
+
+    private UUID getEffectiveOrgId() {
+        UUID orgId = TenantContext.getCurrentOrg();
+        if (orgId != null) return orgId;
+        
+        // Fallback: Use the first organization found for this client
+        UUID clientId = TenantContext.getCurrentTenant();
+        log.warn("No active Org ID in context for Client {}. Falling back to first available branch.", clientId);
+        return organizationRepository.findAllByClientId(clientId).stream()
+                .findFirst()
+                .map(Organization::getId)
+                .orElseThrow(() -> new BusinessException("No branch configuration found. Please create at least one branch in 'Branch Management'."));
+    }
+}

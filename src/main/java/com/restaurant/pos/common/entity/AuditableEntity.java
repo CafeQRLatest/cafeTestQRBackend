@@ -23,28 +23,40 @@ public abstract class AuditableEntity {
     @Column(name = "created_by", updatable = false)
     private String createdBy;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
         
+        String currentUser = resolveCurrentUser();
+        
         // Only set if not already manually set
         if (this.createdBy == null) {
-            try {
-                var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
-                if (auth != null && auth.isAuthenticated() && auth.getPrincipal() != null) {
-                    this.createdBy = auth.getName(); // Standard way to get the current user identification
-                } else {
-                    this.createdBy = "SYSTEM";
-                }
-            } catch (Exception e) {
-                this.createdBy = "SYSTEM";
-            }
+            this.createdBy = currentUser;
+        }
+        if (this.updatedBy == null) {
+            this.updatedBy = currentUser;
         }
     }
 
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
+        this.updatedBy = resolveCurrentUser();
+    }
+
+    private String resolveCurrentUser() {
+        try {
+            var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null && auth.isAuthenticated() && auth.getPrincipal() != null) {
+                return auth.getName();
+            }
+        } catch (Exception ignored) {
+            // Fall through to SYSTEM
+        }
+        return "SYSTEM";
     }
 }

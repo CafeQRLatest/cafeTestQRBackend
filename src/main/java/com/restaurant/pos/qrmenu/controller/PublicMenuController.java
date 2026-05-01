@@ -3,6 +3,7 @@ package com.restaurant.pos.qrmenu.controller;
 import com.restaurant.pos.common.dto.ApiResponse;
 import com.restaurant.pos.order.domain.Order;
 import com.restaurant.pos.order.domain.OrderLine;
+import com.restaurant.pos.order.domain.OrderType;
 import com.restaurant.pos.order.repository.OrderRepository;
 import com.restaurant.pos.product.domain.Product;
 import com.restaurant.pos.product.repository.ProductRepository;
@@ -153,7 +154,7 @@ public class PublicMenuController {
         Order order = Order.builder()
                 .id(UUID.randomUUID())
                 .orderNo(orderNo)
-                .orderType("SALE")
+                .orderType(OrderType.SALE)   // QR menu orders are always customer sales
                 .orderStatus("CONFIRMED")
                 .paymentStatus("PENDING")
                 .orderSource("QR_MENU")

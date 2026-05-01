@@ -1,0 +1,10 @@
+package com.restaurant.pos.common.security;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+@PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
+public @interface StaffAccess {
+}

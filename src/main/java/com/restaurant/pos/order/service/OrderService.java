@@ -2,20 +2,25 @@ package com.restaurant.pos.order.service;
 
 import com.restaurant.pos.common.exception.ResourceNotFoundException;
 import com.restaurant.pos.common.tenant.TenantContext;
+import com.restaurant.pos.common.util.SecurityUtils;
+import com.restaurant.pos.inventory.service.InventoryService;
 import com.restaurant.pos.invoice.domain.Invoice;
+import com.restaurant.pos.invoice.domain.InvoiceType;
 import com.restaurant.pos.order.domain.Order;
+import com.restaurant.pos.order.domain.OrderType;
 import com.restaurant.pos.order.domain.Payment;
+import com.restaurant.pos.order.domain.PaymentType;
 import com.restaurant.pos.invoice.repository.InvoiceRepository;
 import com.restaurant.pos.order.repository.OrderRepository;
 import com.restaurant.pos.order.repository.PaymentRepository;
+import com.restaurant.pos.sequence.domain.DocumentType;
+import com.restaurant.pos.sequence.service.DocumentSequenceService;
+import com.restaurant.pos.table.domain.RestaurantTable;
+import com.restaurant.pos.table.repository.RestaurantTableRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.restaurant.pos.common.util.SecurityUtils;
-import com.restaurant.pos.inventory.service.InventoryService;
-import com.restaurant.pos.table.repository.RestaurantTableRepository;
-import com.restaurant.pos.table.domain.RestaurantTable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -31,6 +36,7 @@ public class OrderService {
     private final PaymentRepository paymentRepository;
     private final InventoryService inventoryService;
     private final RestaurantTableRepository tableRepository;
+    private final DocumentSequenceService sequenceService;
 
     public List<Order> getOrders(String status) {
         UUID tenantId = TenantContext.getCurrentTenant();
@@ -59,7 +65,7 @@ public class OrderService {
         return getOrders(null);
     }
 
-    public List<Order> getOrdersByType(String orderType) {
+    public List<Order> getOrdersByType(OrderType orderType) {
         UUID tenantId = TenantContext.getCurrentTenant();
         if (SecurityUtils.isSuperAdmin()) {
             return orderRepository.findByClientIdAndOrderTypeOrderByCreatedAtDesc(tenantId, orderType);
@@ -89,6 +95,16 @@ public class OrderService {
             order.setOrderStatus("DRAFT");
         }
 
+        // Auto-generate orderNo if not provided
+        if (order.getOrderNo() == null || order.getOrderNo().isEmpty()) {
+            DocumentType docType = switch (order.getOrderType()) {
+                case PURCHASE -> DocumentType.PURCHASE_ORDER;
+                case EXPENSE  -> DocumentType.EXPENSE;
+                default       -> DocumentType.SALE_ORDER;
+            };
+            order.setOrderNo(sequenceService.generateNextSequence(docType));
+        }
+
         // Ensure bidirectional mapping
         if (order.getLines() != null) {
             order.getLines().forEach(line -> line.setOrder(order));
@@ -103,7 +119,9 @@ public class OrderService {
         
         // Create payment only if completed and paid
         if ("COMPLETED".equalsIgnoreCase(saved.getOrderStatus()) && "PAID".equalsIgnoreCase(saved.getPaymentStatus())) {
-            generatePayment(saved);
+            // Use reference field as payment method hint (set by ExpenseService/PurchaseService)
+            String paymentMethod = saved.getReference() != null ? saved.getReference() : "CASH";
+            generatePayment(saved, paymentMethod);
         }
 
         handleTableStatus(saved);
@@ -165,13 +183,14 @@ public class OrderService {
         UUID oldInvId = oldInvoiceIdList.isEmpty() ? null : oldInvoiceIdList.get(0);
         generateInvoice(saved, oldInvId);
         if ("PAID".equalsIgnoreCase(saved.getPaymentStatus())) {
-            generatePayment(saved);
+            String paymentMethod = saved.getReference() != null ? saved.getReference() : "CASH";
+            generatePayment(saved, paymentMethod);
         }
         
         handleTableStatus(saved);
 
         // Inventory Hook: If PURCHASE order is COMPLETED, update stock
-        if ("PURCHASE".equalsIgnoreCase(saved.getOrderType()) && "COMPLETED".equalsIgnoreCase(saved.getOrderStatus())) {
+        if (saved.getOrderType() == OrderType.PURCHASE && "COMPLETED".equalsIgnoreCase(saved.getOrderStatus())) {
             processInventoryForOrder(saved);
         }
         
@@ -194,12 +213,13 @@ public class OrderService {
 
         // Generate Payment only if completed and paid
         if ("COMPLETED".equalsIgnoreCase(result.getOrderStatus()) && "PAID".equalsIgnoreCase(result.getPaymentStatus())) {
-            generatePayment(result);
+            String paymentMethod = result.getReference() != null ? result.getReference() : "CASH";
+            generatePayment(result, paymentMethod);
         }
         
         handleTableStatus(result);
 
-        if ("PURCHASE".equalsIgnoreCase(result.getOrderType()) && "COMPLETED".equalsIgnoreCase(result.getOrderStatus())) {
+        if (result.getOrderType() == OrderType.PURCHASE && "COMPLETED".equalsIgnoreCase(result.getOrderStatus())) {
             processInventoryForOrder(result);
         }
         return result;
@@ -224,17 +244,31 @@ public class OrderService {
         UUID clientId = order.getClientId();
         UUID orgId = order.getOrgId();
         
-        long invCount = invoiceRepository.countByClientId(clientId) + 1;
-        String invNo = String.format("INV-%d-%05d", LocalDateTime.now().getYear(), invCount);
+        // Determine invoice document type from order type
+        DocumentType invoiceDocType = switch (order.getOrderType()) {
+            case PURCHASE -> DocumentType.VENDOR_BILL;
+            case EXPENSE  -> DocumentType.EXPENSE_RECEIPT;
+            default       -> DocumentType.CUSTOMER_INVOICE;
+        };
         
+        String invNo = sequenceService.generateNextSequence(invoiceDocType);
+        
+        // Map to entity InvoiceType
+        InvoiceType invoiceType = switch (invoiceDocType) {
+            case VENDOR_BILL -> InvoiceType.VENDOR_BILL;
+            case EXPENSE_RECEIPT -> InvoiceType.EXPENSE_RECEIPT;
+            default -> InvoiceType.CUSTOMER_INVOICE;
+        };
+
         Invoice invoice = Invoice.builder()
+            .invoiceType(invoiceType)
             .terminalId(order.getTerminalId())
             .orderId(order.getId())
             .customerId(order.getCustomerId())
             .vendorId(order.getVendorId())
             .invoiceNo(invNo)
             .totalAmount(order.getGrandTotal())
-            .amountDue(order.getGrandTotal()) // Initially due
+            .amountDue(order.getGrandTotal())
             .status("UNPAID")
             .isPaid(false)
             .isCredit("PENDING".equalsIgnoreCase(order.getPaymentStatus()))
@@ -249,6 +283,11 @@ public class OrderService {
 
     @Transactional
     public void generatePayment(Order order) {
+        generatePayment(order, "CASH");
+    }
+
+    @Transactional
+    public void generatePayment(Order order, String paymentMethod) {
         if (order.getPaymentNo() != null && !order.getPaymentNo().isEmpty()) return;
 
         // Try to find the invoice
@@ -258,14 +297,23 @@ public class OrderService {
         UUID clientId = order.getClientId();
         UUID orgId = order.getOrgId();
         
-        long payCount = paymentRepository.countByClientId(clientId) + 1;
-        String payNo = String.format("PAY-%d-%05d", LocalDateTime.now().getYear(), payCount);
+        // INBOUND = money received (Sales), OUTBOUND = money paid (Purchase/Expense)
+        DocumentType paymentDocType = (order.getOrderType() == OrderType.SALE)
+                ? DocumentType.INBOUND_PAYMENT
+                : DocumentType.OUTBOUND_PAYMENT;
+                
+        String payNo = sequenceService.generateNextSequence(paymentDocType);
+
+        PaymentType paymentType = (paymentDocType == DocumentType.INBOUND_PAYMENT)
+                ? PaymentType.INBOUND
+                : PaymentType.OUTBOUND;
         
         Payment payment = Payment.builder()
+            .paymentType(paymentType)
             .terminalId(order.getTerminalId())
             .orderId(order.getId())
             .invoiceId(invoice != null ? invoice.getId() : null)
-            .paymentMethod("CASH") // Default
+            .paymentMethod(paymentMethod)
             .amountPaid(order.getGrandTotal())
             .referenceNo(payNo)
             .status("COMPLETED")

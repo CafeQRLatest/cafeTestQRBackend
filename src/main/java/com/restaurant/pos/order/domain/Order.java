@@ -28,9 +28,10 @@ public class Order extends BaseEntity {
     @Column(name = "order_no", unique = true, nullable = false)
     private String orderNo;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "order_type", length = 20, nullable = false)
     @Builder.Default
-    private String orderType = "SALE"; // SALE, PURCHASE
+    private OrderType orderType = OrderType.SALE; // SALE, PURCHASE, EXPENSE
 
     @Column(name = "order_status", length = 20)
     @Builder.Default
@@ -100,6 +101,9 @@ public class Order extends BaseEntity {
 
     @Column(name = "original_order_id")
     private UUID originalOrderId;
+
+    @Column(name = "expense_category_id")
+    private UUID expenseCategoryId;
 
     @Column(name = "revision_number")
     @Builder.Default

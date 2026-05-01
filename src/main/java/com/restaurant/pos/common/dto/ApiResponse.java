@@ -16,6 +16,7 @@ public class ApiResponse<T> {
     private String message;
     private T data;
     private String timestamp;
+    private String errorReference;
 
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
@@ -39,6 +40,15 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .success(false)
                 .message(message)
+                .timestamp(LocalDateTime.now().toString())
+                .build();
+    }
+
+    public static <T> ApiResponse<T> error(String message, String errorReference) {
+        return ApiResponse.<T>builder()
+                .success(false)
+                .message(message)
+                .errorReference(errorReference)
                 .timestamp(LocalDateTime.now().toString())
                 .build();
     }
