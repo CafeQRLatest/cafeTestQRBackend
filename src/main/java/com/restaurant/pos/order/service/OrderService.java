@@ -74,6 +74,16 @@ public class OrderService {
                 tenantId, TenantContext.getCurrentOrg(), orderType);
     }
 
+    public List<Order> searchOrders(com.restaurant.pos.order.dto.OrderSearchCriteria criteria) {
+        UUID clientId = TenantContext.getCurrentTenant();
+        UUID orgId = TenantContext.getCurrentOrg();
+        
+        org.springframework.data.jpa.domain.Specification<Order> spec = 
+            com.restaurant.pos.order.spec.OrderSpecification.filterBy(criteria, clientId, orgId);
+            
+        return orderRepository.findAll(spec, org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "createdAt"));
+    }
+
     public Order getOrder(UUID id) {
         UUID tenantId = TenantContext.getCurrentTenant();
         if (SecurityUtils.isSuperAdmin()) {
@@ -119,9 +129,7 @@ public class OrderService {
         
         // Create payment only if completed and paid
         if ("COMPLETED".equalsIgnoreCase(saved.getOrderStatus()) && "PAID".equalsIgnoreCase(saved.getPaymentStatus())) {
-            // Use reference field as payment method hint (set by ExpenseService/PurchaseService)
-            String paymentMethod = saved.getReference() != null ? saved.getReference() : "CASH";
-            generatePayment(saved, paymentMethod);
+            generatePayment(saved, saved.getPaymentMethod());
         }
 
         handleTableStatus(saved);

@@ -36,6 +36,31 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
+    public ResponseEntity<ApiResponse<List<Order>>> searchOrders(
+            @RequestParam(required = false) OrderType type,
+            @RequestParam(required = false) java.time.Instant fromDate,
+            @RequestParam(required = false) java.time.Instant toDate,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) java.util.UUID branchId,
+            @RequestParam(required = false) java.util.UUID vendorId,
+            @RequestParam(required = false) java.util.UUID customerId,
+            @RequestParam(required = false) String searchTerm
+    ) {
+        com.restaurant.pos.order.dto.OrderSearchCriteria criteria = com.restaurant.pos.order.dto.OrderSearchCriteria.builder()
+                .orderType(type)
+                .fromDate(fromDate)
+                .toDate(toDate)
+                .status(status)
+                .branchId(branchId)
+                .vendorId(vendorId)
+                .customerId(customerId)
+                .searchTerm(searchTerm)
+                .build();
+        return ResponseEntity.ok(ApiResponse.success(orderService.searchOrders(criteria)));
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
     public ResponseEntity<ApiResponse<Order>> getOrder(@PathVariable UUID id) {
