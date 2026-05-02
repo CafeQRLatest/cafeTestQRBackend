@@ -33,9 +33,38 @@ public class ExpenseMapper {
                 .id(entity.getId())
                 .name(entity.getName())
                 .sortOrder(entity.getSortOrder())
-                .isActive("Y".equalsIgnoreCase(entity.getIsactive()))
+                .active("Y".equalsIgnoreCase(entity.getIsactive()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
+                .build();
+    }
+
+    public CategoryResponse.SimpleCategory toSimpleResponse(ExpenseCategory entity) {
+        return CategoryResponse.SimpleCategory.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .build();
+    }
+
+    public com.restaurant.pos.expense.dto.ExpenseDto.ExpenseResponse toExpenseResponse(
+            com.restaurant.pos.expense.domain.Expense expense, 
+            String categoryName) {
+        
+        String method = (expense.getReference() != null && !expense.getReference().isBlank()) 
+                ? expense.getReference() 
+                : "CASH";
+
+        return com.restaurant.pos.expense.dto.ExpenseDto.ExpenseResponse.builder()
+                .id(expense.getId())
+                .referenceNumber(expense.getOrderNo())
+                .categoryId(expense.getExpenseCategoryId())
+                .categoryName(categoryName)
+                .expenseDate(expense.getOrderDate())
+                .amount(expense.getGrandTotal())
+                .description(expense.getDescription())
+                .paymentMethod(method)
+                .active("Y".equals(expense.getIsactive()))
+                .orgId(expense.getOrgId())
                 .build();
     }
 }

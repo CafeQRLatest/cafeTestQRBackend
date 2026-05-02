@@ -1,8 +1,14 @@
 package com.restaurant.pos.expense.controller;
 
+import com.restaurant.pos.common.dto.ApiResponse;
 import com.restaurant.pos.common.security.AdminAccess;
 import com.restaurant.pos.common.security.StaffAccess;
-import com.restaurant.pos.expense.dto.*;
+import com.restaurant.pos.expense.dto.CategoryResponse;
+import com.restaurant.pos.expense.dto.CreateCategoryRequest;
+import com.restaurant.pos.expense.dto.ExpenseDto;
+import com.restaurant.pos.expense.dto.ExpenseSearchCriteria;
+import com.restaurant.pos.expense.dto.UpdateCategoryRequest;
+import com.restaurant.pos.expense.service.CategoryService;
 import com.restaurant.pos.expense.service.ExpenseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,69 +31,174 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/expenses")
 @RequiredArgsConstructor
-@Tag(name = "Expense Management", description = "APIs for tracking branch expenses and categories")
+@Tag(
+        name = "Expense Management",
+        description = "APIs for expense categories and expense transaction management"
+)
 public class ExpenseController {
 
     private final ExpenseService expenseService;
+    private final CategoryService categoryService;
 
-    // ── Categories ──────────────────────────────────────────────────────────────
+    /*
+     * ─────────────────────────────────────────────────────────────
+     * Expense Categories
+     * ─────────────────────────────────────────────────────────────
+     */
 
     @GetMapping("/categories")
     @StaffAccess
-    @Operation(summary = "Get all expense categories", description = "Retrieves a list of all active and inactive expense categories sorted by sort order.")
+    @Operation(
+            summary = "Fetch expense categories",
+            description = "Returns all expense categories available for the current organization, including active/inactive records ordered by sort priority."
+    )
     public ResponseEntity<ApiResponse<List<CategoryResponse>>> getCategories() {
-        log.info("REST request to get all expense categories for current organization context");
-        return ResponseEntity.ok(ApiResponse.success(expenseService.getCategories()));
+
+        log.info("Fetching expense categories for current organization");
+
+        List<CategoryResponse> response = categoryService.getCategories();
+
+        return ResponseEntity.ok(
+                ApiResponse.success(response)
+        );
     }
 
     @PostMapping("/categories")
     @AdminAccess
-    @Operation(summary = "Create an expense category", description = "Creates a new expense category.")
+    @Operation(
+            summary = "Create expense category",
+            description = "Creates a new expense category for expense classification and reporting."
+    )
     public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(
-            @Valid @RequestBody CreateCategoryRequest request) {
-        log.info("REST request to create expense category: '{}'", request.getName());
-        CategoryResponse response = expenseService.createCategory(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response));
+            @Valid @RequestBody CreateCategoryRequest request
+    ) {
+
+        log.info(
+                "Creating expense category | name={} | sortOrder={}",
+                request.getName(),
+                request.getSortOrder()
+        );
+
+        CategoryResponse response = categoryService.createCategory(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        ApiResponse.success(response)
+                );
     }
 
     @PutMapping("/categories/{id}")
     @AdminAccess
-    @Operation(summary = "Update an expense category", description = "Updates an existing expense category.")
+    @Operation(
+            summary = "Update expense category",
+            description = "Updates an existing expense category."
+    )
     public ResponseEntity<ApiResponse<CategoryResponse>> updateCategory(
-            @PathVariable UUID id, @Valid @RequestBody UpdateCategoryRequest request) {
-        log.info("REST request to update expense category ID: '{}' to '{}'", id, request.getName());
-        return ResponseEntity.ok(ApiResponse.success(expenseService.updateCategory(id, request)));
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateCategoryRequest request
+    ) {
+
+        log.info(
+                "Updating expense category | categoryId={} | newName={}",
+                id,
+                request.getName()
+        );
+
+        CategoryResponse response = categoryService.updateCategory(id, request);
+
+        return ResponseEntity.ok(
+                ApiResponse.success(response)
+        );
     }
 
     @DeleteMapping("/categories/{id}")
     @AdminAccess
-    @Operation(summary = "Delete an expense category", description = "Soft-deletes an expense category (marks as inactive).")
-    public ResponseEntity<ApiResponse<Void>> deleteCategory(@PathVariable UUID id) {
-        log.info("REST request to soft-delete expense category ID: '{}'", id);
-        expenseService.deleteCategory(id);
-        return ResponseEntity.ok(ApiResponse.success(null));
+    @Operation(
+            summary = "Delete expense category",
+            description = "Soft deletes an expense category by marking it inactive."
+    )
+    public ResponseEntity<ApiResponse<Void>> deleteCategory(
+            @PathVariable UUID id
+    ) {
+
+        log.info(
+                "Soft deleting expense category | categoryId={}",
+                id
+        );
+
+        categoryService.deleteCategory(id);
+
+        return ResponseEntity.ok(
+                ApiResponse.success(null)
+        );
     }
 
-    // ── Expenses ────────────────────────────────────────────────────────────────
+    /*
+     * ─────────────────────────────────────────────────────────────
+     * Expenses
+     * ─────────────────────────────────────────────────────────────
+     */
 
     @GetMapping
     @StaffAccess
-    @Operation(summary = "Get all expenses", description = "Retrieves paginated and filtered expense records with audit-ready details.")
+    @Operation(
+            summary = "Fetch expenses",
+            description = "Returns paginated expense records with filtering support for audit, reporting, and operational review."
+    )
     public ResponseEntity<ApiResponse<Page<ExpenseDto.ExpenseResponse>>> getExpenses(
-            @Parameter(description = "Search criteria for filtering expenses") ExpenseSearchCriteria criteria,
-            @PageableDefault(size = 20, sort = "orderDate", direction = org.springframework.data.domain.Sort.Direction.DESC) Pageable pageable) {
-        log.info("REST request to fetch paginated expenses | criteria: {} | page: {}", criteria, pageable.getPageNumber());
-        return ResponseEntity.ok(ApiResponse.success(expenseService.getExpenses(criteria, pageable)));
+            @Parameter(
+                    description = "Search criteria for filtering expense records"
+            )
+            ExpenseSearchCriteria criteria,
+
+            @PageableDefault(
+                    size = 20,
+                    sort = "orderDate",
+                    direction = Sort.Direction.DESC
+            )
+            Pageable pageable
+    ) {
+
+        log.info(
+                "Fetching expenses | filters={} | page={} | size={}",
+                criteria,
+                pageable.getPageNumber(),
+                pageable.getPageSize()
+        );
+
+        Page<ExpenseDto.ExpenseResponse> response =
+                expenseService.getExpenses(criteria, pageable);
+
+        return ResponseEntity.ok(
+                ApiResponse.success(response)
+        );
     }
 
     @PostMapping
     @StaffAccess
-    @Operation(summary = "Create an expense", description = "Records a new expense. Automatically generates linked Invoice and Payment records for auditing.")
+    @Operation(
+            summary = "Create expense",
+            description = "Creates a new expense transaction and automatically generates linked invoice/payment records for financial audit compliance."
+    )
     public ResponseEntity<ApiResponse<ExpenseDto.ExpenseResponse>> createExpense(
-            @Valid @RequestBody ExpenseDto.CreateExpenseRequest request) {
-        log.info("REST request to record expense | amount: {} | category: '{}'", request.getAmount(), request.getCategoryId());
-        ExpenseDto.ExpenseResponse response = expenseService.createExpense(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(response));
-    }
+            @Valid @RequestBody ExpenseDto.CreateExpenseRequest request
+    ) {
 
+        log.info(
+                "Creating expense | branchId={} | categoryId={} | amount={}",
+                request.getBranchId(),
+                request.getCategoryId(),
+                request.getAmount()
+        );
+
+        ExpenseDto.ExpenseResponse response =
+                expenseService.createExpense(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        ApiResponse.success(response)
+                );
+    }
 }

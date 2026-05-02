@@ -14,11 +14,26 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "orders")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "order_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("SALE")
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.EXISTING_PROPERTY,
+    property = "orderType",
+    visible = true,
+    defaultImpl = Order.class
+)
+@com.fasterxml.jackson.annotation.JsonSubTypes({
+    @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Order.class, name = "SALE"),
+    @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = com.restaurant.pos.purchasing.domain.PurchaseOrder.class, name = "PURCHASE"),
+    @com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = com.restaurant.pos.expense.domain.Expense.class, name = "EXPENSE")
+})
 public class Order extends BaseEntity {
 
     @Id
@@ -29,7 +44,7 @@ public class Order extends BaseEntity {
     private String orderNo;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "order_type", length = 20, nullable = false)
+    @Column(name = "order_type", length = 20, nullable = false, insertable = false, updatable = false)
     @Builder.Default
     private OrderType orderType = OrderType.SALE; // SALE, PURCHASE, EXPENSE
 

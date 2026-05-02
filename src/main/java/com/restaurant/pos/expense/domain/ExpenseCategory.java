@@ -1,30 +1,38 @@
 package com.restaurant.pos.expense.domain;
 
 import com.restaurant.pos.common.entity.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
 
-@Data
+/**
+ * Enterprise-grade Entity for Expense Classification.
+ * Maintains compatibility with project-wide "Y/N" status conventions 
+ * while providing rich domain behavior methods.
+ */
 @Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Table(
     name = "expense_categories",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uk_expense_cat_name", columnNames = {"client_id", "org_id", "name"})
+        @UniqueConstraint(
+            name = "uk_expense_category_name", 
+            columnNames = {"client_id", "org_id", "name"}
+        )
     },
     indexes = {
-        @Index(name = "idx_expense_cat_client", columnList = "client_id"),
-        @Index(name = "idx_expense_cat_org", columnList = "org_id"),
-        @Index(name = "idx_expense_cat_active", columnList = "is_active"),
-        @Index(name = "idx_expense_cat_sort", columnList = "sort_order")
+        @Index(name = "idx_expense_category_client", columnList = "client_id"),
+        @Index(name = "idx_expense_category_org", columnList = "org_id"),
+        @Index(name = "idx_expense_category_active", columnList = "is_active"),
+        @Index(name = "idx_expense_category_sort", columnList = "sort_order")
     }
 )
+@EqualsAndHashCode(callSuper = true)
 public class ExpenseCategory extends BaseEntity {
 
     @Id
@@ -38,8 +46,35 @@ public class ExpenseCategory extends BaseEntity {
     @Builder.Default
     private Integer sortOrder = 0;
 
-    @Builder.Default
-    @JsonProperty("isActive")
     @Column(name = "is_active", nullable = false, length = 1)
+    @Builder.Default
     private String isactive = "Y";
+
+    /*
+     * ── Domain Behavior Methods ─────────────────────────────────────────────
+     */
+
+    public void deactivate() {
+        this.isactive = "N";
+    }
+
+    public void activate() {
+        this.isactive = "Y";
+    }
+
+    public boolean isActive() {
+        return "Y".equalsIgnoreCase(this.isactive);
+    }
+
+    public void updateName(String name) {
+        if (name != null && !name.isBlank()) {
+            this.name = name.trim();
+        }
+    }
+
+    public void updateSortOrder(Integer sortOrder) {
+        if (sortOrder != null) {
+            this.sortOrder = sortOrder;
+        }
+    }
 }

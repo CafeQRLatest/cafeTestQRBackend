@@ -1,21 +1,40 @@
 package com.restaurant.pos.expense.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
-@Builder
+/**
+ * Enterprise-grade Search Criteria for Expense filtering.
+ */
+@Getter
+@ToString
+@EqualsAndHashCode
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "Criteria for filtering expense records")
 public class ExpenseSearchCriteria {
+
+    @Schema(description = "Starting timestamp for the search range")
     private LocalDateTime fromDate;
+
+    @Schema(description = "Ending timestamp for the search range")
     private LocalDateTime toDate;
+
+    @Schema(description = "Filter by specific category ID")
     private UUID categoryId;
+
+    @Schema(description = "Filter by specific payment channel recorded in the reference field", example = "CASH")
     private String paymentMethod;
+
+    @Schema(description = "Fuzzy search term matching reference number or description", example = "Bill")
     private String searchTerm;
+
+    @Schema(description = "Filter results by organizational branch ID")
     private UUID branchId;
 }

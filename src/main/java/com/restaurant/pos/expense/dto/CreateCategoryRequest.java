@@ -1,12 +1,21 @@
 package com.restaurant.pos.expense.dto;
 
-import jakarta.validation.constraints.*;
-import lombok.Data;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
-@Data
-@Schema(description = "Request payload for creating an expense category")
+/**
+ * Enterprise-grade Request DTO for Category Creation.
+ */
+@Getter
+@ToString
+@EqualsAndHashCode
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "Payload for creating a new expense category")
 public class CreateCategoryRequest {
 
     @NotBlank(message = "Category name is required")
@@ -15,6 +24,7 @@ public class CreateCategoryRequest {
     private String name;
 
     @Min(value = 0, message = "Sort order must be non-negative")
-    @Schema(description = "Display sort order", example = "1")
+    @Schema(description = "Display sort order for UI positioning", example = "1")
+    @Builder.Default
     private Integer sortOrder = 0;
 }
