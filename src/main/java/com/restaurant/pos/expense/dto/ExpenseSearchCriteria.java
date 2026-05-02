@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -22,10 +22,10 @@ import java.util.UUID;
 public class ExpenseSearchCriteria {
 
     @Schema(description = "Starting timestamp for the search range")
-    private LocalDateTime fromDate;
+    private Instant fromDate;
 
     @Schema(description = "Ending timestamp for the search range")
-    private LocalDateTime toDate;
+    private Instant toDate;
 
     @Schema(description = "Filter by specific category ID")
     private UUID categoryId;

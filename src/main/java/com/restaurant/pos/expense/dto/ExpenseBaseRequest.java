@@ -1,7 +1,7 @@
 package com.restaurant.pos.expense.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public interface ExpenseBaseRequest {
     UUID getCategoryId();
-    LocalDateTime getExpenseDate();
+    Instant getExpenseDate();
     BigDecimal getAmount();
     String getDescription();
     String getPaymentMethod();

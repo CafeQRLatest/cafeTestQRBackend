@@ -55,7 +55,7 @@ public class ExpenseController {
 
             @PageableDefault(
                     size = 20,
-                    sort = "expenseDate",
+                    sort = "orderDate",
                     direction = Sort.Direction.DESC
             )
             Pageable pageable
