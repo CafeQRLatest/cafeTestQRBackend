@@ -52,6 +52,10 @@ public class Invoice extends BaseEntity {
     @Column(length = 20)
     private String status = "UNPAID"; // UNPAID, PARTIAL, PAID, VOID
 
+    @Column(name = "doc_status", length = 20)
+    @Builder.Default
+    private String docStatus = "COMPLETED";
+
     @Builder.Default
     @Column(name = "is_paid")
     private Boolean isPaid = false;

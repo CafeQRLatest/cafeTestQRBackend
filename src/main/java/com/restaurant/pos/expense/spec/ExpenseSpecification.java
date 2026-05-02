@@ -1,7 +1,8 @@
-package com.restaurant.pos.expense.repository;
+package com.restaurant.pos.expense.spec;
 
 import com.restaurant.pos.common.util.SecurityUtils;
 import com.restaurant.pos.expense.domain.Expense;
+import com.restaurant.pos.expense.domain.ExpenseStatus;
 import com.restaurant.pos.expense.dto.ExpenseSearchCriteria;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -52,10 +53,30 @@ public class ExpenseSpecification {
 
             // Fuzzy Search (Order No or Description)
             if (criteria.getSearchTerm() != null && !criteria.getSearchTerm().isBlank()) {
-                String pattern = "%" + criteria.getSearchTerm().toLowerCase() + "%";
+                String safe = criteria.getSearchTerm()
+                        .replace("%", "\\%")
+                        .replace("_", "\\_")
+                        .trim();
+                String pattern = "%" + safe.toLowerCase() + "%";
                 predicates.add(cb.or(
                     cb.like(cb.lower(root.get("orderNo")), pattern),
                     cb.like(cb.lower(root.get("description")), pattern)
+                ));
+            }
+
+            // Status Filtering (Strictly Mutually Exclusive)
+            if (criteria.getStatus() != null && ExpenseStatus.VOID.equalsIgnoreCase(criteria.getStatus())) {
+                // VOID History: Show only records marked as inactive or explicitly voided
+                predicates.add(cb.or(
+                    cb.equal(root.get("isactive"), ExpenseStatus.INACTIVE_FLAG),
+                    cb.equal(root.get("orderStatus"), ExpenseStatus.VOID)
+                ));
+            } else {
+                // ACTIVE: Show only records that are both isactive='Y' AND not status 'VOID'
+                // This is the default if status is null, empty, or "ACTIVE"
+                predicates.add(cb.and(
+                    cb.equal(root.get("isactive"), ExpenseStatus.ACTIVE_FLAG),
+                    cb.notEqual(root.get("orderStatus"), ExpenseStatus.VOID)
                 ));
             }
 

@@ -93,4 +93,16 @@ public class OrderLine {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+    // ─────────────────────────────────────────────────────────────
+    // Domain Methods
+    // ─────────────────────────────────────────────────────────────
+
+    public boolean isActive() {
+        return "Y".equals(this.isactive);
+    }
+
+    public void deactivate() {
+        this.isactive = "N";
+    }
 }

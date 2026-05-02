@@ -1,4 +1,4 @@
-package com.restaurant.pos.expense.domain;
+package com.restaurant.pos.category.domain;
 
 import com.restaurant.pos.common.entity.BaseEntity;
 import jakarta.persistence.*;

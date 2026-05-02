@@ -11,6 +11,7 @@ import java.util.UUID;
  * Enterprise-grade Search Criteria for Expense filtering.
  */
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @Builder(toBuilder = true)
@@ -37,4 +38,7 @@ public class ExpenseSearchCriteria {
 
     @Schema(description = "Filter results by organizational branch ID")
     private UUID branchId;
+
+    @Schema(description = "Filter results by status (ACTIVE/VOID)", example = "ACTIVE")
+    private String status;
 }

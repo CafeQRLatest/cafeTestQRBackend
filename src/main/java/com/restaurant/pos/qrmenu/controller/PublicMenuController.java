@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -161,7 +161,7 @@ public class PublicMenuController {
                 .fulfillmentType("DINE_IN")
                 .tableNumber(tableNumber)
                 .description(customerNote)
-                .orderDate(LocalDateTime.now())
+                .orderDate(Instant.now())
                 .build();
                 
         String tableIdStr = (String) payload.get("tableId");

@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.Formula;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,10 @@ public class Order extends BaseEntity {
     @Builder.Default
     private String orderStatus = "DRAFT"; // DRAFT, CONFIRMED, COMPLETED, CANCELLED
 
+    @Column(name = "doc_status", length = 20)
+    @Builder.Default
+    private String docStatus = "COMPLETED";
+
     @Column(name = "payment_status", length = 20)
     @Builder.Default
     private String paymentStatus = "PENDING"; // PENDING, PARTIAL, PAID
@@ -80,7 +85,7 @@ public class Order extends BaseEntity {
 
     @Column(name = "order_date")
     @Builder.Default
-    private LocalDateTime orderDate = LocalDateTime.now();
+    private Instant orderDate = Instant.now();
 
     @Builder.Default
     @Column(name = "total_tax_amount", precision = 15, scale = 2)
@@ -142,5 +147,20 @@ public class Order extends BaseEntity {
     public void addLine(OrderLine line) {
         lines.add(line);
         line.setOrder(this);
+    }
+
+    /**
+     * Domain-safe check for the legacy 'Y'/'N' active flag.
+     * Encapsulates the string comparison so it's never scattered across services.
+     */
+    public boolean isActive() {
+        return "Y".equals(this.isactive);
+    }
+
+    /**
+     * Marks this record as inactive in the legacy flag system.
+     */
+    public void deactivate() {
+        this.isactive = "N";
     }
 }

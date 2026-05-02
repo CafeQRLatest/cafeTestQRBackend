@@ -3,12 +3,11 @@ package com.restaurant.pos.expense.controller;
 import com.restaurant.pos.common.dto.ApiResponse;
 import com.restaurant.pos.common.security.AdminAccess;
 import com.restaurant.pos.common.security.StaffAccess;
-import com.restaurant.pos.expense.dto.CategoryResponse;
-import com.restaurant.pos.expense.dto.CreateCategoryRequest;
-import com.restaurant.pos.expense.dto.ExpenseDto;
+import com.restaurant.pos.expense.dto.CreateExpenseRequest;
+import com.restaurant.pos.expense.dto.UpdateExpenseRequest;
+import com.restaurant.pos.expense.dto.ExpenseResponse;
+import com.restaurant.pos.expense.dto.VoidExpenseResponse;
 import com.restaurant.pos.expense.dto.ExpenseSearchCriteria;
-import com.restaurant.pos.expense.dto.UpdateCategoryRequest;
-import com.restaurant.pos.expense.service.CategoryService;
 import com.restaurant.pos.expense.service.ExpenseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -38,167 +39,136 @@ import java.util.UUID;
 public class ExpenseController {
 
     private final ExpenseService expenseService;
-    private final CategoryService categoryService;
-
-    /*
-     * ─────────────────────────────────────────────────────────────
-     * Expense Categories
-     * ─────────────────────────────────────────────────────────────
-     */
-
-    @GetMapping("/categories")
-    @StaffAccess
-    @Operation(
-            summary = "Fetch expense categories",
-            description = "Returns all expense categories available for the current organization, including active/inactive records ordered by sort priority."
-    )
-    public ResponseEntity<ApiResponse<List<CategoryResponse>>> getCategories() {
-
-        log.info("Fetching expense categories for current organization");
-
-        List<CategoryResponse> response = categoryService.getCategories();
-
-        return ResponseEntity.ok(
-                ApiResponse.success(response)
-        );
-    }
-
-    @PostMapping("/categories")
-    @AdminAccess
-    @Operation(
-            summary = "Create expense category",
-            description = "Creates a new expense category for expense classification and reporting."
-    )
-    public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(
-            @Valid @RequestBody CreateCategoryRequest request
-    ) {
-
-        log.info(
-                "Creating expense category | name={} | sortOrder={}",
-                request.getName(),
-                request.getSortOrder()
-        );
-
-        CategoryResponse response = categoryService.createCategory(request);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        ApiResponse.success(response)
-                );
-    }
-
-    @PutMapping("/categories/{id}")
-    @AdminAccess
-    @Operation(
-            summary = "Update expense category",
-            description = "Updates an existing expense category."
-    )
-    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategory(
-            @PathVariable UUID id,
-            @Valid @RequestBody UpdateCategoryRequest request
-    ) {
-
-        log.info(
-                "Updating expense category | categoryId={} | newName={}",
-                id,
-                request.getName()
-        );
-
-        CategoryResponse response = categoryService.updateCategory(id, request);
-
-        return ResponseEntity.ok(
-                ApiResponse.success(response)
-        );
-    }
-
-    @DeleteMapping("/categories/{id}")
-    @AdminAccess
-    @Operation(
-            summary = "Delete expense category",
-            description = "Soft deletes an expense category by marking it inactive."
-    )
-    public ResponseEntity<ApiResponse<Void>> deleteCategory(
-            @PathVariable UUID id
-    ) {
-
-        log.info(
-                "Soft deleting expense category | categoryId={}",
-                id
-        );
-
-        categoryService.deleteCategory(id);
-
-        return ResponseEntity.ok(
-                ApiResponse.success(null)
-        );
-    }
-
-    /*
-     * ─────────────────────────────────────────────────────────────
-     * Expenses
-     * ─────────────────────────────────────────────────────────────
-     */
 
     @GetMapping
     @StaffAccess
     @Operation(
             summary = "Fetch expenses",
-            description = "Returns paginated expense records with filtering support for audit, reporting, and operational review."
+            description = "Returns paginated expense records with filtering support for audit, reporting, and operational review. Use 'expenseDate' for sorting — it maps to the internal date field automatically."
     )
-    public ResponseEntity<ApiResponse<Page<ExpenseDto.ExpenseResponse>>> getExpenses(
-            @Parameter(
-                    description = "Search criteria for filtering expense records"
-            )
-            ExpenseSearchCriteria criteria,
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully retrieved paginated list"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "Access denied")
+    })
+    public ResponseEntity<ApiResponse<Page<ExpenseResponse>>> getExpenses(
+            @ParameterObject ExpenseSearchCriteria criteria,
 
             @PageableDefault(
                     size = 20,
-                    sort = "orderDate",
+                    sort = "expenseDate",
                     direction = Sort.Direction.DESC
             )
             Pageable pageable
     ) {
-
-        log.info(
-                "Fetching expenses | filters={} | page={} | size={}",
-                criteria,
-                pageable.getPageNumber(),
-                pageable.getPageSize()
-        );
-
-        Page<ExpenseDto.ExpenseResponse> response =
+        Page<ExpenseResponse> response =
                 expenseService.getExpenses(criteria, pageable);
+
+        log.info("Fetched expenses | count={} | totalPages={}",
+                response.getNumberOfElements(),
+                response.getTotalPages());
 
         return ResponseEntity.ok(
                 ApiResponse.success(response)
         );
+    }
+
+    @GetMapping("/{id}")
+    @StaffAccess
+    @Operation(
+            summary = "Get expense by ID",
+            description = "Retrieves the full details of a specific expense record, including its associated category and document status."
+    )
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Found the expense"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Expense not found")
+    })
+    public ResponseEntity<ApiResponse<ExpenseResponse>> getExpenseById(
+            @PathVariable UUID id
+    ) {
+        try (var mdc = MDC.putCloseable("expenseId", String.valueOf(id))) {
+            ExpenseResponse response = expenseService.getExpenseById(id);
+            log.info("Fetched expense | id={}", id);
+            return ResponseEntity.ok(ApiResponse.success(response));
+        }
     }
 
     @PostMapping
     @StaffAccess
     @Operation(
             summary = "Create expense",
-            description = "Creates a new expense transaction and automatically generates linked invoice/payment records for financial audit compliance."
+            description = "Atomically creates a financial triplet: Order + Invoice + Payment. All records are created in a single transaction with a 5-second timeout. Pass an 'Idempotency-Key' header to prevent duplicate transactions on network retries."
     )
-    public ResponseEntity<ApiResponse<ExpenseDto.ExpenseResponse>> createExpense(
-            @Valid @RequestBody ExpenseDto.CreateExpenseRequest request
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Expense created successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid input data or missing Idempotency-Key"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Idempotency conflict - duplicate request detected"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "422", description = "Validation failure")
+    })
+    public ResponseEntity<ApiResponse<ExpenseResponse>> createExpense(
+            @Parameter(description = "Unique key to ensure request idempotency")
+            @RequestHeader(value = "Idempotency-Key", required = true) String idempotencyKey,
+
+            @Valid @RequestBody CreateExpenseRequest request
     ) {
+        try (
+            var mdcBranch   = MDC.putCloseable("branchId",   String.valueOf(request.getBranchId()));
+            var mdcCategory = MDC.putCloseable("categoryId", String.valueOf(request.getCategoryId()));
+            var mdcAmount   = MDC.putCloseable("amount",     String.valueOf(request.getAmount()))
+        ) {
+            ExpenseResponse response = expenseService.createExpense(idempotencyKey, request);
 
-        log.info(
-                "Creating expense | branchId={} | categoryId={} | amount={}",
-                request.getBranchId(),
-                request.getCategoryId(),
-                request.getAmount()
-        );
+            log.info("Expense created successfully | id={} | ref={}", response.getId(), response.getReferenceNumber());
 
-        ExpenseDto.ExpenseResponse response =
-                expenseService.createExpense(request);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(ApiResponse.success(response));
+        }
+    }
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        ApiResponse.success(response)
-                );
+    @PutMapping("/{id}")
+    @AdminAccess
+    @Operation(
+            summary = "Update expense",
+            description = "Updates an existing expense by voiding the old record and creating a new revision for audit consistency. Payment records are re-linked if the amount remains identical."
+    )
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Revision created successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Original expense not found"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "422", description = "Business rule violation")
+    })
+    public ResponseEntity<ApiResponse<ExpenseResponse>> updateExpense(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateExpenseRequest request
+    ) {
+        try (
+            var mdcExpense = MDC.putCloseable("expenseId", String.valueOf(id));
+            var mdcAmount  = MDC.putCloseable("amount",    String.valueOf(request.getAmount()))
+        ) {
+            ExpenseResponse response = expenseService.updateExpense(id, request);
+
+            log.info("Expense revision finalized | oldId={} | newId={}", id, response.getId());
+
+            return ResponseEntity.ok(ApiResponse.success(response));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @AdminAccess
+    @Operation(
+            summary = "Void expense",
+            description = "Soft-deletes an expense and its associated financial chain (Invoices, Payments). Marks all records as VOID and inactive to preserve the audit trail."
+    )
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Audit receipt for voided transaction"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Expense not found")
+    })
+    public ResponseEntity<ApiResponse<VoidExpenseResponse>> deleteExpense(@PathVariable UUID id) {
+        VoidExpenseResponse receipt = expenseService.voidExpense(id);
+
+        log.info("Expense and financial chain voided | id={} | paymentsCount={}",
+                id,
+                receipt.getPaymentIds().size());
+
+        return ResponseEntity.ok(ApiResponse.success(receipt));
     }
 }

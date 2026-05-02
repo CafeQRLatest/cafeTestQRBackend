@@ -67,6 +67,10 @@ public class Payment extends BaseEntity {
     @Builder.Default
     private String status = "COMPLETED";
 
+    @Column(name = "doc_status", length = 20)
+    @Builder.Default
+    private String docStatus = "COMPLETED";
+
     @Builder.Default
     @Column(name = "isactive", length = 1)
     private String isactive = "Y";

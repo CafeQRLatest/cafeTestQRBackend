@@ -1,13 +1,14 @@
-package com.restaurant.pos.expense.service;
+package com.restaurant.pos.category.service;
 
+import com.restaurant.pos.category.domain.ExpenseCategory;
+import com.restaurant.pos.category.dto.CategoryResponse;
+import com.restaurant.pos.category.dto.CreateCategoryRequest;
+import com.restaurant.pos.category.dto.UpdateCategoryRequest;
+import com.restaurant.pos.category.mapper.CategoryMapper;
+import com.restaurant.pos.category.repository.ExpenseCategoryRepository;
+import com.restaurant.pos.common.exception.DuplicateResourceException;
 import com.restaurant.pos.common.exception.ResourceNotFoundException;
 import com.restaurant.pos.common.tenant.TenantContext;
-import com.restaurant.pos.expense.domain.ExpenseCategory;
-import com.restaurant.pos.expense.dto.CategoryResponse;
-import com.restaurant.pos.expense.dto.CreateCategoryRequest;
-import com.restaurant.pos.expense.dto.UpdateCategoryRequest;
-import com.restaurant.pos.expense.mapper.ExpenseMapper;
-import com.restaurant.pos.expense.repository.ExpenseCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * Service for managing expense categories.
- * Follows FAANG-level modularity and clean code standards.
+ * Now lives in its own module for cross-domain reusability.
  */
 @Slf4j
 @Service
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 public class CategoryService {
 
     private final ExpenseCategoryRepository categoryRepository;
-    private final ExpenseMapper expenseMapper;
+    private final CategoryMapper categoryMapper;
 
     @Cacheable(value = "expenseCategories", key = "#root.methodName + '_' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
     @Transactional(readOnly = true)
@@ -42,7 +43,7 @@ public class CategoryService {
         
         return categoryRepository.findByClientIdAndOrgIdOrderBySortOrderAsc(clientId, orgId)
                 .stream()
-                .map(expenseMapper::toResponse)
+                .map(categoryMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -55,16 +56,16 @@ public class CategoryService {
         log.info("Creating category '{}' | orgId={}", request.getName(), orgId);
 
         if (categoryRepository.existsByNameIgnoreCaseAndClientIdAndOrgId(request.getName(), clientId, orgId)) {
-            throw new com.restaurant.pos.common.exception.DuplicateResourceException(
+            throw new DuplicateResourceException(
                     "Expense category '" + request.getName() + "' already exists in this branch."
             );
         }
 
-        ExpenseCategory category = expenseMapper.toEntity(request);
+        ExpenseCategory category = categoryMapper.toEntity(request);
         category.setOrgId(orgId);
 
         ExpenseCategory saved = categoryRepository.save(category);
-        return expenseMapper.toResponse(saved);
+        return categoryMapper.toResponse(saved);
     }
 
     @Transactional
@@ -80,24 +81,23 @@ public class CategoryService {
         if (!category.getName().equalsIgnoreCase(request.getName())) {
             if (categoryRepository.existsByNameIgnoreCaseAndClientIdAndOrgId(
                     request.getName(), category.getClientId(), category.getOrgId())) {
-                throw new com.restaurant.pos.common.exception.DuplicateResourceException(
+                throw new DuplicateResourceException(
                         "Category name '" + request.getName() + "' is already in use."
                 );
             }
         }
 
-        expenseMapper.updateEntity(category, request);
+        categoryMapper.updateEntity(category, request);
 
         // Handle status via domain behavior
         if (request.getActive() != null) {
             if (request.getActive()) category.activate();
             else category.deactivate();
             
-            // Sync DB status for immediate transactional consistency
             categoryRepository.updateStatus(id, category.getIsactive());
         }
 
-        return expenseMapper.toResponse(categoryRepository.save(category));
+        return categoryMapper.toResponse(categoryRepository.save(category));
     }
 
     @Transactional

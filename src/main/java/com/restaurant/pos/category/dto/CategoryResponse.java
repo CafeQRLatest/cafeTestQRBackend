@@ -1,4 +1,4 @@
-package com.restaurant.pos.expense.dto;
+package com.restaurant.pos.category.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,7 +9,6 @@ import java.util.UUID;
 
 /**
  * Enterprise-grade Response DTO for Expense Categories.
- * Refined for immutability, clean naming conventions, and 10/10 documentation.
  */
 @Getter
 @ToString
@@ -21,28 +20,16 @@ import java.util.UUID;
 @Schema(description = "Expense category response payload")
 public class CategoryResponse {
 
-    @Schema(
-        description = "Unique identifier of the category",
-        example = "550e8400-e29b-41d4-a716-446655440000"
-    )
+    @Schema(description = "Unique identifier of the category", example = "550e8400-e29b-41d4-a716-446655440000")
     private UUID id;
 
-    @Schema(
-        description = "Name of the category used for classification",
-        example = "Utilities"
-    )
+    @Schema(description = "Name of the category used for classification", example = "Utilities")
     private String name;
 
-    @Schema(
-        description = "Display sort order for UI positioning",
-        example = "10"
-    )
+    @Schema(description = "Display sort order for UI positioning", example = "10")
     private Integer sortOrder;
 
-    @Schema(
-        description = "Indicates if the category is currently available for operational use",
-        example = "true"
-    )
+    @Schema(description = "Indicates if the category is currently available for operational use", example = "true")
     private Boolean active;
 
     @Schema(description = "ISO-8601 timestamp of record creation")
@@ -52,7 +39,7 @@ public class CategoryResponse {
     private LocalDateTime updatedAt;
 
     /**
-     * Minimalist view for high-performance dropdown lists and simplified UI components.
+     * Minimalist view for high-performance dropdown lists.
      */
     @Getter
     @ToString

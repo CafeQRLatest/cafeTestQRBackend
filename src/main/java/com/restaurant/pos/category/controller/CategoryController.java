@@ -1,0 +1,123 @@
+package com.restaurant.pos.category.controller;
+
+import com.restaurant.pos.common.dto.ApiResponse;
+import com.restaurant.pos.common.security.AdminAccess;
+import com.restaurant.pos.common.security.StaffAccess;
+import com.restaurant.pos.category.dto.CategoryResponse;
+import com.restaurant.pos.category.dto.CreateCategoryRequest;
+import com.restaurant.pos.category.dto.UpdateCategoryRequest;
+import com.restaurant.pos.category.service.CategoryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+
+@Slf4j
+@RestController
+@RequestMapping("/api/v1/expense-categories")
+@RequiredArgsConstructor
+@Tag(
+        name = "Expense Category Management",
+        description = "APIs for expense categories classification"
+)
+public class CategoryController {
+
+    private final CategoryService categoryService;
+
+    @GetMapping
+    @StaffAccess
+    @Operation(
+            summary = "Fetch expense categories",
+            description = "Returns all expense categories available for the current organization, including active/inactive records ordered by sort priority."
+    )
+    public ResponseEntity<ApiResponse<List<CategoryResponse>>> getCategories() {
+
+        log.info("Fetching expense categories for current organization");
+
+        List<CategoryResponse> response = categoryService.getCategories();
+
+        return ResponseEntity.ok(
+                ApiResponse.success(response)
+        );
+    }
+
+    @PostMapping
+    @AdminAccess
+    @Operation(
+            summary = "Create expense category",
+            description = "Creates a new expense category for expense classification and reporting."
+    )
+    public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(
+            @Valid @RequestBody CreateCategoryRequest request
+    ) {
+
+        log.info(
+                "Creating expense category | name={} | sortOrder={}",
+                request.getName(),
+                request.getSortOrder()
+        );
+
+        CategoryResponse response = categoryService.createCategory(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        ApiResponse.success(response)
+                );
+    }
+
+    @PutMapping("/{id}")
+    @AdminAccess
+    @Operation(
+            summary = "Update expense category",
+            description = "Updates an existing expense category."
+    )
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategory(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateCategoryRequest request
+    ) {
+
+        log.info(
+                "Updating expense category | categoryId={} | newName={}",
+                id,
+                request.getName()
+        );
+
+        CategoryResponse response = categoryService.updateCategory(id, request);
+
+        return ResponseEntity.ok(
+                ApiResponse.success(response)
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    @AdminAccess
+    @Operation(
+            summary = "Delete expense category",
+            description = "Soft deletes an expense category by marking it inactive."
+    )
+    @io.swagger.v3.oas.annotations.responses.ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Category soft-deleted successfully"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Category not found")
+    })
+    public ResponseEntity<Void> deleteCategory(
+            @PathVariable UUID id
+    ) {
+
+        log.info(
+                "Soft deleting expense category | categoryId={}",
+                id
+        );
+
+        categoryService.deleteCategory(id);
+
+        return ResponseEntity.noContent().build();
+    }
+}

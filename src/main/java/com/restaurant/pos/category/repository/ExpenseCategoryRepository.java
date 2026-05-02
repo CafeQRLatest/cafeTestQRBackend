@@ -1,6 +1,6 @@
-package com.restaurant.pos.expense.repository;
+package com.restaurant.pos.category.repository;
 
-import com.restaurant.pos.expense.domain.ExpenseCategory;
+import com.restaurant.pos.category.domain.ExpenseCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,11 +1,13 @@
 package com.restaurant.pos.common.exception;
 
 import com.restaurant.pos.common.dto.ApiResponse;
+import com.restaurant.pos.expense.exception.IdempotencyStoreException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,6 +43,14 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(message));
     }
 
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMissingHeader(MissingRequestHeaderException ex) {
+        log.warn("Missing required header: {}", ex.getHeaderName());
+        return ResponseEntity
+                .badRequest()
+                .body(ApiResponse.error("Required header missing: " + ex.getHeaderName()));
+    }
+
     @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class, org.springframework.mail.MailException.class})
     public ResponseEntity<ApiResponse<Void>> handleAuthenticationException(Exception ex) {
         log.warn("Authentication failed: {}", ex.getMessage());
@@ -64,6 +74,13 @@ public class GlobalExceptionHandler {
         log.warn("Access denied: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.error("You do not have permission to access this resource."));
+    }
+
+    @ExceptionHandler(IdempotencyStoreException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIdempotencyStoreException(IdempotencyStoreException ex) {
+        log.error("Idempotency store unavailable: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ApiResponse.error("The service is temporarily unable to process the request safely. Please try again later."));
     }
 
     @ExceptionHandler(Exception.class)

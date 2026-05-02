@@ -1,5 +1,6 @@
 package com.restaurant.pos.expense.domain;
 
+import com.restaurant.pos.category.domain.ExpenseCategory;
 import com.restaurant.pos.order.domain.Order;
 import com.restaurant.pos.order.domain.OrderType;
 import jakarta.persistence.DiscriminatorValue;
