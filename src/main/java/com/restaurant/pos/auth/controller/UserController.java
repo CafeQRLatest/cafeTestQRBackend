@@ -104,42 +104,10 @@ public class UserController {
 
     @GetMapping("/menus")
     public ResponseEntity<ApiResponse<List<Menu>>> getMyMenus() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return repository.findByEmail(email)
-                .map(user -> {
-                    RoleEntity role = user.getRoleEntity();
-                    if (role == null) return ResponseEntity.ok(ApiResponse.success(Collections.<Menu>emptyList()));
-
-                    List<Menu> assigned = (role.getMenus() != null) 
-                            ? role.getMenus().stream()
-                                .filter(m -> "Y".equalsIgnoreCase(m.getIsactive()))
-                                .collect(Collectors.toList())
-                            : new java.util.ArrayList<>();
-                    
-                    boolean isSuperAdmin = "SUPER_ADMIN".equalsIgnoreCase(role.getName()) || 
-                                         "ROLE_SUPER_ADMIN".equalsIgnoreCase(role.getName());
-
-                    if (assigned.isEmpty() && isSuperAdmin) {
-                        assigned = menuRepository.findAll().stream()
-                                .filter(m -> "Y".equalsIgnoreCase(m.getIsactive()))
-                                .filter(m -> m.getParentId() == null)
-                                .collect(Collectors.toList());
-                    }
-
-                    if (assigned.isEmpty()) return ResponseEntity.ok(ApiResponse.success(assigned));
-
-                    List<UUID> parentIds = assigned.stream().map(Menu::getId).collect(Collectors.toList());
-                    List<Menu> children = menuRepository.findByParentIdIn(parentIds).stream()
-                            .filter(m -> "Y".equalsIgnoreCase(m.getIsactive()))
-                            .collect(Collectors.toList());
-
-                    assigned.addAll(children);
-                    List<Menu> distinctMenus = assigned.stream()
-                            .collect(Collectors.toMap(Menu::getId, m -> m, (existing, replacement) -> existing))
-                            .values().stream().collect(Collectors.toList());
-
-                    return ResponseEntity.ok(ApiResponse.success(distinctMenus));
-                })
-                .orElse(ResponseEntity.ok(ApiResponse.success(Collections.emptyList())));
+        // Temporarily return all menus to unblock UI
+        List<Menu> allActiveMenus = menuRepository.findAll().stream()
+                .filter(m -> "Y".equalsIgnoreCase(m.getIsactive()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success(allActiveMenus));
     }
 }

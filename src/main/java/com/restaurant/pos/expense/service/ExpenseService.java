@@ -338,7 +338,7 @@ public class ExpenseService {
 
         Expense expense = new Expense(category);
         expense.setOrderDate(expenseDate);
-        expense.setPaymentMethod(paymentMethod);
+        expense.setReference(paymentMethod);
 
         // Contextual Metadata
         UUID orgId = TenantContext.getCurrentOrg();

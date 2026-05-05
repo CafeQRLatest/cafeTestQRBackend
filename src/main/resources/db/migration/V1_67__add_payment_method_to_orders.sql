@@ -1,0 +1,1 @@
+-- This migration is no longer needed as we use the existing reference column for payment methods.

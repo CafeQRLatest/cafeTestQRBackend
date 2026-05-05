@@ -1,5 +1,6 @@
 server:
   port: 8080
+  max-http-request-header-size: 65536
 
 spring:
   main:
@@ -8,9 +9,9 @@ spring:
     name: cafe-qr-backend
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/cafeqr_db}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/pos_db}
+    username: ${SPRING_DATASOURCE_USERNAME:pos_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:pos_password}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5

@@ -18,6 +18,7 @@ import com.restaurant.pos.sequence.service.DocumentSequenceService;
 import com.restaurant.pos.table.domain.RestaurantTable;
 import com.restaurant.pos.table.repository.RestaurantTableRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -96,6 +98,8 @@ public class OrderService {
 
     @Transactional
     public Order createOrder(Order order) {
+        log.info("Creating order: {} | Tenant: {} | Org: {}", order, TenantContext.getCurrentTenant(), TenantContext.getCurrentOrg());
+        
         order.setClientId(TenantContext.getCurrentTenant());
         if (!SecurityUtils.isSuperAdmin() || order.getOrgId() == null) {
             order.setOrgId(TenantContext.getCurrentOrg());
@@ -129,7 +133,8 @@ public class OrderService {
         
         // Create payment only if completed and paid
         if ("COMPLETED".equalsIgnoreCase(saved.getOrderStatus()) && "PAID".equalsIgnoreCase(saved.getPaymentStatus())) {
-            generatePayment(saved, saved.getPaymentMethod());
+            String paymentMethod = saved.getReference() != null ? saved.getReference() : "CASH";
+            generatePayment(saved, paymentMethod);
         }
 
         handleTableStatus(saved);

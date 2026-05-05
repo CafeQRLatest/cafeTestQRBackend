@@ -37,6 +37,9 @@ public class OrderLine {
     @Column(name = "product_name")
     private String productName;
 
+    @Column(name = "category_name")
+    private String categoryName;
+
     @Column(name = "is_packaged_good")
     private Boolean isPackagedGood;
 

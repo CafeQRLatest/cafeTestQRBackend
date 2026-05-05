@@ -109,10 +109,6 @@ public class Order extends BaseEntity {
     @Column(length = 100)
     private String reference;
 
-    @Column(name = "payment_method", length = 50)
-    @Builder.Default
-    private String paymentMethod = "CASH";
-
     @Column(name = "fulfillment_type", length = 20)
     @Builder.Default
     private String fulfillmentType = "DINE_IN"; // DINE_IN, TAKEAWAY, DELIVERY
