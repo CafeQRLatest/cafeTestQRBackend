@@ -7,6 +7,7 @@ import com.restaurant.pos.order.domain.OrderType;
 import com.restaurant.pos.order.repository.OrderRepository;
 import com.restaurant.pos.product.domain.Product;
 import com.restaurant.pos.product.repository.ProductRepository;
+import com.restaurant.pos.common.service.SystemConfigurationService;
 import com.restaurant.pos.table.domain.RestaurantTable;
 import com.restaurant.pos.table.repository.RestaurantTableRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class PublicMenuController {
     private final OrderRepository orderRepository;
     private final com.restaurant.pos.client.repository.ClientRepository clientRepository;
     private final com.restaurant.pos.client.repository.OrganizationRepository organizationRepository;
+    private final SystemConfigurationService systemConfigurationService;
 
     /**
      * GET /api/v1/public/menu/{clientId}/{orgId}
@@ -99,6 +101,7 @@ public class PublicMenuController {
         info.put("seatingCapacity", table.getSeatingCapacity());
         info.put("floor", table.getFloor());
         info.put("section", table.getSection());
+        info.put("onlinePaymentEnabled", systemConfigurationService.getConfiguration().isOnlinePaymentEnabled());
 
         // Attach brand color, name, and logo (Prefer Organization-specific, fallback to Client-global)
         UUID effectiveClientId = table.getClientId() != null ? table.getClientId() : clientId;
@@ -141,10 +144,16 @@ public class PublicMenuController {
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> items = (List<Map<String, Object>>) payload.get("items");
         String customerNote = (String) payload.getOrDefault("note", "");
+        String paymentStatus = String.valueOf(payload.getOrDefault("paymentStatus", "PENDING")).toUpperCase();
+        String paymentMethod = String.valueOf(payload.getOrDefault("paymentMethod", "CASH")).toUpperCase();
+        String razorpayPaymentId = (String) payload.getOrDefault("razorpayPaymentId", null);
+        String razorpayOrderId = (String) payload.getOrDefault("razorpayOrderId", null);
 
         if (items == null || items.isEmpty()) {
+            Map<String, Object> error = new LinkedHashMap<>();
+            error.put("error", "No items in order");
             return ResponseEntity.badRequest()
-                    .body(ApiResponse.success(Map.of("error", "No items in order")));
+                    .body(ApiResponse.success(error));
         }
 
         // Generate order number
@@ -156,11 +165,12 @@ public class PublicMenuController {
                 .orderNo(orderNo)
                 .orderType(OrderType.SALE)   // QR menu orders are always customer sales
                 .orderStatus("CONFIRMED")
-                .paymentStatus("PENDING")
+                .paymentStatus("PAID".equals(paymentStatus) ? "PAID" : "PENDING")
                 .orderSource("QR_MENU")
                 .fulfillmentType("DINE_IN")
                 .tableNumber(tableNumber)
                 .description(customerNote)
+                .reference(buildPaymentReference(paymentMethod, razorpayPaymentId, razorpayOrderId))
                 .orderDate(Instant.now())
                 .build();
                 
@@ -182,11 +192,32 @@ public class PublicMenuController {
         for (Map<String, Object> cartItem : items) {
             UUID productId = UUID.fromString((String) cartItem.get("productId"));
             int qty = ((Number) cartItem.get("quantity")).intValue();
-            BigDecimal price = new BigDecimal(cartItem.get("price").toString());
+            Optional<Product> productOpt = productRepository.findById(productId)
+                    .filter(product -> clientId.equals(product.getClientId()))
+                    .filter(product -> orgUuid == null || product.getOrgId() == null || orgUuid.equals(product.getOrgId()))
+                    .filter(Product::isActive)
+                    .filter(Product::isAvailable);
+
+            if (productOpt.isEmpty()) {
+                Map<String, Object> error = new LinkedHashMap<>();
+                error.put("error", "Invalid menu item in order");
+                return ResponseEntity.badRequest()
+                        .body(ApiResponse.success(error));
+            }
+
+            Product product = productOpt.get();
+            BigDecimal price = product.getPrice();
             BigDecimal lineTotal = price.multiply(BigDecimal.valueOf(qty));
+            String productName = product.getName() != null ? product.getName() : (String) cartItem.getOrDefault("name", null);
+            String categoryName = product.getCategory() != null
+                    ? product.getCategory().getName()
+                    : (String) cartItem.getOrDefault("category", null);
 
             OrderLine line = OrderLine.builder()
                     .productId(productId)
+                    .productName(productName)
+                    .categoryName(categoryName)
+                    .isPackagedGood(product.isPackagedGood())
                     .quantity(BigDecimal.valueOf(qty))
                     .unitPrice(price)
                     .lineTotal(lineTotal)
@@ -220,9 +251,23 @@ public class PublicMenuController {
         response.put("orderId", saved.getId());
         response.put("orderNo", saved.getOrderNo());
         response.put("status", saved.getOrderStatus());
+        response.put("paymentStatus", saved.getPaymentStatus());
         response.put("grandTotal", saved.getGrandTotal());
         response.put("tableNumber", saved.getTableNumber());
 
         return ResponseEntity.ok(ApiResponse.success(response));
+    }
+
+    private String buildPaymentReference(String paymentMethod, String razorpayPaymentId, String razorpayOrderId) {
+        String method = (paymentMethod == null || paymentMethod.isBlank()) ? "CASH" : paymentMethod.toUpperCase();
+        if ("RAZORPAY".equals(method)) {
+            if (razorpayPaymentId != null && !razorpayPaymentId.isBlank()) {
+                return "RAZORPAY:" + razorpayPaymentId;
+            }
+            if (razorpayOrderId != null && !razorpayOrderId.isBlank()) {
+                return "RAZORPAY:" + razorpayOrderId;
+            }
+        }
+        return method;
     }
 }
