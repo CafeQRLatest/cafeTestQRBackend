@@ -7,12 +7,15 @@ import com.restaurant.pos.inventory.service.InventoryService;
 import com.restaurant.pos.invoice.domain.Invoice;
 import com.restaurant.pos.invoice.domain.InvoiceType;
 import com.restaurant.pos.order.domain.Order;
+import com.restaurant.pos.order.domain.OrderLine;
 import com.restaurant.pos.order.domain.OrderType;
 import com.restaurant.pos.order.domain.Payment;
 import com.restaurant.pos.order.domain.PaymentType;
 import com.restaurant.pos.invoice.repository.InvoiceRepository;
 import com.restaurant.pos.order.repository.OrderRepository;
 import com.restaurant.pos.order.repository.PaymentRepository;
+import com.restaurant.pos.product.domain.Product;
+import com.restaurant.pos.product.repository.ProductRepository;
 import com.restaurant.pos.sequence.domain.DocumentType;
 import com.restaurant.pos.sequence.service.DocumentSequenceService;
 import com.restaurant.pos.table.domain.RestaurantTable;
@@ -26,7 +29,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,6 +45,61 @@ public class OrderService {
     private final InventoryService inventoryService;
     private final RestaurantTableRepository tableRepository;
     private final DocumentSequenceService sequenceService;
+    private final ProductRepository productRepository;
+
+    private Order hydrateOrderLines(Order order) {
+        if (order == null || order.getLines() == null || order.getLines().isEmpty()) {
+            return order;
+        }
+
+        boolean needsHydration = order.getLines().stream()
+                .anyMatch(line -> line.getProductId() != null && (
+                        line.getProductName() == null || line.getProductName().isBlank()
+                                || line.getCategoryName() == null || line.getCategoryName().isBlank()
+                                || line.getIsPackagedGood() == null
+                ));
+
+        if (!needsHydration) {
+            return order;
+        }
+
+        List<UUID> productIds = order.getLines().stream()
+                .map(OrderLine::getProductId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .toList();
+
+        if (productIds.isEmpty()) {
+            return order;
+        }
+
+        Map<UUID, Product> productsById = productRepository.findByIdIn(productIds).stream()
+                .collect(Collectors.toMap(Product::getId, product -> product));
+
+        for (OrderLine line : order.getLines()) {
+            Product product = productsById.get(line.getProductId());
+            if (product == null) {
+                continue;
+            }
+
+            if (line.getProductName() == null || line.getProductName().isBlank()) {
+                line.setProductName(product.getName());
+            }
+            if (line.getCategoryName() == null || line.getCategoryName().isBlank()) {
+                line.setCategoryName(product.getCategory() != null ? product.getCategory().getName() : null);
+            }
+            if (line.getIsPackagedGood() == null) {
+                line.setIsPackagedGood(product.isPackagedGood());
+            }
+        }
+
+        return order;
+    }
+
+    private List<Order> hydrateOrderLines(List<Order> orders) {
+        orders.forEach(this::hydrateOrderLines);
+        return orders;
+    }
 
     public List<Order> getOrders(String status) {
         UUID tenantId = TenantContext.getCurrentTenant();
@@ -60,22 +121,24 @@ public class OrderService {
                 try { generatePayment(o); } catch (Exception ignored) {}
             });
 
-        return orders;
+        return hydrateOrderLines(orders);
     }
     
     public List<Order> getOrders() {
         return getOrders(null);
     }
 
+    @Transactional(readOnly = true)
     public List<Order> getOrdersByType(OrderType orderType) {
         UUID tenantId = TenantContext.getCurrentTenant();
         if (SecurityUtils.isSuperAdmin()) {
-            return orderRepository.findByClientIdAndOrderTypeOrderByCreatedAtDesc(tenantId, orderType);
+            return hydrateOrderLines(orderRepository.findByClientIdAndOrderTypeOrderByCreatedAtDesc(tenantId, orderType));
         }
-        return orderRepository.findByClientIdAndOrgIdAndOrderTypeOrderByCreatedAtDesc(
-                tenantId, TenantContext.getCurrentOrg(), orderType);
+        return hydrateOrderLines(orderRepository.findByClientIdAndOrgIdAndOrderTypeOrderByCreatedAtDesc(
+                tenantId, TenantContext.getCurrentOrg(), orderType));
     }
 
+    @Transactional(readOnly = true)
     public List<Order> searchOrders(com.restaurant.pos.order.dto.OrderSearchCriteria criteria) {
         UUID clientId = TenantContext.getCurrentTenant();
         UUID orgId = TenantContext.getCurrentOrg();
@@ -83,17 +146,18 @@ public class OrderService {
         org.springframework.data.jpa.domain.Specification<Order> spec = 
             com.restaurant.pos.order.spec.OrderSpecification.filterBy(criteria, clientId, orgId);
             
-        return orderRepository.findAll(spec, org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "createdAt"));
+        return hydrateOrderLines(orderRepository.findAll(spec, org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "createdAt")));
     }
 
+    @Transactional(readOnly = true)
     public Order getOrder(UUID id) {
         UUID tenantId = TenantContext.getCurrentTenant();
         if (SecurityUtils.isSuperAdmin()) {
-            return orderRepository.findByIdAndClientId(id, tenantId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Order not found or access denied"));
+            return hydrateOrderLines(orderRepository.findByIdAndClientId(id, tenantId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Order not found or access denied")));
         }
-        return orderRepository.findByIdAndClientIdAndOrgId(id, tenantId, TenantContext.getCurrentOrg())
-                .orElseThrow(() -> new ResourceNotFoundException("Order not found or access denied"));
+        return hydrateOrderLines(orderRepository.findByIdAndClientIdAndOrgId(id, tenantId, TenantContext.getCurrentOrg())
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found or access denied")));
     }
 
     @Transactional
@@ -123,6 +187,7 @@ public class OrderService {
         if (order.getLines() != null) {
             order.getLines().forEach(line -> line.setOrder(order));
         }
+        hydrateOrderLines(order);
 
         Order saved = orderRepository.save(order);
         
@@ -138,7 +203,7 @@ public class OrderService {
         }
 
         handleTableStatus(saved);
-        return saved;
+        return hydrateOrderLines(saved);
     }
 
     @Transactional
@@ -189,6 +254,7 @@ public class OrderService {
         if (updates.getLines() != null) {
             updates.getLines().forEach(newOrder::addLine);
         }
+        hydrateOrderLines(newOrder);
         
         Order saved = orderRepository.save(newOrder);
         
@@ -207,7 +273,7 @@ public class OrderService {
             processInventoryForOrder(saved);
         }
         
-        return saved;
+        return hydrateOrderLines(saved);
     }
 
     @Transactional
@@ -235,7 +301,7 @@ public class OrderService {
         if (result.getOrderType() == OrderType.PURCHASE && "COMPLETED".equalsIgnoreCase(result.getOrderStatus())) {
             processInventoryForOrder(result);
         }
-        return result;
+        return hydrateOrderLines(result);
     }
 
     @Transactional
