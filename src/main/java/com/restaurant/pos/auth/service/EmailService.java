@@ -72,7 +72,7 @@ public class EmailService {
                     safe(fromEmail),
                     e.getMessage(),
                     e);
-            throw new EmailDeliveryException("Unable to send verification email. Please check SMTP settings and try again.", e);
+            throw new EmailDeliveryException(buildOtpDeliveryFailureMessage(e), e);
         }
     }
 
@@ -128,5 +128,31 @@ public class EmailService {
 
     private String safe(String value) {
         return isBlank(value) ? "<not configured>" : value;
+    }
+
+    private String buildOtpDeliveryFailureMessage(MailException e) {
+        if (isStandardSmtpPort(mailPort) && looksLikeConnectionFailure(e)) {
+            return "Unable to connect to the SMTP server. If this backend is running on Render free, SMTP ports 25, 465, and 587 are blocked. Use a paid Render instance or an email provider that supports HTTPS API delivery or SMTP on port 2525.";
+        }
+        return "Unable to send verification email. Please check SMTP settings and try again.";
+    }
+
+    private boolean isStandardSmtpPort(int port) {
+        return port == 25 || port == 465 || port == 587;
+    }
+
+    private boolean looksLikeConnectionFailure(Throwable throwable) {
+        Throwable current = throwable;
+        while (current != null) {
+            String message = current.getMessage();
+            if (message != null) {
+                String lower = message.toLowerCase();
+                if (lower.contains("connect") || lower.contains("timed out") || lower.contains("connection refused")) {
+                    return true;
+                }
+            }
+            current = current.getCause();
+        }
+        return false;
     }
 }

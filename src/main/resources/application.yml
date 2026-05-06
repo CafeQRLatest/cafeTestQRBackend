@@ -68,7 +68,7 @@ spring:
           timeout: ${SMTP_TIMEOUT:10000}
           writetimeout: ${SMTP_WRITE_TIMEOUT:10000}
           ssl:
-            trust: ${SMTP_SSL_TRUST:smtp.gmail.com}
+            trust: ${SMTP_SSL_TRUST:${SMTP_HOST:smtp.gmail.com}}
 
 # JWT Configuration
 jwt:

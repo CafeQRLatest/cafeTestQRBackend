@@ -35,18 +35,27 @@ This project is configured to run on 100% free services. Follow these steps to d
    - `SPRING_RABBITMQ_USERNAME`: The user
    - `SPRING_RABBITMQ_PASSWORD`: The password
 
-## 4. Email (SMTP) - [Gmail](https://gmail.com) or [SendGrid](https://sendgrid.com)
-1. Use a Gmail account or a free SendGrid account.
-2. For Gmail:
+## 4. Email Delivery
+Render free web services block outbound SMTP traffic on ports `25`, `465`, and `587`. Gmail SMTP uses `587` or `465`, so Gmail SMTP will not send email from a free Render backend even when the username and app password are correct.
+
+Use one of these options:
+
+1. Upgrade the Render backend to a paid instance, then Gmail SMTP can use the normal settings below.
+2. Stay on free Render and use a mail provider that supports an HTTPS email API.
+3. Stay on free Render and use an SMTP provider that supports an allowed alternate port such as `2525`.
+
+For Gmail on a paid Render instance or local development:
    - Go to **Google Account Settings** -> **Security**.
    - Enable **2-Step Verification**.
    - Search for **App Passwords**.
    - Create a new App Password for "Mail" on "Other (Custom name: Cafe-QR)".
-3. You will need:
+
+You will need:
    - `SMTP_HOST`: `smtp.gmail.com`
    - `SMTP_PORT`: `587`
    - `SMTP_USERNAME`: Your Gmail address
    - `SMTP_PASSWORD`: The 16-character App Password
+
 ## 5. Backend - [Render.com](https://render.com)
 1. Push your code to your **Private** GitHub repository.
 2. Go to **Render Dashboard** -> **New** -> **Blueprint**.
