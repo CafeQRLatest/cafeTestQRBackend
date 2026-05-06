@@ -90,7 +90,7 @@ razorpay:
   webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
 
 subscription:
-  monthly-amount-paise: ${SUBSCRIPTION_MONTHLY_AMOUNT_PAISE:9900}
+  monthly-amount-paise: ${SUBSCRIPTION_MONTHLY_AMOUNT_PAISE:100}
 
 logging:
   level:
