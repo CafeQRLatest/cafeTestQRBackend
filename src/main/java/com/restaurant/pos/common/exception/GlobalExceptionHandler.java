@@ -58,15 +58,25 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error("Required header missing: " + ex.getHeaderName()));
     }
 
-    @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class, org.springframework.mail.MailException.class})
+    @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class})
     public ResponseEntity<ApiResponse<Void>> handleAuthenticationException(Exception ex) {
         log.warn("Authentication failed: {}", ex.getMessage());
-        String message = "Invalid email or password";
-        if (ex.getMessage() != null && (ex.getMessage().toLowerCase().contains("mail") || ex.getMessage().toLowerCase().contains("authentication"))) {
-            message = ex.getMessage();
-        }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error(message));
+                .body(ApiResponse.error("Invalid email or password"));
+    }
+
+    @ExceptionHandler(EmailDeliveryException.class)
+    public ResponseEntity<ApiResponse<Void>> handleEmailDeliveryException(EmailDeliveryException ex) {
+        log.error("Email delivery failed: {}", ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ApiResponse.error(ex.getMessage()));
+    }
+
+    @ExceptionHandler(org.springframework.mail.MailException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMailException(org.springframework.mail.MailException ex) {
+        log.error("Mail sender failure: {}", ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ApiResponse.error("Unable to send email at the moment. Please try again later."));
     }
 
     @ExceptionHandler({DuplicateResourceException.class, org.springframework.dao.DataIntegrityViolationException.class})

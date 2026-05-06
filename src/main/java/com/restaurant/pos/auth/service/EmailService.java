@@ -1,8 +1,11 @@
 package com.restaurant.pos.auth.service;
 
+import com.restaurant.pos.common.exception.EmailDeliveryException;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,34 +19,60 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
 
-    @Value("${spring.mail.username:testcafeqr@gmail.com}")
+    @Value("${spring.mail.host:}")
+    private String mailHost;
+
+    @Value("${spring.mail.port:587}")
+    private int mailPort;
+
+    @Value("${spring.mail.username:}")
     private String fromEmail;
 
     @Value("${spring.mail.password:}")
     private String mailPassword;
 
-    @Async
+    @Value("${app.otp.log-code:false}")
+    private boolean logOtpCode;
+
+    @PostConstruct
+    void logMailConfiguration() {
+        log.info("Mail configuration loaded. host={}, port={}, usernameConfigured={}, passwordConfigured={}",
+                safe(mailHost),
+                mailPort,
+                !isBlank(fromEmail),
+                !isBlank(mailPassword));
+    }
+
     public void sendOtpEmail(String toEmail, String otp) {
-        log.info("Requested OTP email to {}", toEmail);
+        validateMailConfiguration();
+        log.info("Sending OTP email to {}", toEmail);
 
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
             message.setTo(toEmail);
-            message.setSubject("Your Cafe-QR Registration OTP");
-            message.setText("Welcome to Cafe-QR!\n\nYour one-time password (OTP) for registration is: " + otp + "\n\nThis OTP is valid for 5 minutes.");
+            message.setSubject("Your CafeQR verification code");
+            message.setText("""
+                    Welcome to CafeQR!
 
-            // Log the OTP to console for local development convenience
-            System.out.println("\n[OTP DEBUG] ------------------------------------------------");
-            System.out.println("[OTP DEBUG] TO: " + toEmail);
-            System.out.println("[OTP DEBUG] CODE: " + otp);
-            System.out.println("[OTP DEBUG] ------------------------------------------------\n");
+                    Your one-time password (OTP) is: %s
+
+                    This OTP is valid for 5 minutes.
+                    """.formatted(otp));
+
+            logOtpForDebugging(toEmail, otp);
 
             emailSender.send(message);
             log.info("OTP email successfully sent to {}", toEmail);
-        } catch (Exception e) {
-            log.warn("FAILED to send OTP email to {}: {}", toEmail, e.getMessage());
-            // We do NOT throw an exception here so the user can still register by looking at the backend logs
+        } catch (MailException e) {
+            log.error("Failed to send OTP email to {} using {}:{} as {}: {}",
+                    toEmail,
+                    safe(mailHost),
+                    mailPort,
+                    safe(fromEmail),
+                    e.getMessage(),
+                    e);
+            throw new EmailDeliveryException("Unable to send verification email. Please check SMTP settings and try again.", e);
         }
     }
 
@@ -69,5 +98,35 @@ public class EmailService {
         } catch (Exception e) {
             log.warn("FAILED to send QR email to {}: {}. !!! LINK IS LOGGED ABOVE !!!", toEmail, e.getMessage());
         }
+    }
+
+    private void validateMailConfiguration() {
+        if (isBlank(mailHost) || isBlank(fromEmail) || isBlank(mailPassword)) {
+            log.error("SMTP is not fully configured. hostConfigured={}, usernameConfigured={}, passwordConfigured={}",
+                    !isBlank(mailHost),
+                    !isBlank(fromEmail),
+                    !isBlank(mailPassword));
+            throw new EmailDeliveryException("Email delivery is not configured. Please set SMTP_USERNAME and SMTP_PASSWORD on the backend.");
+        }
+    }
+
+    private void logOtpForDebugging(String toEmail, String otp) {
+        if (!logOtpCode) {
+            return;
+        }
+
+        log.warn("OTP debug logging is enabled. Disable OTP_LOG_CODE in production.");
+        System.out.println("\n[OTP DEBUG] ------------------------------------------------");
+        System.out.println("[OTP DEBUG] TO: " + toEmail);
+        System.out.println("[OTP DEBUG] CODE: " + otp);
+        System.out.println("[OTP DEBUG] ------------------------------------------------\n");
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.trim().isEmpty();
+    }
+
+    private String safe(String value) {
+        return isBlank(value) ? "<not configured>" : value;
     }
 }

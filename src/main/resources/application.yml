@@ -56,6 +56,7 @@ spring:
     port: ${SMTP_PORT:587}
     username: ${SMTP_USERNAME:testcafeqr@gmail.com}
     password: ${SMTP_PASSWORD:}
+    default-encoding: UTF-8
     properties:
       mail:
         smtp:
@@ -63,6 +64,11 @@ spring:
           starttls:
             enable: true
             required: true
+          connectiontimeout: ${SMTP_CONNECTION_TIMEOUT:10000}
+          timeout: ${SMTP_TIMEOUT:10000}
+          writetimeout: ${SMTP_WRITE_TIMEOUT:10000}
+          ssl:
+            trust: ${SMTP_SSL_TRUST:smtp.gmail.com}
 
 # JWT Configuration
 jwt:
@@ -83,6 +89,8 @@ app:
   cors:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001}
   frontend-url: ${FRONTEND_URL:http://localhost:3000}
+  otp:
+    log-code: ${OTP_LOG_CODE:false}
 
 razorpay:
   key-id: ${RAZORPAY_KEY_ID:}

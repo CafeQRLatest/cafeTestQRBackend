@@ -35,7 +35,7 @@ public class OtpService {
         try {
             // Try saving to Redis with expiration
             redisTemplate.opsForValue().set(key, otp, OTP_VALIDITY_MINUTES, TimeUnit.MINUTES);
-            log.info("OTP {} saved to Redis for key: {}", otp, key);
+            log.info("OTP saved to Redis for key: {}", key);
         } catch (Exception e) {
             log.warn("Redis is unavailable, falling back to in-memory storage for OTP: {}", e.getMessage());
             fallbackStore.put(key, otp);
@@ -71,7 +71,7 @@ public class OtpService {
             cachedOtp = fallbackStore.get(key);
         }
 
-        log.info("Verifying OTP for {}. Input: {}, Cached: {}", sanitizedEmail, sanitizedInput, cachedOtp);
+        log.info("Verifying OTP for {}. Cached OTP present: {}", sanitizedEmail, cachedOtp != null);
 
         if (cachedOtp != null && cachedOtp.equals(sanitizedInput)) {
             // OTP is valid, delete it
