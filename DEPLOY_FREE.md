@@ -38,11 +38,36 @@ This project is configured to run on 100% free services. Follow these steps to d
 ## 4. Email Delivery
 Render free web services block outbound SMTP traffic on ports `25`, `465`, and `587`. Gmail SMTP uses `587` or `465`, so Gmail SMTP will not send email from a free Render backend even when the username and app password are correct.
 
-Use one of these options:
+This app supports two email providers:
 
-1. Upgrade the Render backend to a paid instance, then Gmail SMTP can use the normal settings below.
-2. Stay on free Render and use a mail provider that supports an HTTPS email API.
-3. Stay on free Render and use an SMTP provider that supports an allowed alternate port such as `2525`.
+1. `smtp` - Gmail SMTP. Good for local development or paid hosts that allow SMTP port `587`.
+2. `gmail-api` - Gmail API over HTTPS. This is the free Render-compatible option.
+
+### Free Render + Gmail Account: Gmail API
+Use Gmail API when the backend is hosted on Render free:
+
+1. Open **Google Cloud Console**.
+2. Create/select a project.
+3. Enable **Gmail API**.
+4. Configure the OAuth consent screen and add your Gmail address as a test user if the app is in testing mode.
+5. Create OAuth credentials for a **Desktop app** or **Web application**.
+6. Generate a refresh token with the `https://www.googleapis.com/auth/gmail.send` scope.
+   - Easiest path: use **OAuth 2.0 Playground**.
+   - In the Playground settings, enable **Use your own OAuth credentials**.
+   - Enter the client ID and client secret from Google Cloud.
+   - Authorize the Gmail send scope.
+   - Exchange the authorization code for tokens.
+   - Copy the `refresh_token`.
+7. Add these Render environment variables:
+   - `EMAIL_PROVIDER`: `gmail-api`
+   - `GMAIL_CLIENT_ID`: Google OAuth client ID
+   - `GMAIL_CLIENT_SECRET`: Google OAuth client secret
+   - `GMAIL_REFRESH_TOKEN`: Refresh token from the OAuth flow
+   - `GMAIL_SENDER_EMAIL`: Your Gmail address, for example `testcafeqr@gmail.com`
+
+This sends through Gmail using HTTPS port `443`, so Render's SMTP port block does not apply. Gmail account sending limits still apply.
+
+> Keep the OAuth consent screen in **Production** for a long-lived refresh token. Google may expire refresh tokens after 7 days when an external OAuth app is still in **Testing** mode.
 
 For Gmail on a paid Render instance or local development:
    - Go to **Google Account Settings** -> **Security**.
@@ -51,6 +76,7 @@ For Gmail on a paid Render instance or local development:
    - Create a new App Password for "Mail" on "Other (Custom name: Cafe-QR)".
 
 You will need:
+   - `EMAIL_PROVIDER`: `smtp`
    - `SMTP_HOST`: `smtp.gmail.com`
    - `SMTP_PORT`: `587`
    - `SMTP_USERNAME`: Your Gmail address
@@ -65,8 +91,11 @@ You will need:
     - `SPRING_DATASOURCE_URL`: From Neon (jdbc:...neondb?sslmode=require)
     - `SPRING_RABBITMQ_HOST`: From CloudAMQP
     - `SPRING_DATA_REDIS_HOST`: From Upstash
-    - `SMTP_USERNAME`: Your Gmail address
-    - `SMTP_PASSWORD`: Your Gmail App Password
+    - `EMAIL_PROVIDER`: `gmail-api` for Render free
+    - `GMAIL_CLIENT_ID`: From Google Cloud OAuth credentials
+    - `GMAIL_CLIENT_SECRET`: From Google Cloud OAuth credentials
+    - `GMAIL_REFRESH_TOKEN`: From the Gmail OAuth flow
+    - `GMAIL_SENDER_EMAIL`: Your Gmail address
     - `ALLOWED_ORIGINS`: Your Vercel URL (e.g., `https://cafe-qr.vercel.app`)
 6. Once deployed, copy your backend URL (e.g., `https://cafe-qr-backend.onrender.com`).
 

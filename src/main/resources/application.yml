@@ -70,6 +70,16 @@ spring:
           ssl:
             trust: ${SMTP_SSL_TRUST:${SMTP_HOST:smtp.gmail.com}}
 
+email:
+  provider: ${EMAIL_PROVIDER:smtp}
+
+gmail:
+  api:
+    client-id: ${GMAIL_CLIENT_ID:}
+    client-secret: ${GMAIL_CLIENT_SECRET:}
+    refresh-token: ${GMAIL_REFRESH_TOKEN:}
+    sender-email: ${GMAIL_SENDER_EMAIL:${SMTP_USERNAME:testcafeqr@gmail.com}}
+
 # JWT Configuration
 jwt:
   private-key: |-

@@ -1,5 +1,7 @@
 package com.restaurant.pos.auth.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restaurant.pos.common.exception.EmailDeliveryException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +14,28 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.scheduling.annotation.Async;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Map;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailService {
 
     private final JavaMailSender emailSender;
+    private final ObjectMapper objectMapper;
+    private final HttpClient httpClient = HttpClient.newHttpClient();
+
+    private static final String PROVIDER_GMAIL_API = "gmail-api";
+    private static final String GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
+    private static final String GMAIL_SEND_URL = "https://gmail.googleapis.com/gmail/v1/users/me/messages/send";
 
     @Value("${spring.mail.host:}")
     private String mailHost;
@@ -31,48 +49,53 @@ public class EmailService {
     @Value("${spring.mail.password:}")
     private String mailPassword;
 
+    @Value("${email.provider:smtp}")
+    private String emailProvider;
+
+    @Value("${gmail.api.client-id:}")
+    private String gmailClientId;
+
+    @Value("${gmail.api.client-secret:}")
+    private String gmailClientSecret;
+
+    @Value("${gmail.api.refresh-token:}")
+    private String gmailRefreshToken;
+
+    @Value("${gmail.api.sender-email:}")
+    private String gmailSenderEmail;
+
     @Value("${app.otp.log-code:false}")
     private boolean logOtpCode;
 
     @PostConstruct
     void logMailConfiguration() {
-        log.info("Mail configuration loaded. host={}, port={}, usernameConfigured={}, passwordConfigured={}",
+        log.info("Mail configuration loaded. provider={}, smtpHost={}, smtpPort={}, smtpUsernameConfigured={}, smtpPasswordConfigured={}, gmailApiConfigured={}",
+                safe(emailProvider),
                 safe(mailHost),
                 mailPort,
                 !isBlank(fromEmail),
-                !isBlank(mailPassword));
+                !isBlank(mailPassword),
+                isGmailApiConfigured());
     }
 
     public void sendOtpEmail(String toEmail, String otp) {
-        validateMailConfiguration();
-        log.info("Sending OTP email to {}", toEmail);
+        String body = """
+                Welcome to CafeQR!
 
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromEmail);
-            message.setTo(toEmail);
-            message.setSubject("Your CafeQR verification code");
-            message.setText("""
-                    Welcome to CafeQR!
+                Your one-time password (OTP) is: %s
 
-                    Your one-time password (OTP) is: %s
+                This OTP is valid for 5 minutes.
+                """.formatted(otp);
 
-                    This OTP is valid for 5 minutes.
-                    """.formatted(otp));
+        logOtpForDebugging(toEmail, otp);
+        sendPlainTextEmail(toEmail, "Your CafeQR verification code", body, "OTP email");
+    }
 
-            logOtpForDebugging(toEmail, otp);
-
-            emailSender.send(message);
-            log.info("OTP email successfully sent to {}", toEmail);
-        } catch (MailException e) {
-            log.error("Failed to send OTP email to {} using {}:{} as {}: {}",
-                    toEmail,
-                    safe(mailHost),
-                    mailPort,
-                    safe(fromEmail),
-                    e.getMessage(),
-                    e);
-            throw new EmailDeliveryException(buildOtpDeliveryFailureMessage(e), e);
+    private void sendPlainTextEmail(String toEmail, String subject, String body, String logLabel) {
+        if (shouldUseGmailApi()) {
+            sendPlainTextEmailViaGmailApi(toEmail, subject, body, logLabel);
+        } else {
+            sendPlainTextEmailViaSmtp(toEmail, subject, body, logLabel);
         }
     }
 
@@ -87,20 +110,120 @@ public class EmailService {
         
         log.info("Requested QR email for Table {} to {}. LINK: {}", tableNumber, toEmail, qrLink);
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromEmail);
-            message.setTo(toEmail);
-            message.setSubject("Table " + tableNumber + " Digital Access - Cafe-QR");
-            message.setText("Hello,\n\nYour digital menu access link for Table " + tableNumber + " is: " + qrLink + "\n\nUse this link to browse the menu and place orders.");
-
-            emailSender.send(message);
+            sendPlainTextEmail(toEmail,
+                    "Table " + tableNumber + " Digital Access - Cafe-QR",
+                    "Hello,\n\nYour digital menu access link for Table " + tableNumber + " is: " + qrLink + "\n\nUse this link to browse the menu and place orders.",
+                    "QR email");
             log.info("QR email successfully sent to {}", toEmail);
         } catch (Exception e) {
             log.warn("FAILED to send QR email to {}: {}. !!! LINK IS LOGGED ABOVE !!!", toEmail, e.getMessage());
         }
     }
 
-    private void validateMailConfiguration() {
+    private void sendPlainTextEmailViaSmtp(String toEmail, String subject, String body, String logLabel) {
+        validateSmtpConfiguration();
+        log.info("Sending {} to {} using SMTP", logLabel, toEmail);
+
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(toEmail);
+            message.setSubject(subject);
+            message.setText(body);
+
+            emailSender.send(message);
+            log.info("{} successfully sent to {} using SMTP", logLabel, toEmail);
+        } catch (MailException e) {
+            log.error("Failed to send {} to {} using SMTP {}:{} as {}: {}",
+                    logLabel,
+                    toEmail,
+                    safe(mailHost),
+                    mailPort,
+                    safe(fromEmail),
+                    e.getMessage(),
+                    e);
+            throw new EmailDeliveryException(buildSmtpDeliveryFailureMessage(e), e);
+        }
+    }
+
+    private void sendPlainTextEmailViaGmailApi(String toEmail, String subject, String body, String logLabel) {
+        validateGmailApiConfiguration();
+        log.info("Sending {} to {} using Gmail API", logLabel, toEmail);
+
+        try {
+            String accessToken = requestGmailAccessToken();
+            String rawMessage = buildRawMimeMessage(toEmail, subject, body);
+            String jsonPayload = objectMapper.writeValueAsString(Map.of("raw", rawMessage));
+
+            HttpRequest request = HttpRequest.newBuilder(URI.create(GMAIL_SEND_URL))
+                    .header("Authorization", "Bearer " + accessToken)
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                log.error("Gmail API send failed for {} to {}. Status={}, Body={}",
+                        logLabel,
+                        toEmail,
+                        response.statusCode(),
+                        response.body());
+                throw new EmailDeliveryException("Unable to send verification email using Gmail API. Please check Gmail API credentials and consent.");
+            }
+
+            log.info("{} successfully sent to {} using Gmail API", logLabel, toEmail);
+        } catch (IOException e) {
+            log.error("Gmail API network error while sending {} to {}: {}", logLabel, toEmail, e.getMessage(), e);
+            throw new EmailDeliveryException("Unable to send verification email through Gmail API. Please try again.", e);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.error("Gmail API send interrupted for {} to {}: {}", logLabel, toEmail, e.getMessage(), e);
+            throw new EmailDeliveryException("Unable to send verification email through Gmail API. Please try again.", e);
+        }
+    }
+
+    private String requestGmailAccessToken() throws IOException, InterruptedException {
+        String formBody = "client_id=" + urlEncode(gmailClientId)
+                + "&client_secret=" + urlEncode(gmailClientSecret)
+                + "&refresh_token=" + urlEncode(gmailRefreshToken)
+                + "&grant_type=refresh_token";
+
+        HttpRequest request = HttpRequest.newBuilder(URI.create(GOOGLE_TOKEN_URL))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(formBody, StandardCharsets.UTF_8))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            log.error("Gmail OAuth token refresh failed. Status={}, Body={}", response.statusCode(), response.body());
+            throw new EmailDeliveryException("Unable to authorize Gmail API email delivery. Please check Gmail client ID, secret, and refresh token.");
+        }
+
+        JsonNode root = objectMapper.readTree(response.body());
+        String accessToken = root.path("access_token").asText();
+        if (isBlank(accessToken)) {
+            log.error("Gmail OAuth token response did not include access_token. Body={}", response.body());
+            throw new EmailDeliveryException("Unable to authorize Gmail API email delivery. Access token was missing.");
+        }
+        return accessToken;
+    }
+
+    private String buildRawMimeMessage(String toEmail, String subject, String body) {
+        String sender = !isBlank(gmailSenderEmail) ? gmailSenderEmail.trim() : fromEmail.trim();
+        String mimeMessage = "From: " + sender + "\r\n"
+                + "To: " + toEmail + "\r\n"
+                + "Subject: " + subject + "\r\n"
+                + "MIME-Version: 1.0\r\n"
+                + "Content-Type: text/plain; charset=UTF-8\r\n"
+                + "Content-Transfer-Encoding: 8bit\r\n"
+                + "\r\n"
+                + body;
+        return Base64.getUrlEncoder()
+                .withoutPadding()
+                .encodeToString(mimeMessage.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private void validateSmtpConfiguration() {
         if (isBlank(mailHost) || isBlank(fromEmail) || isBlank(mailPassword)) {
             log.error("SMTP is not fully configured. hostConfigured={}, usernameConfigured={}, passwordConfigured={}",
                     !isBlank(mailHost),
@@ -108,6 +231,41 @@ public class EmailService {
                     !isBlank(mailPassword));
             throw new EmailDeliveryException("Email delivery is not configured. Please set SMTP_USERNAME and SMTP_PASSWORD on the backend.");
         }
+    }
+
+    private void validateGmailApiConfiguration() {
+        if (!isGmailApiConfigured()) {
+            log.error("Gmail API email is not fully configured. clientIdConfigured={}, clientSecretConfigured={}, refreshTokenConfigured={}, senderConfigured={}",
+                    !isBlank(gmailClientId),
+                    !isBlank(gmailClientSecret),
+                    !isBlank(gmailRefreshToken),
+                    !isBlank(gmailSenderEmail));
+            throw new EmailDeliveryException("Gmail API email delivery is not configured. Please set GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, and GMAIL_SENDER_EMAIL.");
+        }
+    }
+
+    private boolean isGmailApiConfigured() {
+        return !isBlank(gmailClientId)
+                && !isBlank(gmailClientSecret)
+                && !isBlank(gmailRefreshToken)
+                && !isBlank(gmailSenderEmail);
+    }
+
+    private boolean isGmailApiProvider() {
+        return PROVIDER_GMAIL_API.equalsIgnoreCase(emailProvider == null ? "" : emailProvider.trim());
+    }
+
+    private boolean shouldUseGmailApi() {
+        if (isGmailApiProvider()) {
+            return true;
+        }
+
+        if (isGmailApiConfigured()) {
+            log.warn("Gmail API credentials are configured but EMAIL_PROVIDER is '{}'. Using Gmail API automatically for email delivery.", safe(emailProvider));
+            return true;
+        }
+
+        return false;
     }
 
     private void logOtpForDebugging(String toEmail, String otp) {
@@ -130,7 +288,7 @@ public class EmailService {
         return isBlank(value) ? "<not configured>" : value;
     }
 
-    private String buildOtpDeliveryFailureMessage(MailException e) {
+    private String buildSmtpDeliveryFailureMessage(MailException e) {
         if (isStandardSmtpPort(mailPort) && looksLikeConnectionFailure(e)) {
             return "Unable to connect to the SMTP server. If this backend is running on Render free, SMTP ports 25, 465, and 587 are blocked. Use a paid Render instance or an email provider that supports HTTPS API delivery or SMTP on port 2525.";
         }
@@ -154,5 +312,9 @@ public class EmailService {
             current = current.getCause();
         }
         return false;
+    }
+
+    private String urlEncode(String value) {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 }
