@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface VariantOptionRepository extends JpaRepository<VariantOption, UUID> {
-    List<VariantOption> findByGroupId(UUID groupId);
+    List<VariantOption> findByGroup_Id(UUID groupId);
 
     @Query("SELECT v FROM VariantOption v WHERE v.clientId = :clientId AND (:orgId IS NULL OR v.orgId IS NULL OR v.orgId = :orgId) AND v.isActive = true")
     List<VariantOption> findByClientIdAndOrgIdOrGlobalAndIsActiveTrue(UUID clientId, UUID orgId);

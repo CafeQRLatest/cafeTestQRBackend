@@ -199,7 +199,7 @@ public class ProductService {
 
     @Cacheable(value = "variant_options", key = "#groupId")
     public List<VariantOption> getVariantOptionsByGroup(UUID groupId) {
-        return variantOptionRepository.findByGroupId(groupId);
+        return variantOptionRepository.findByGroup_Id(groupId);
     }
 
     @Transactional
