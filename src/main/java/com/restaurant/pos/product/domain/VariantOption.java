@@ -1,6 +1,5 @@
 package com.restaurant.pos.product.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.pos.common.entity.AuditableEntity;
 import jakarta.persistence.Column;
@@ -37,7 +36,7 @@ public class VariantOption extends AuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private VariantGroup group;
 
     private String name;
@@ -54,4 +53,21 @@ public class VariantOption extends AuditableEntity {
 
     @Column(name = "org_id")
     private UUID orgId;
+
+    @JsonProperty("groupId")
+    public UUID getGroupId() {
+        return group != null ? group.getId() : null;
+    }
+
+    @JsonProperty("groupId")
+    public void setGroupId(UUID groupId) {
+        if (groupId == null) {
+            return;
+        }
+
+        if (this.group == null) {
+            this.group = new VariantGroup();
+        }
+        this.group.setId(groupId);
+    }
 }

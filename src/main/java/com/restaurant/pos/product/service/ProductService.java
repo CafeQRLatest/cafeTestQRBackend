@@ -348,6 +348,12 @@ public class ProductService {
     private void setProductRelationships(Product product, UUID clientId, UUID orgId) {
         if (product.getVariantMappings() != null) {
             product.getVariantMappings().forEach(vm -> {
+                if (vm.getVariantGroup() != null && vm.getVariantGroup().getId() != null) {
+                    VariantGroup group = variantGroupRepository.findById(vm.getVariantGroup().getId())
+                            .orElseThrow(() -> new ResourceNotFoundException("Variant Group not found"));
+                    validateOwnership(group.getClientId(), group.getOrgId(), "Variant Group", false);
+                    vm.setVariantGroup(group);
+                }
                 vm.setProduct(product);
                 vm.setClientId(clientId);
                 vm.setOrgId(orgId);
@@ -355,6 +361,12 @@ public class ProductService {
         }
         if (product.getVariantPricings() != null) {
             product.getVariantPricings().forEach(vp -> {
+                if (vp.getVariantOption() != null && vp.getVariantOption().getId() != null) {
+                    VariantOption option = variantOptionRepository.findById(vp.getVariantOption().getId())
+                            .orElseThrow(() -> new ResourceNotFoundException("Variant Option not found"));
+                    validateOwnership(option.getClientId(), option.getOrgId(), "Variant Option", false);
+                    vp.setVariantOption(option);
+                }
                 vp.setProduct(product);
                 vp.setClientId(clientId);
                 vp.setOrgId(orgId);
