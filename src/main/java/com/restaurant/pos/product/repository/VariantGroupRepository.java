@@ -12,10 +12,10 @@ import java.util.UUID;
 @Repository
 public interface VariantGroupRepository extends JpaRepository<VariantGroup, UUID> {
     @EntityGraph(attributePaths = {"options"})
-    @Query("SELECT v FROM VariantGroup v WHERE v.clientId = :clientId AND (:orgId IS NULL OR v.orgId IS NULL OR v.orgId = :orgId)")
+    @Query("SELECT DISTINCT v FROM VariantGroup v WHERE v.clientId = :clientId AND (:orgId IS NULL OR v.orgId IS NULL OR v.orgId = :orgId)")
     List<VariantGroup> findByClientIdAndOrgIdOrGlobal(UUID clientId, UUID orgId);
 
     @EntityGraph(attributePaths = {"options"})
-    @Query("SELECT v FROM VariantGroup v WHERE v.clientId = :clientId AND (:orgId IS NULL OR v.orgId IS NULL OR v.orgId = :orgId) AND v.isActive = true")
+    @Query("SELECT DISTINCT v FROM VariantGroup v WHERE v.clientId = :clientId AND (:orgId IS NULL OR v.orgId IS NULL OR v.orgId = :orgId) AND v.isActive = true")
     List<VariantGroup> findByClientIdAndOrgIdOrGlobalAndIsActiveTrue(UUID clientId, UUID orgId);
 }

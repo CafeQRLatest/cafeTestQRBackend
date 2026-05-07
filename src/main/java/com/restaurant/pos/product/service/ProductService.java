@@ -14,6 +14,8 @@ import com.restaurant.pos.product.repository.UomRepository;
 import com.restaurant.pos.product.repository.VariantGroupRepository;
 import com.restaurant.pos.product.repository.VariantOptionRepository;
 import com.restaurant.pos.product.dto.ProductListDto;
+import com.restaurant.pos.product.dto.VariantGroupDto;
+import com.restaurant.pos.product.dto.VariantOptionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -140,14 +142,17 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     @Cacheable(value = "products_variant_groups_v2", key = "T(com.restaurant.pos.common.tenant.TenantContext).getCurrentTenant() + ':' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
-    public List<VariantGroup> getVariantGroups() {
+    public List<VariantGroupDto> getVariantGroups() {
         return variantGroupRepository.findByClientIdAndOrgIdOrGlobal(TenantContext.getCurrentTenant(),
-                TenantContext.getCurrentOrg());
+                TenantContext.getCurrentOrg())
+                .stream()
+                .map(this::mapVariantGroupToDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    @CacheEvict(value = "products_variant_groups_v2", key = "T(com.restaurant.pos.common.tenant.TenantContext).getCurrentTenant() + ':' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
-    public VariantGroup createVariantGroup(VariantGroup group) {
+    @CacheEvict(value = { "products_variant_groups_v2", "variant_options" }, allEntries = true)
+    public VariantGroupDto createVariantGroup(VariantGroup group) {
         group.setClientId(TenantContext.getCurrentTenant());
         group.setOrgId(TenantContext.getCurrentOrg());
         
@@ -158,12 +163,12 @@ public class ProductService {
                 opt.setOrgId(group.getOrgId());
             });
         }
-        return variantGroupRepository.save(group);
+        return mapVariantGroupToDto(variantGroupRepository.save(group));
     }
 
     @Transactional
-    @CacheEvict(value = "products_variant_groups_v2", key = "T(com.restaurant.pos.common.tenant.TenantContext).getCurrentTenant() + ':' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
-    public VariantGroup updateVariantGroup(UUID id, VariantGroup group) {
+    @CacheEvict(value = { "products_variant_groups_v2", "variant_options" }, allEntries = true)
+    public VariantGroupDto updateVariantGroup(UUID id, VariantGroup group) {
         VariantGroup existing = variantGroupRepository.findById(java.util.Objects.requireNonNull(id))
                 .orElseThrow(() -> new ResourceNotFoundException("Variant Group not found"));
 
@@ -182,7 +187,7 @@ public class ProductService {
                 existing.getOptions().add(opt);
             });
         }
-        return variantGroupRepository.save(existing);
+        return mapVariantGroupToDto(variantGroupRepository.save(existing));
     }
 
     @Transactional
@@ -198,13 +203,16 @@ public class ProductService {
     }
 
     @Cacheable(value = "variant_options", key = "#groupId")
-    public List<VariantOption> getVariantOptionsByGroup(UUID groupId) {
-        return variantOptionRepository.findByGroup_Id(groupId);
+    public List<VariantOptionDto> getVariantOptionsByGroup(UUID groupId) {
+        return variantOptionRepository.findByGroup_Id(groupId)
+                .stream()
+                .map(this::mapVariantOptionToDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
     @CacheEvict(value = { "products_variant_groups_v2", "variant_options" }, allEntries = true)
-    public VariantOption createVariantOption(VariantOption option) {
+    public VariantOptionDto createVariantOption(VariantOption option) {
         if (option.getGroup() == null || option.getGroup().getId() == null) {
             throw new BusinessException("Variant Group ID is required");
         }
@@ -217,12 +225,12 @@ public class ProductService {
         option.setGroup(group);
         option.setClientId(TenantContext.getCurrentTenant());
         option.setOrgId(TenantContext.getCurrentOrg());
-        return variantOptionRepository.save(option);
+        return mapVariantOptionToDto(variantOptionRepository.save(option));
     }
 
     @Transactional
     @CacheEvict(value = { "products_variant_groups_v2", "variant_options" }, allEntries = true)
-    public VariantOption updateVariantOption(UUID id, VariantOption option) {
+    public VariantOptionDto updateVariantOption(UUID id, VariantOption option) {
         VariantOption existing = variantOptionRepository.findById(java.util.Objects.requireNonNull(id))
                 .orElseThrow(() -> new ResourceNotFoundException("Variant Option not found"));
 
@@ -231,7 +239,7 @@ public class ProductService {
         existing.setName(option.getName());
         existing.setAdditionalPrice(option.getAdditionalPrice());
         existing.setActive(option.isActive());
-        return variantOptionRepository.save(existing);
+        return mapVariantOptionToDto(variantOptionRepository.save(existing));
     }
 
     @Transactional
@@ -319,6 +327,31 @@ public class ProductService {
                 .productType(product.getProductType())
                 .hasVariants(product.getVariantMappings() != null && !product.getVariantMappings().isEmpty())
                 .variantCount(product.getVariantMappings() != null ? product.getVariantMappings().size() : 0)
+                .build();
+    }
+
+    private VariantGroupDto mapVariantGroupToDto(VariantGroup group) {
+        List<VariantOptionDto> options = group.getOptions() == null
+                ? List.of()
+                : group.getOptions().stream()
+                        .map(this::mapVariantOptionToDto)
+                        .collect(Collectors.toList());
+
+        return VariantGroupDto.builder()
+                .id(group.getId())
+                .name(group.getName())
+                .isActive(group.isActive())
+                .options(options)
+                .build();
+    }
+
+    private VariantOptionDto mapVariantOptionToDto(VariantOption option) {
+        return VariantOptionDto.builder()
+                .id(option.getId())
+                .groupId(option.getGroupId())
+                .name(option.getName())
+                .additionalPrice(option.getAdditionalPrice())
+                .isActive(option.isActive())
                 .build();
     }
 

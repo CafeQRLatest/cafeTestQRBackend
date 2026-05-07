@@ -7,6 +7,8 @@ import com.restaurant.pos.product.domain.Uom;
 import com.restaurant.pos.product.domain.VariantGroup;
 import com.restaurant.pos.product.domain.VariantOption;
 import com.restaurant.pos.product.dto.ProductListDto;
+import com.restaurant.pos.product.dto.VariantGroupDto;
+import com.restaurant.pos.product.dto.VariantOptionDto;
 import com.restaurant.pos.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -125,19 +127,19 @@ public class ProductController {
 
     @GetMapping("/variants/groups")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
-    public ResponseEntity<ApiResponse<List<VariantGroup>>> getVariantGroups() {
+    public ResponseEntity<ApiResponse<List<VariantGroupDto>>> getVariantGroups() {
         return ResponseEntity.ok(ApiResponse.success(productService.getVariantGroups()));
     }
 
     @PostMapping("/variants/groups")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
-    public ResponseEntity<ApiResponse<VariantGroup>> createVariantGroup(@RequestBody VariantGroup group) {
+    public ResponseEntity<ApiResponse<VariantGroupDto>> createVariantGroup(@RequestBody VariantGroup group) {
         return ResponseEntity.ok(ApiResponse.success(productService.createVariantGroup(group)));
     }
 
     @PutMapping("/variants/groups/{id}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
-    public ResponseEntity<ApiResponse<VariantGroup>> updateVariantGroup(@PathVariable UUID id, @RequestBody VariantGroup group) {
+    public ResponseEntity<ApiResponse<VariantGroupDto>> updateVariantGroup(@PathVariable UUID id, @RequestBody VariantGroup group) {
         return ResponseEntity.ok(ApiResponse.success(productService.updateVariantGroup(id, group)));
     }
 
@@ -150,19 +152,19 @@ public class ProductController {
 
     @GetMapping("/variants/groups/{groupId}/options")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
-    public ResponseEntity<ApiResponse<List<VariantOption>>> getVariantOptions(@PathVariable UUID groupId) {
+    public ResponseEntity<ApiResponse<List<VariantOptionDto>>> getVariantOptions(@PathVariable UUID groupId) {
         return ResponseEntity.ok(ApiResponse.success(productService.getVariantOptionsByGroup(groupId)));
     }
 
     @PostMapping("/variants/options")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
-    public ResponseEntity<ApiResponse<VariantOption>> createVariantOption(@RequestBody VariantOption option) {
+    public ResponseEntity<ApiResponse<VariantOptionDto>> createVariantOption(@RequestBody VariantOption option) {
         return ResponseEntity.ok(ApiResponse.success(productService.createVariantOption(option)));
     }
 
     @PutMapping("/variants/options/{id}")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
-    public ResponseEntity<ApiResponse<VariantOption>> updateVariantOption(@PathVariable UUID id, @RequestBody VariantOption option) {
+    public ResponseEntity<ApiResponse<VariantOptionDto>> updateVariantOption(@PathVariable UUID id, @RequestBody VariantOption option) {
         return ResponseEntity.ok(ApiResponse.success(productService.updateVariantOption(id, option)));
     }
 
