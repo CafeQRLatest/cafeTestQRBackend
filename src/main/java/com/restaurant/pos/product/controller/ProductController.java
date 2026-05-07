@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -27,6 +28,12 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
     public ResponseEntity<ApiResponse<List<ProductListDto>>> getProducts() {
         return ResponseEntity.ok(ApiResponse.success(productService.getProducts()));
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF')")
+    public ResponseEntity<ApiResponse<Product>> getProduct(@PathVariable UUID id) {
+        return ResponseEntity.ok(ApiResponse.success(productService.getProduct(id)));
     }
 
     @PostMapping
@@ -45,6 +52,14 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
     public ResponseEntity<ApiResponse<Product>> updateProduct(@PathVariable UUID id, @RequestBody Product product) {
         return ResponseEntity.ok(ApiResponse.success(productService.updateProduct(id, product)));
+    }
+
+    @PutMapping("/{id}/status")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN', 'ADMIN', 'MANAGER')")
+    public ResponseEntity<ApiResponse<Product>> updateProductStatus(@PathVariable UUID id, @RequestBody Map<String, Boolean> request) {
+        Boolean requestedStatus = request.containsKey("isActive") ? request.get("isActive") : request.get("isAvailable");
+        boolean active = Boolean.TRUE.equals(requestedStatus);
+        return ResponseEntity.ok(ApiResponse.success(productService.updateProductStatus(id, active)));
     }
 
     @DeleteMapping("/{id}")

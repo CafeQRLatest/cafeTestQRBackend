@@ -214,6 +214,7 @@ public class ProductService {
 
         validateOwnership(group.getClientId(), group.getOrgId(), "Variant Group");
 
+        option.setGroup(group);
         option.setClientId(TenantContext.getCurrentTenant());
         option.setOrgId(TenantContext.getCurrentOrg());
         return variantOptionRepository.save(option);
@@ -259,6 +260,46 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public Product getProduct(UUID id) {
+        Product product = productRepository.findById(java.util.Objects.requireNonNull(id))
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        validateOwnership(product.getClientId(), product.getOrgId(), "Product", false);
+        initializeProductDetails(product);
+        return product;
+    }
+
+    private void initializeProductDetails(Product product) {
+        if (product.getCategory() != null) product.getCategory().getName();
+        if (product.getUom() != null) product.getUom().getName();
+
+        if (product.getVariantMappings() != null) {
+            product.getVariantMappings().forEach(mapping -> {
+                if (mapping.getVariantGroup() != null) {
+                    mapping.getVariantGroup().getName();
+                    mapping.getVariantGroup().getOptions().size();
+                }
+            });
+        }
+
+        if (product.getVariantPricings() != null) {
+            product.getVariantPricings().forEach(pricing -> {
+                if (pricing.getVariantOption() != null) {
+                    pricing.getVariantOption().getName();
+                }
+            });
+        }
+
+        if (product.getUpsells() != null) {
+            product.getUpsells().forEach(upsell -> {
+                if (upsell.getUpsellProduct() != null) {
+                    upsell.getUpsellProduct().getName();
+                }
+            });
+        }
+    }
+
     private ProductListDto mapToDto(Product product) {
         return ProductListDto.builder()
                 .id(product.getId())
@@ -276,6 +317,8 @@ public class ProductService {
                 .isPackagedGood(product.isPackagedGood())
                 .isIngredient(product.isIngredient())
                 .productType(product.getProductType())
+                .hasVariants(product.getVariantMappings() != null && !product.getVariantMappings().isEmpty())
+                .variantCount(product.getVariantMappings() != null ? product.getVariantMappings().size() : 0)
                 .build();
     }
 
@@ -320,7 +363,8 @@ public class ProductService {
         if (product.getUpsells() != null) {
             product.getUpsells().forEach(upsell -> {
                 // Circular Check
-                if (product.getId() != null && product.getId().equals(upsell.getUpsellProduct().getId())) {
+                if (product.getId() != null && upsell.getUpsellProduct() != null
+                        && product.getId().equals(upsell.getUpsellProduct().getId())) {
                     throw new BusinessException("A product cannot be an upsell to itself");
                 }
                 upsell.setParentProduct(product);
@@ -425,26 +469,56 @@ public class ProductService {
         existing.setCategory(product.getCategory());
         existing.setUom(product.getUom());
 
-        setProductRelationships(product, clientId, orgId);
-
         // Update Mappings
         existing.getVariantMappings().clear();
         if (product.getVariantMappings() != null) {
+            product.getVariantMappings().forEach(vm -> {
+                vm.setProduct(existing);
+                vm.setClientId(clientId);
+                vm.setOrgId(orgId);
+            });
             existing.getVariantMappings().addAll(product.getVariantMappings());
         }
 
         // Update Pricings
         existing.getVariantPricings().clear();
         if (product.getVariantPricings() != null) {
+            product.getVariantPricings().forEach(vp -> {
+                vp.setProduct(existing);
+                vp.setClientId(clientId);
+                vp.setOrgId(orgId);
+            });
             existing.getVariantPricings().addAll(product.getVariantPricings());
         }
 
         // Update Upsells
         existing.getUpsells().clear();
         if (product.getUpsells() != null) {
+            product.getUpsells().forEach(upsell -> {
+                if (existing.getId() != null && upsell.getUpsellProduct() != null
+                        && existing.getId().equals(upsell.getUpsellProduct().getId())) {
+                    throw new BusinessException("A product cannot be an upsell to itself");
+                }
+                upsell.setParentProduct(existing);
+                upsell.setClientId(clientId);
+                upsell.setOrgId(orgId);
+            });
             existing.getUpsells().addAll(product.getUpsells());
         }
 
+        return productRepository.save(existing);
+    }
+
+    @Transactional
+    @CacheEvict(value = "products_list_v2", key = "T(com.restaurant.pos.common.tenant.TenantContext).getCurrentTenant() + ':' + T(com.restaurant.pos.common.tenant.TenantContext).getCurrentOrg()")
+    public Product updateProductStatus(UUID id, boolean active) {
+        Product existing = productRepository.findById(java.util.Objects.requireNonNull(id))
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        validateOwnership(existing.getClientId(), existing.getOrgId(), "Product");
+
+        existing.setActive(active);
+        existing.setAvailable(active);
         return productRepository.save(existing);
     }
 

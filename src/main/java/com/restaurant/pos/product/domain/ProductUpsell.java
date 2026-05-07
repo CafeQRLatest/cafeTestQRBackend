@@ -1,6 +1,7 @@
 package com.restaurant.pos.product.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.restaurant.pos.common.entity.AuditableEntity;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class ProductUpsell extends AuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "upsell_product_id")
+    @JsonIgnoreProperties({ "category", "uom", "variantMappings", "variantPricings", "upsells" })
     private Product upsellProduct;
 
     @Builder.Default

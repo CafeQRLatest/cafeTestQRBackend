@@ -33,4 +33,6 @@ public class ProductListDto {
     private boolean isPackagedGood;
     @JsonProperty("isIngredient")
     private boolean isIngredient;
+    private boolean hasVariants;
+    private int variantCount;
 }
